@@ -1,0 +1,71 @@
+* {
+    box-sizing: border-box;
+}
+.body {
+    display: grid;
+    gap: 10px;
+    min-height: 100vh;
+    grid-template-areas: 
+    "A A A A A A A A A A A A A A"
+    "B B C C C C C C C C C C C C" 
+    "B B C C C C C C C C C C C C"
+    "B B C C C C C C C C C C C C" 
+    "B B C C C C C C C C C C C C" 
+    "B B C C C C C C C C C C C C" 
+    "B B C C C C C C C C C C C C" 
+    "B B C C C C C C C C C C C C"  
+    "B B C C C C C C C C C C C C" 
+    "B B C C C C C C C C C C C C" 
+    "D D D D D D D D D D D D D D";
+}
+.header {
+    grid-area: A;
+    border: 1px red solid;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px 0 15px;
+}
+.header__cart {
+    background: url('./assets/icons/basket.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px; 
+}
+.aside {
+
+    grid-area: B;
+    border: 1px green solid;
+}
+.main {
+    grid-area: C;
+    border: 1px solid;
+}
+.main__filters {
+    width: 100%;
+    height: 5%;
+}
+.main__cards {
+    width: 100%;
+    height: 95%;
+    border: 1px solid palevioletred;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.card {
+    width: 20%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid;
+    margin: 10px;
+}
+.card__discription-list {
+    list-style-type: none;
+}
+.footer {
+    grid-area: D;
+    border: 1px blue solid;
+}
