@@ -6,24 +6,17 @@ const EslintPlugin = require('eslint-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const pages = ['index', 'product-details', 'cart'];
-
 const baseConfig = {
-    entry: pages.reduce((config, page) => {
-        config[page] = `./src/${page}`;
-        return config;
-    }, {}),
-    optimization: {
-        splitChunks: {
-        chunks: "all",
-        },
-    },
+    entry: path.resolve(__dirname, './src/index'),
     mode: 'development',
     module: {
         rules: [
             {
-                test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                test: /\.(c|sa|sc)ss$/i,
+                use: [MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader'
+                ],
                 
             },
             { test: /\.ts$/i, use: 'ts-loader' },
@@ -44,35 +37,25 @@ const baseConfig = {
         path: path.resolve(__dirname, './dist'),
     },
     plugins: [
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, './src/index.html'),
+            filename: 'index.html',
+        }),
         new CleanWebpackPlugin(),
         new EslintPlugin({ extensions: 'ts' }),
         new CopyWebpackPlugin ({
             patterns: [
                 { from: 'src/assets', to: 'assets' }
         ]
-    }),
-    ]
-    .concat(
-        pages.map(
-        (page) =>
-            new HtmlWebpackPlugin({
-            inject: true,
-            template: `./src/${page}.html`,
-            filename: `${page}.html`,
-            chunks: [page],
-            })
-        )
-    ).concat(
-        new MiniCssExtractPlugin({
-        filename: `[name].css`,
-        chunkFilename: '[id].css',
         }),
-    ),
+        new MiniCssExtractPlugin({
+            filename: `[name].css`,
+        }),
+    ]
 };
 
 module.exports = ({ mode }) => {
     const isProductionMode = mode === 'prod';
     const envConfig = isProductionMode ? require('./webpack.prod.config') : require('./webpack.dev.config');
-
     return merge(baseConfig, envConfig);
 };
