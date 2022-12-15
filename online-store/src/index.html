@@ -7,7 +7,7 @@
     <title>Online store</title>
 </head>
 <body class="body">
-    <header class="header">
+    <header class="header fixed-top bg-light">
         <div>
             <h1>Online store</h1>
         </div>    
@@ -15,15 +15,35 @@
         <div class="header__cart"></div>
     </header>
     <main class="main">
-        <div class="main__filters">
-
+        <div class="accordion main__filters" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Filters
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body d-flex justify-content-between align-items-center">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Select options:</option>
+                        <option value="1">Sort by price ASC</option>
+                        <option value="2">Sort by price DESC</option>
+                        <option value="3">Sort by rating ASC</option>
+                        <option value="4">Sort by rating DESC</option>
+                        <option value="5">Sort by discount ASC</option>
+                        <option value="6">Sort by discount DESC</option>
+                      </select>
+                      <div class="main__found">FOUND: <span class="main__found-span"></span></div>
+                      <input class="main__search" type="search" placeholder="Search by name" autofocus>
+              </div>
+            </div>    
         </div>
         <div class="main__content">
         </div>
     </main>
     <aside class="aside">
     </aside>
-    <footer class="footer">
+    <footer class="footer fixed-bottom bg-dark">
     </footer>
 
 </body>

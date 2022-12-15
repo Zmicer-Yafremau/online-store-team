@@ -1,6 +1,7 @@
 import './global.scss';
 import '../node_modules/normalize.css/normalize.css';
 import 'bootstrap';
-import { CARDS } from './components/cards/cards';
-import { fill } from './components/fill';
-fill(CARDS);
+import { react } from './components/react-on-changes';
+import { fillSort } from './filters/fill-n-sort';
+react();
+fillSort();
