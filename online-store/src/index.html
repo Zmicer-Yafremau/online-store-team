@@ -7,24 +7,28 @@
     <title>Online store</title>
 </head>
 <body class="body">
-    <header class="header">
-        <div>
-            <h1>Online store</h1>
-        </div>    
-        <div class="header__sum">Cart total: € <span></span></div>
-        <div class="header__cart"></div>
-    </header>
-    <main class="main">
-        <div class="main__filters">
-
+    <div id="root">  
+        <header class="header">
+            <div>
+                <h1>Online store</h1>
+            </div>    
+            <div class="header__sum">Cart total: € <span></span></div>
+            <a href="/product-details/1" onclick="route(event)">Product</a>
+            <div class="header__cart"></div>
+        </header>
+        <div id="main-page">
+            <main class="main"> 
+                <div class="main__filters">
+                </div>
+                <div class="main__content">
+                </div>
+            </main>
+            <aside class="aside">
+            </aside>
         </div>
-        <div class="main__content">
-        </div>
-    </main>
-    <aside class="aside">
-    </aside>
-    <footer class="footer">
-    </footer>
+        <footer class="footer">
+        </footer>    
+    </div>
 
 </body>
 </html>
