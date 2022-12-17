@@ -1,13 +1,3 @@
-import { CARDS } from './cards/cards';
-
-export function productDetail(cardID: number) {
-    const MAIN = document.getElementsByClassName('main')[0] as HTMLElement;
-    const ASIDE = document.getElementsByClassName('aside')[0] as HTMLElement;
-    MAIN.innerHTML = '';
-    ASIDE.remove();
-    const currentProduct = CARDS.find((item) => item.id === cardID);
-    MAIN.innerHTML = `
-  
 <div class="product-details">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -24,5 +14,4 @@ export function productDetail(cardID: number) {
     
 
   </div>
-</div>`;
-}
+</div>
