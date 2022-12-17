@@ -1,4 +1,5 @@
 import { cardType } from '../types/types';
+import { react } from './react-on-changes';
 export function fill(data: cardType[]) {
     const CONTENT = document.getElementsByClassName('main__content')[0] as HTMLDivElement;
     CONTENT.innerHTML = '';
@@ -22,10 +23,12 @@ export function fill(data: cardType[]) {
         </ul>
      </div>
      <div class="card__buttons container">
-        <button type="button" class="btn btn-light card__drop-button card__btn-${value.id}"><span>ADD TO</span> CART</button>
-        <button type="button" class="btn btn-light card__details-button">DETAILS</button>
+        <button type="button" class="btn btn-light card__drop-button card__btn-${value.id} fs-6"><span>ADD TO</span> CART</button>
+        <button type="button" class="btn btn-light card__details-button fs-6">DETAILS</button>
      </div>  
         
         `;
     });
+    react();
+    if (!CONTENT.innerHTML) CONTENT.innerHTML = `Sorry, no matches ='(`;
 }

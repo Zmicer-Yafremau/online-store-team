@@ -1,60 +1,96 @@
 // Import all of Bootstrap's CSS
 @import "~bootstrap/scss/bootstrap";
+
 * {
     box-sizing: border-box;
 }
-$clr:red;
+
+$clr: red;
 $accordion-color: black;
+
 .body {
-    display: grid;
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
-    grid-template-areas: 
-    "A A A A A A A A A A A A A A"
-    "D C C C C C C C C C C C C C" 
-    "D D D D D D D D D D D D D D";
+    align-items: center;
+    justify-content: space-between;
 }
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .header {
-    grid-area: A;
+    height: 100px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 15px 0 15px;
 }
+
 .main__search {
     height: 30px;
     border-radius: 5px;
 }
+
 .header__cart {
     background: url('./assets/icons/basket.png');
     background-size: cover;
-    width: 50px;
-    height: 50px; 
+    width: 60px;
+    height: 60px;
 }
+
+.header__cart-quntity {
+    background: white;
+    border: 1px solid;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    font-size: 80%;
+    color: black !important;
+}
+
 .aside {
-min-width: 25vw;
-    grid-area: B;
+    min-width: 25vw;
     border: 1px green solid;
+    margin-right: 20px;
 }
+
 .main {
-    grid-area: C;
-}
-.main__filters {
     width: 100%;
-    height: 70px;
+    margin-top: 120px;
+    display: flex;
+}
+
+.products {
+    width: 70%;
+}
+
+.main__filters {
     position: relative;
     z-index: 100;
+    width: 100%;
+    height: 70px;
+    z-index: 100;
 }
+
 .main__content {
     width: 100%;
     min-height: 70vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 5px;
 }
+
 .form-select {
     width: 200px;
 }
+
 .card {
     width: 250px;
     height: 270px;
@@ -65,9 +101,11 @@ min-width: 25vw;
     margin: 10px;
     background-size: contain;
 }
+
 .card.active {
     border: solid;
 }
+
 .card__description-list {
     list-style-type: none;
     font-size: 10px;
@@ -78,41 +116,104 @@ min-width: 25vw;
     align-items: flex-start;
 
 }
+
 .card__description {
     position: absolute;
     top: 15%;
     background-color: white;
-    width:145px;
+    width: 145px;
     border-radius: 0 0 10px;
 }
+
 .card__discription-item {
-margin-left: -10px !important;
+    margin-left: -10px !important;
 }
+
 .card__buttons {
     height: 20%;
 }
+
 .card__header {
     height: 15%;
     color: white;
-   line-height: 40px;
+    line-height: 40px;
 }
+
 .card__header {
     background-color: white;
 }
+
 .card__span {
     padding-left: 5px;
     text-align: right;
 }
+
 .card__buttons {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
+.btn {
+    font-size: 10px !important;
+}
+
 .card__id {
     opacity: 0;
 }
+
 .footer {
     width: 100%;
-    grid-area: D;
-    height: 50px;
+    min-height: 100px;
+    background-color: black;
+    z-index: 10000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.footer_img-rs {
+    width: 100px;
+    height: 100px;
+}
+
+.footer_date {
+    color: white;
+}
+
+.footer_img-git {
+    width: 20px;
+    height: 20px;
+    margin-left: 20px;
+    border: .1px solid white;
+    background-color: white;
+    border-radius: 30px;
+}
+
+.footer__produced {
+    height: 100%;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.footer__header {
+    display: block;
+    color: white;
+    font-size: 15px;
+    padding: 0;
+    margin: 0;
+    text-align: start;
+}
+
+.footer__link {
+    display: block;
+    text-decoration: none;
+    color: white;
+    font-weight: 100;
 }
