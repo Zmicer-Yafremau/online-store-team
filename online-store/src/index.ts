@@ -4,4 +4,4 @@ import 'bootstrap';
 import { fillSort } from './filters/fill-n-sort';
 import { productDetail } from './components/product-detail';
 fillSort();
-productDetail(1);
+/*productDetail(1);*/

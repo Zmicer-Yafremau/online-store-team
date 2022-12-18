@@ -9,11 +9,9 @@ $clr: red;
 $accordion-color: black;
 
 .body {
-    display: flex;
     flex-direction: column;
     min-height: 100vh;
-    align-items: center;
-    justify-content: space-between;
+    overflow-X: hidden;
 }
 
 .center {
@@ -21,7 +19,11 @@ $accordion-color: black;
     justify-content: center;
     align-items: center;
 }
-
+.between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .header {
     height: 100px;
     width: 100%;
@@ -68,7 +70,10 @@ $accordion-color: black;
 .products {
     width: 70%;
 }
-
+.accordion-body {
+    flex-wrap: wrap;
+    gap: 20px;
+}
 .main__filters {
     position: relative;
     z-index: 100;
@@ -91,15 +96,44 @@ $accordion-color: black;
     width: 200px;
 }
 
+.size {
+    width: 50px;
+    height: 50px;
+    border: 1px solid;
+    border-radius: 5px;
+    flex-wrap: wrap;
+}
+.size > div {
+    border-radius: 20px;
+    border: 1px solid;
+    margin: 2px;
+
+}
+.size__large > div {
+    width: 35%;
+    height: 35%;
+}
+.size__small > div {
+    width: 20%;
+    height: 20%;
+}
+.header__cart:hover,
+.size:hover {
+    transition: all .5s;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
 .card {
-    width: 250px;
+    width: 23%;
     height: 270px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     border: 1px solid;
-    margin: 10px;
-    background-size: contain;
+    background-size: contain !important;
+    background-position: center !important;
+    margin-bottom: 10px;
 }
 
 .card.active {
@@ -108,8 +142,8 @@ $accordion-color: black;
 
 .card__description-list {
     list-style-type: none;
-    font-size: 10px;
-    line-height: 10px;
+    font-size: 60%;
+    line-height: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -119,7 +153,7 @@ $accordion-color: black;
 
 .card__description {
     position: absolute;
-    top: 15%;
+    top: 20%;
     background-color: white;
     width: 145px;
     border-radius: 0 0 10px;
@@ -129,18 +163,12 @@ $accordion-color: black;
     margin-left: -10px !important;
 }
 
-.card__buttons {
+.card__header {
     height: 20%;
-}
-
-.card__header {
-    height: 15%;
     color: white;
-    line-height: 40px;
-}
-
-.card__header {
-    background-color: white;
+    font-size: 90%;
+    padding-left: 5px;
+    text-overflow: ellipsis; 
 }
 
 .card__span {
@@ -150,12 +178,15 @@ $accordion-color: black;
 
 .card__buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    height: 20%;
 }
 
 .btn {
-    font-size: 10px !important;
+    font-size: 70% !important;
+    height: 70%;
+    margin-left: 4px;
 }
 
 .card__id {
@@ -200,6 +231,7 @@ $accordion-color: black;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+    height: 70px;
 }
 
 .footer__header {
@@ -219,44 +251,48 @@ $accordion-color: black;
     height: 50px;
 }
 
-
-
-
 .product-details {
     width: 80%;
     height: fit-content;
     margin: 82px auto;
 }
+
 .product-details__container {
     width: 100%;
     border: 2px solid white;
     border-radius: 1rem;
-    background: rgba(24,26,28,.5);
+    background: rgba(24, 26, 28, .5);
     overflow: hidden;
 }
+
 .product-details__title {
     width: 100%;
     text-align: center;
     border-bottom: 1px solid white;
 }
+
 .product-data {
     display: flex;
     width: 100%;
     padding: .5%;
 }
+
 .product-photo {
     width: 40%;
     display: flex;
 }
+
 .slides-photo {
     width: 25%;
 }
+
 .grand-photo {
     width: 70%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .slides-photo img {
     width: 80%;
     border: 1px solid white;
@@ -271,8 +307,9 @@ $accordion-color: black;
     border: 1px solid white;
     border-radius: 0.5rem;
 }
+
 .product-info {
-   width: 40%;
+    width: 40%;
 }
 
 .product-detail-item {
@@ -301,7 +338,7 @@ $accordion-color: black;
     text-align: center;
 }
 
-.cart-button{
+.cart-button {
     width: 90%;
     font-size: 200%;
     color: white;
@@ -310,19 +347,22 @@ $accordion-color: black;
 
 @media screen and (max-width: 700px) {
 
-   h4{
-    font-size:14px;
-   }
-   p{
-    font-size:14px;
-   }
-   .product-data{
-    flex-direction: column;
-    align-items: center;
-   }
-   .add-to-cart {
-    display:flex;
-    width:100%;
-   }
+    h4 {
+        font-size: 14px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .product-data {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .add-to-cart {
+        display: flex;
+        width: 100%;
+    }
 
 }

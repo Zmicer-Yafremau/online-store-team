@@ -7,8 +7,8 @@ export function productDetail(cardID: number) {
     const BODY = document.getElementsByClassName('body')[0] as HTMLElement;
     MAIN.innerHTML = '';
     ASIDE.remove();
-    BODY.style.gridTemplateAreas = 
-    '"A A A A A A A A A A A A A A" "C C C C C C C C C C C C C C" "C C C C C C C C C C C C C C" "C C C C C C C C C C C C C C" "C C C C C C C C C C C C C C" "C C C C C C C C C C C C C C" "C C C C C C C C C C C C C C" "C C C C C C C C C C C C C C"  "C C C C C C C C C C C C C C" "C C C C C C C C C C C C C C" "D D D D D D D D D D D D D D"';
+    BODY.style.gridTemplateAreas =
+        '"A A A A A A A A A A A A A A" "C C C C C C C C C C C C C C" "C C C C C C C C C C C C C C" "C C C C C C C C C C C C C C" "C C C C C C C C C C C C C C" "C C C C C C C C C C C C C C" "C C C C C C C C C C C C C C" "C C C C C C C C C C C C C C"  "C C C C C C C C C C C C C C" "C C C C C C C C C C C C C C" "D D D D D D D D D D D D D D"';
     const currentProduct: cardType | undefined = CARDS.find((item) => item.id === cardID) || CARDS[0];
     const imgProduct = imagesProduct(currentProduct);
     const imgGrand = ` <img alt="${currentProduct.title}" src=${
