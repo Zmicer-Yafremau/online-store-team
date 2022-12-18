@@ -7,4 +7,4 @@ import { productDetail } from './components/product-detail';
 
 react();
 fillSort();
-productDetail(1);
+//productDetail(1);
