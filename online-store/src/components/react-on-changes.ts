@@ -1,4 +1,5 @@
 import { fillSort } from '../filters/fill-n-sort';
+import { CARDS } from './cards/cards';
 export function react() {
     const ADD = document.getElementsByClassName('card__drop-button') as HTMLCollectionOf<HTMLDivElement>;
     const SELECT = document.querySelector('.form-select') as HTMLSelectElement;
@@ -7,6 +8,7 @@ export function react() {
     const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
     const PRODUCTS = MAIN.children[1] as HTMLElement;
     const CONTENT = (PRODUCTS.children[1] as unknown) as NodeListOf<HTMLDivElement>;
+    const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
     const START_SEARCH = () => {
         const url = new URL(window.location.href);
         url.searchParams.set('search', SEARCH.value);
@@ -29,13 +31,13 @@ export function react() {
             if (!localStorage.basket) {
                 CART.classList.add('visually-hidden');
                 localStorage.basket = `[]`;
+                TOTAL_SUM.innerHTML = '0';
             }
             const BUTTON_CONTAINER = item.parentElement as HTMLDivElement;
             const CARD = BUTTON_CONTAINER.parentElement as HTMLDivElement;
             const CARD_ID_CLASS = CARD.classList[1];
             const CARD_ID = CARD_ID_CLASS.split('__')[1];
 
-            if (!localStorage.basket) localStorage.basket = `[]`;
             CARD.classList.toggle('active');
 
             let ID_ARR: string[] = JSON.parse(localStorage.basket);
@@ -49,14 +51,22 @@ export function react() {
                 (item.firstElementChild as HTMLSpanElement).innerHTML = 'ADD TO';
             }
             localStorage.basket = JSON.stringify(ID_ARR);
-            console.log(CART.innerHTML);
             if (!JSON.parse(localStorage.basket).length) {
                 CART.classList.add('visually-hidden');
                 CART.innerHTML = '';
+                TOTAL_SUM.innerHTML = '0';
             }
             if (JSON.parse(localStorage.basket).length) {
                 CART.classList.remove('visually-hidden');
                 CART.innerHTML = `${JSON.parse(localStorage.basket).length}`;
+                TOTAL_SUM.innerHTML = `${CARDS.reduce((sum, current) => {
+                    let curPrice = 0;
+                    if (JSON.parse(localStorage.basket).includes(`${current.id}`)) {
+                        curPrice = current.price;
+                        console.log(curPrice);
+                    }
+                    return sum + curPrice;
+                }, 0)}`;
             }
         };
         item.addEventListener('click', ADD_TO_CART);

@@ -103,7 +103,7 @@ $accordion-color: black;
 }
 
 .card.active {
-    border: solid;
+    border: $danger solid;
 }
 
 .card__description-list {
