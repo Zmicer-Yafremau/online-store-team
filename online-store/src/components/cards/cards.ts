@@ -11,8 +11,6 @@ export const CARDS = [
         category: 'smartphones',
         thumbnail: 'https://i.dummyjson.com/data/products/1/thumbnail.jpg',
         images: [
-            'https://i.dummyjson.com/data/products/1/1.jpg',
-            'https://i.dummyjson.com/data/products/1/2.jpg',
             'https://i.dummyjson.com/data/products/1/3.jpg',
             'https://i.dummyjson.com/data/products/1/4.jpg',
             'https://i.dummyjson.com/data/products/1/thumbnail.jpg',
@@ -48,7 +46,9 @@ export const CARDS = [
         brand: 'Samsung',
         category: 'smartphones',
         thumbnail: 'https://i.dummyjson.com/data/products/3/thumbnail.jpg',
-        images: ['https://i.dummyjson.com/data/products/3/1.jpg'],
+        images: [
+            'https://i.dummyjson.com/data/products/7/1.jpg',
+            'https://i.dummyjson.com/data/products/3/1.jpg'],
     },
     {
         id: 4,
@@ -175,7 +175,6 @@ export const CARDS = [
         thumbnail: 'https://i.dummyjson.com/data/products/10/thumbnail.jpeg',
         images: [
             'https://i.dummyjson.com/data/products/10/1.jpg',
-            'https://i.dummyjson.com/data/products/10/2.jpg',
             'https://i.dummyjson.com/data/products/10/3.jpg',
             'https://i.dummyjson.com/data/products/10/thumbnail.jpeg',
         ],
@@ -289,7 +288,6 @@ export const CARDS = [
         images: [
             'https://i.dummyjson.com/data/products/16/1.png',
             'https://i.dummyjson.com/data/products/16/2.webp',
-            'https://i.dummyjson.com/data/products/16/3.jpg',
             'https://i.dummyjson.com/data/products/16/4.jpg',
             'https://i.dummyjson.com/data/products/16/thumbnail.jpg',
         ],
@@ -365,8 +363,6 @@ export const CARDS = [
         thumbnail: 'https://i.dummyjson.com/data/products/20/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/20/1.jpg',
-            'https://i.dummyjson.com/data/products/20/2.jpg',
-            'https://i.dummyjson.com/data/products/20/3.jpg',
             'https://i.dummyjson.com/data/products/20/4.jpg',
             'https://i.dummyjson.com/data/products/20/thumbnail.jpg',
         ],
