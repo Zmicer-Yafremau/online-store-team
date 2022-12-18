@@ -1,4 +1,6 @@
 import { cardType } from '../types/types';
+import { react } from './react-on-changes';
+import { CARDS } from './cards/cards';
 export function fill(data: cardType[]) {
     const CONTENT = document.getElementsByClassName('main__content')[0] as HTMLDivElement;
     CONTENT.innerHTML = '';
@@ -22,10 +24,49 @@ export function fill(data: cardType[]) {
         </ul>
      </div>
      <div class="card__buttons container">
-        <button type="button" class="btn btn-light card__drop-button card__btn-${value.id}"><span>ADD TO</span> CART</button>
-        <button type="button" class="btn btn-light card__details-button">DETAILS</button>
+        <button type="button" class="btn btn-light card__drop-button card__btn-${value.id} fs-6"><span>ADD TO</span> CART</button>
+        <button type="button" class="btn btn-light card__details-button fs-6">DETAILS</button>
      </div>  
         
         `;
     });
+    react();
+    if (!CONTENT.innerHTML) CONTENT.innerHTML = `Sorry, no matches ='(`;
+    const DIV_CARDS = (document.getElementsByClassName('card') as unknown) as NodeListOf<HTMLDivElement>;
+    const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
+    const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
+    Array.from(DIV_CARDS).forEach((el) => {
+        console.log(typeof el.classList[1].split(`_`)[2]);
+        if (
+            !el.classList.contains('active') &&
+            JSON.parse(localStorage.basket).includes(el.classList[1].split(`_`)[2])
+        ) {
+            el.classList.add('active');
+            el.children[2].children[0].children[0].innerHTML = 'REMOVE FROM';
+        } else if (JSON.parse(localStorage.basket).includes(el.classList[1].split(`_`)[2]))
+            el.classList.remove('active');
+        el.children[2].children[0].children[0].innerHTML = 'ADD TO';
+    });
+    if (!localStorage.basket) {
+        CART.classList.add('visually-hidden');
+        localStorage.basket = `[]`;
+        TOTAL_SUM.innerHTML = '0';
+    }
+    if (!JSON.parse(localStorage.basket).length) {
+        CART.classList.add('visually-hidden');
+        CART.innerHTML = '';
+        TOTAL_SUM.innerHTML = '0';
+    }
+    if (JSON.parse(localStorage.basket).length) {
+        CART.classList.remove('visually-hidden');
+        CART.innerHTML = `${JSON.parse(localStorage.basket).length}`;
+        TOTAL_SUM.innerHTML = `${CARDS.reduce((sum, current) => {
+            let curPrice = 0;
+            if (JSON.parse(localStorage.basket).includes(`${current.id}`)) {
+                curPrice = current.price;
+                console.log(curPrice);
+            }
+            return sum + curPrice;
+        }, 0)}`;
+    }
 }
