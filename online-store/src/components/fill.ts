@@ -10,7 +10,7 @@ export function fill(data: cardType[]) {
         CARD.style.background = `url('${value.images[value.images.length - 1]}') center no-repeat`;
         CONTENT?.append(CARD);
         CARD.innerHTML = `
-        <div class="card__header text-center container bg-dark">
+        <div class="card__header text-center container bg-dark center">
         ${value.title}  
      </div>
      <div class="card__description">
@@ -23,9 +23,9 @@ export function fill(data: cardType[]) {
            <li class="card__description-item list-group-item">Stock:<span class="card__span card__stock">${value.stock}</span></li>
         </ul>
      </div>
-     <div class="card__buttons container">
+     <div class="card__buttons container bg-dark">
         <button type="button" class="btn btn-light card__drop-button card__btn-${value.id} fs-6"><span>ADD TO</span> CART</button>
-        <button type="button" class="btn btn-light card__details-button fs-6">DETAILS</button>
+        <button type="button" class="btn btn-light card__details-button card__btn-${value.id}  fs-6">DETAILS</button>
      </div>  
         
         `;
@@ -43,9 +43,10 @@ export function fill(data: cardType[]) {
         ) {
             el.classList.add('active');
             el.children[2].children[0].children[0].innerHTML = 'REMOVE FROM';
-        } else if (JSON.parse(localStorage.basket).includes(el.classList[1].split(`_`)[2]))
+        } else if (JSON.parse(localStorage.basket).includes(el.classList[1].split(`_`)[2])) {
             el.classList.remove('active');
-        el.children[2].children[0].children[0].innerHTML = 'ADD TO';
+            el.children[2].children[0].children[0].innerHTML = 'ADD TO';
+        }
     });
     if (!localStorage.basket) {
         CART.classList.add('visually-hidden');

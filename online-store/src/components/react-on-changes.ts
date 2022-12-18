@@ -1,5 +1,6 @@
 import { fillSort } from '../filters/fill-n-sort';
 import { CARDS } from './cards/cards';
+import { productDetail } from './product-detail';
 export function react() {
     const ADD = document.getElementsByClassName('card__drop-button') as HTMLCollectionOf<HTMLDivElement>;
     const SELECT = document.querySelector('.form-select') as HTMLSelectElement;
@@ -7,8 +8,42 @@ export function react() {
     const MAIN = document.getElementsByClassName('main')[0] as HTMLElement;
     const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
     const PRODUCTS = MAIN.children[1] as HTMLElement;
-    const CONTENT = (PRODUCTS.children[1] as unknown) as NodeListOf<HTMLDivElement>;
+    const SIZE = (document.getElementsByClassName('size') as unknown) as NodeListOf<HTMLDivElement>;
+    const CONTENT = PRODUCTS.children[1] as HTMLDivElement;
     const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
+    const DETAILS = (document.getElementsByClassName(
+        'card__details-button'
+    ) as unknown) as NodeListOf<HTMLButtonElement>;
+    const REMOVE_STYLES = () => {
+        console.log('0');
+        Array.from((CONTENT.children as unknown) as NodeListOf<HTMLDivElement>).forEach((el) => {
+            localStorage.size = 'large';
+            el.style.width = '';
+            el.style.height = '';
+            el.children[1].classList.remove('visually-hidden');
+            (el.children[0] as HTMLDivElement).style.height = ``;
+            (el.children[2] as HTMLDivElement).style.height = ``;
+            (el.children[2] as HTMLDivElement).style.fontSize = ``;
+            (el.children[0] as HTMLDivElement).style.fontSize = ``;
+        });
+    };
+    console.log(SIZE[0]);
+    SIZE[0].addEventListener('click', REMOVE_STYLES);
+    const ADD_STYLES = () => {
+        console.log('1');
+        Array.from((CONTENT.children as unknown) as NodeListOf<HTMLDivElement>).forEach((el) => {
+            localStorage.size = 'small';
+            el.style.width = '15%';
+            el.style.height = '200px';
+            el.children[1].classList.add('visually-hidden');
+            (el.children[0] as HTMLDivElement).style.height = `20%`;
+            (el.children[0] as HTMLDivElement).style.fontSize = `70%`;
+            (el.children[2] as HTMLDivElement).style.height = `25%`;
+            (el.children[2] as HTMLDivElement).style.fontSize = `80%`;
+        });
+    };
+    SIZE[0].addEventListener('click', REMOVE_STYLES);
+    SIZE[1].addEventListener('click', ADD_STYLES);
     const START_SEARCH = () => {
         const url = new URL(window.location.href);
         url.searchParams.set('search', SEARCH.value);
@@ -25,7 +60,16 @@ export function react() {
         fillSort();
     };
     SELECT.addEventListener('change', START_SELECT);
-
+    Array.from(DETAILS).forEach((item) => {
+        const GO_DETAILS = () => {
+            console.log(item.classList[3].split('-')[1]);
+            const ID = +item.classList[3].split('-')[1];
+            productDetail(ID);
+            const NAME = CARDS.find((el) => el.id === ID);
+            history.pushState({}, '', `/${item.classList[3].split('-')[1]}/${NAME?.title.split(' ').join('_')}`);
+        };
+        item.addEventListener('click', GO_DETAILS);
+    });
     Array.from(ADD).forEach((item) => {
         const ADD_TO_CART = () => {
             if (!localStorage.basket) {
