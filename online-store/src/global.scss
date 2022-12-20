@@ -8,7 +8,13 @@
 $clr: red;
 $accordion-color: black;
 
+html {
+    height: 100%;
+}
+
 .body {
+    height: 100%;
+    display: flex;
     flex-direction: column;
     min-height: 100vh;
     overflow-X: hidden;
@@ -65,6 +71,7 @@ $accordion-color: black;
     width: 100%;
     margin-top: 120px;
     display: flex;
+    flex: 1 0 auto;
 }
 
 .products {
