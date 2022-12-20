@@ -1,12 +1,9 @@
-import Page from '../../core/templates/page';
+import Page from '../../types/page';
 import MainPage from '../main';
 import ProductPage from '../product';
 import CartPage from '../cart';
-import Header from '../../core/components/header';
-import Footer from '../../core/components/footer';
 import ErrorPage, { ErrorTypes } from '../error';
 import { CARDS } from '../../components/cards/cards';
-
 
 export const enum PageIds {
     MainPage = '',
@@ -17,8 +14,6 @@ export const enum PageIds {
 class App {
     private static container: HTMLElement = document.body;
     private static defaultPageId = 'main';
-    private header: Header;
-    private footer: Footer;
 
     static renderNewPage(idPage: string) {
         const currentPageHTML = document.querySelector(`#${App.defaultPageId}`);
@@ -26,43 +21,42 @@ class App {
             currentPageHTML.remove();
         }
         let page: Page | null = null;
+        const idPageArray = idPage.split('/');
 
         if (idPage === PageIds.MainPage) {
             page = new MainPage(idPage, 'main', 'main');
         } else if (idPage === PageIds.CartPage) {
             page = new CartPage(idPage, 'main', 'main');
-        } else if (idPage === PageIds.ProductPage) {
-            page = new ProductPage(idPage, 'main', 'main');
+        } else if (idPageArray.includes(PageIds.ProductPage)) {
+            if (Number(idPageArray[1]) < CARDS.length || idPageArray === undefined) {
+                page = new ProductPage(idPage, 'main', 'main', idPageArray[1]);
+            } else {
+                page = new ErrorPage(idPage, 'main', 'main', ErrorTypes.Error_notFound);
+            }
         } else {
-            page = new ErrorPage(idPage,'main', 'main', ErrorTypes.Error_404);
+            page = new ErrorPage(idPage, 'main', 'main', ErrorTypes.Error_404);
         }
 
         if (page) {
             const pageHTML = page.render();
+            const footer = document.querySelector('.footer');
             pageHTML.id = App.defaultPageId;
-            App.container.append(pageHTML);
+            App.container.insertBefore(pageHTML, footer);
         }
     }
 
     private enableRouteChange() {
         window.addEventListener('hashchange', () => {
             const hash = window.location.hash.slice(1);
-            App.container.append(this.header.render());
             App.renderNewPage(hash);
-            App.container.append(this.footer.render());
         });
     }
 
-    constructor() {
-        this.header = new Header('header', 'header');
-        this.footer = new Footer('footer', 'footer');
-    }
-
-  run() {
-        App.container.append(this.header.render());
-        App.renderNewPage('');
-        App.container.append(this.footer.render());
+    run() {
+        // App.renderNewPage('');
         this.enableRouteChange();
+        const hash = window.location.hash.slice(1);
+        App.renderNewPage(hash);
     }
 }
 

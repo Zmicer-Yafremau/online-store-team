@@ -1,8 +1,10 @@
-import Page from '../../core/templates/page';
+import Page from '../../types/page';
 
 class ProductPage extends Page {
-    constructor(id: string, tagName: string, className: string) {
+    private idProduct: string;
+    constructor(id: string, tagName: string, className: string, idProduct: string) {
         super(id, tagName, className);
+        this.idProduct = idProduct;
     }
 
     public createContent() {

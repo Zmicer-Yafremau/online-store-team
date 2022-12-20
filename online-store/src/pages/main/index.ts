@@ -1,4 +1,4 @@
-import Page from '../../core/templates/page';
+import Page from '../../types/page';
 
 class MainPage extends Page {
     constructor(id: string, tagName: string, className: string) {
