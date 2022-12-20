@@ -16,7 +16,15 @@ export function valueFilter() {
             el.stock <= +MAX_STOCK && 
             el.price >= +MIN_PRICE &&
             el.price <= +MAX_MAX_PRICE && */
-            SEARCH ? el.category.toLocaleLowerCase().includes(SEARCH.toLocaleLowerCase()) : el
+            SEARCH
+                ? el.title.toLocaleLowerCase().includes(SEARCH.toLocaleLowerCase()) ||
+                      el.brand.toLocaleLowerCase().includes(SEARCH.toLocaleLowerCase()) ||
+                      el.category.toLocaleLowerCase().includes(SEARCH.toLocaleLowerCase()) ||
+                      el.price.toString().includes(SEARCH) ||
+                      el.discountPercentage.toString().includes(SEARCH) ||
+                      el.rating.toString().includes(SEARCH) ||
+                      el.stock.toString().includes(SEARCH.toLocaleLowerCase())
+                : el
         );
     });
     localStorage.setItem('cards', JSON.stringify(dataSorted));

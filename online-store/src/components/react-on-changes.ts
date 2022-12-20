@@ -1,6 +1,7 @@
 import { fillSort } from '../filters/fill-n-sort';
 import { CARDS } from './cards/cards';
 import { productDetail } from './product-detail';
+import { changeSize } from './change-size';
 export function react() {
     const ADD = document.getElementsByClassName('card__drop-button') as HTMLCollectionOf<HTMLDivElement>;
     const SELECT = document.querySelector('.form-select') as HTMLSelectElement;
@@ -11,39 +12,26 @@ export function react() {
     const SIZE = (document.getElementsByClassName('size') as unknown) as NodeListOf<HTMLDivElement>;
     const CONTENT = PRODUCTS.children[1] as HTMLDivElement;
     const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
+    const RESET = document.getElementsByClassName('reset')[0] as HTMLButtonElement;
+    const COPY = document.getElementsByClassName('copy')[0] as HTMLButtonElement;
+    RESET.addEventListener('click', () => {
+        location.href = location.origin;
+    });
+    const COPY_LINK = () => {
+        navigator.clipboard.writeText(location.href);
+        COPY.innerHTML = 'COPIED!';
+        setTimeout(() => {
+            COPY.innerHTML = ' COPY LINK';
+        }, 500);
+    };
+    COPY.addEventListener('click', COPY_LINK);
     const DETAILS = (document.getElementsByClassName(
         'card__details-button'
     ) as unknown) as NodeListOf<HTMLButtonElement>;
-    const REMOVE_STYLES = () => {
-        console.log('0');
-        Array.from((CONTENT.children as unknown) as NodeListOf<HTMLDivElement>).forEach((el) => {
-            localStorage.size = 'large';
-            el.style.width = '';
-            el.style.height = '';
-            el.children[1].classList.remove('visually-hidden');
-            (el.children[0] as HTMLDivElement).style.height = ``;
-            (el.children[2] as HTMLDivElement).style.height = ``;
-            (el.children[2] as HTMLDivElement).style.fontSize = ``;
-            (el.children[0] as HTMLDivElement).style.fontSize = ``;
-        });
-    };
-    console.log(SIZE[0]);
-    SIZE[0].addEventListener('click', REMOVE_STYLES);
-    const ADD_STYLES = () => {
-        console.log('1');
-        Array.from((CONTENT.children as unknown) as NodeListOf<HTMLDivElement>).forEach((el) => {
-            localStorage.size = 'small';
-            el.style.width = '15%';
-            el.style.height = '200px';
-            el.children[1].classList.add('visually-hidden');
-            (el.children[0] as HTMLDivElement).style.height = `20%`;
-            (el.children[0] as HTMLDivElement).style.fontSize = `70%`;
-            (el.children[2] as HTMLDivElement).style.height = `25%`;
-            (el.children[2] as HTMLDivElement).style.fontSize = `80%`;
-        });
-    };
-    SIZE[0].addEventListener('click', REMOVE_STYLES);
-    SIZE[1].addEventListener('click', ADD_STYLES);
+    const LARGE = changeSize(SIZE, CONTENT, 'large');
+    SIZE[0].addEventListener('click', LARGE);
+    const SMALL = changeSize(SIZE, CONTENT, 'small');
+    SIZE[1].addEventListener('click', SMALL);
     const START_SEARCH = () => {
         const url = new URL(window.location.href);
         url.searchParams.set('search', SEARCH.value);
@@ -62,7 +50,6 @@ export function react() {
     SELECT.addEventListener('change', START_SELECT);
     Array.from(DETAILS).forEach((item) => {
         const GO_DETAILS = () => {
-            console.log(item.classList[3].split('-')[1]);
             const ID = +item.classList[3].split('-')[1];
             productDetail(ID);
             const NAME = CARDS.find((el) => el.id === ID);

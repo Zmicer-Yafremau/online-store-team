@@ -11,3 +11,6 @@ export type cardType = {
     thumbnail: string;
     images: string[];
 };
+export type quantityObject = {
+    [word:string]: number;
+}

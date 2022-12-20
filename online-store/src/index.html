@@ -1,104 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Online store</title>
+    </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online store</title>
-</head>
-
-<body class="body between">
-  <header class="header fixed-top bg-light">
-    <div>
-      <h1>Online store</h1>
-    </div>
-    <div class="header__sum">Cart total: € <span class="header__totlat-sum">0</span></div>
-    <div class="header__cart center"><span class="header__cart-quntity center visually-hidden">100</span></div>
-  </header>
-  <main class="main">
-    <aside class="aside">
-      <div class="aside__buttons">
-        <button type="button" class="btn btn-outline-secondary">Secondary</button>
-        <button type="button" class="btn btn-outline-secondary">Secondary</button>
-      </div>
-      <div class="checkboxes checkboxes__category">
-
-      </div>
-      <div class="checkboxes checkboxes__brand">
-
-      </div>
-      <div class="range range__price">
-
-      </div>
-      <div class="range range__stock">
-
-      </div>
-    </aside>
-    <section class="products">
-      <div class="accordion main__filters" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-              aria-expanded="true" aria-controls="collapseOne">
-              Filters
-            </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body d-flex justify-content-between align-items-center">
-              <select class="form-select" aria-label="Default select example">
-                <option selected>Select options:</option>
-                <option value="1">Sort by price ASC</option>
-                <option value="2">Sort by price DESC</option>
-                <option value="3">Sort by rating ASC</option>
-                <option value="4">Sort by rating DESC</option>
-                <option value="5">Sort by discount ASC</option>
-                <option value="6">Sort by discount DESC</option>
-              </select>
-              <div class="main__found">FOUND: <span class="main__found-span"></span></div>
-              <input class="main__search" type="search" placeholder="Search by name" autofocus>
-              <div class="size size__large between">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-              <div class="size size__small between">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
+    <body class="body between">
+        <header class="header fixed-top bg-light">
+            <div>
+                <h1>Online store</h1>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="main__content"></div>
-    </section>
-  </main>
-  <footer class="footer bg-dark">
-    <div class="footer__produced">
-      <h2 class="footer__header">Produced by:</h2>
-      <a href="https://github.com/IngaMuse" class="footer__link" target="_blank">
-        Inga Moshkareva
-        <img class="footer_img-git" src="https://wodensoft.co.uk/wp-content/uploads/2020/05/Github.png" alt="git">
-      </a>
-      <a href="https://github.com/Zmicer-Yafremau" class="footer__link" target="_blank">
-        Zmicer Yafremau
-        <img class="footer_img-git" src="https://wodensoft.co.uk/wp-content/uploads/2020/05/Github.png" alt="git">
-      </a>
-    </div>
-    <h2 class="footer_date">2022</h2>
-    <a href="https://rs.school/js-stage0/" target="_blank">
-      <img class="footer_img-rs" src="https://rs.school/images/rs_school_js.svg" alt="rs">
-    </a>
-  </footer>
-</body>
-
+            <div class="header__sum">Cart total: € <span class="header__totlat-sum">0</span></div>
+            <div class="header__cart center"><span class="header__cart-quntity center visually-hidden">100</span></div>
+        </header>
+        <main class="main">
+            <aside class="aside">
+                <div class="asside__panel">
+                    <div class="aside__content">
+                        <div class="aside__buttons between">
+                            <button type="button" class="reset btn btn-outline-dark btn-lg">RESET FILTERS</button>
+                            <button type="button" class="copy btn btn-outline-dark btn-lg">COPY LINK</button>
+                        </div>
+                        <div class="checkboxes checkboxes__category category">
+                            <div class="aside__header checkbox__header center">Category</div>
+                            <div class="checkbox__content between">
+                            </div>
+                        </div>
+                        <div class="checkboxes checkboxes__brand brand">
+                            <div class="aside__header checkbox__header center">Brand</div>
+                            <div class="checkbox__content"></div>
+                        </div>
+                        <div class="range range__price">
+                            <div class="aside__header range__header center">Price</div>
+                            <div class="range__content"></div>
+                        </div>
+                        <div class="range range__stock">
+                            <div class="aside__header range__header center">Stock</div>
+                            <div class="range__content"></div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <section class="products">
+                <div class="accordion main__filters" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button
+                                class="accordion-button"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne"
+                                aria-expanded="true"
+                                aria-controls="collapseOne"
+                            >
+                                Filters
+                            </button>
+                        </h2>
+                        <div
+                            id="collapseOne"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample"
+                        >
+                            <div class="accordion-body d-flex justify-content-between align-items-center">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Select options:</option>
+                                    <option value="1">Sort by price ASC</option>
+                                    <option value="2">Sort by price DESC</option>
+                                    <option value="3">Sort by rating ASC</option>
+                                    <option value="4">Sort by rating DESC</option>
+                                    <option value="5">Sort by discount ASC</option>
+                                    <option value="6">Sort by discount DESC</option>
+                                </select>
+                                <div class="main__found">FOUND: <span class="main__found-span"></span></div>
+                                <input class="main__search" type="search" placeholder="Search by name" autofocus />
+                                <div class="size size__large between active">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div class="size size__small between">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="main__content"></div>
+            </section>
+        </main>
+        <footer class="footer bg-dark">
+            <div class="footer__produced">
+                <h2 class="footer__header">Produced by:</h2>
+                <a href="https://github.com/IngaMuse" class="footer__link" target="_blank">
+                    Inga Moshkareva
+                    <img
+                        class="footer_img-git"
+                        src="https://wodensoft.co.uk/wp-content/uploads/2020/05/Github.png"
+                        alt="git"
+                    />
+                </a>
+                <a href="https://github.com/Zmicer-Yafremau" class="footer__link" target="_blank">
+                    Zmicer Yafremau
+                    <img
+                        class="footer_img-git"
+                        src="https://wodensoft.co.uk/wp-content/uploads/2020/05/Github.png"
+                        alt="git"
+                    />
+                </a>
+            </div>
+            <h2 class="footer_date">2022</h2>
+            <a href="https://rs.school/js-stage0/" target="_blank">
+                <img class="footer_img-rs" src="https://rs.school/images/rs_school_js.svg" alt="rs" />
+            </a>
+        </footer>
+    </body>
 </html>
