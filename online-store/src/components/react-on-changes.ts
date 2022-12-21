@@ -2,8 +2,9 @@ import { fillSort } from '../filters/fill-n-sort';
 import { CARDS } from './cards/cards';
 import { productDetail } from './product-detail';
 import { changeSize } from './change-size';
+import { addToBasket } from './add-to-basket';
 export function react() {
-    const ADD = document.getElementsByClassName('card__drop-button') as HTMLCollectionOf<HTMLDivElement>;
+    const ADD = document.getElementsByClassName('card__drop-button') as HTMLCollectionOf<HTMLButtonElement>;
     const SELECT = document.querySelector('.form-select') as HTMLSelectElement;
     const SEARCH = document.querySelector('.main__search') as HTMLInputElement;
     const MAIN = document.getElementsByClassName('main')[0] as HTMLElement;
@@ -34,9 +35,9 @@ export function react() {
     SIZE[1].addEventListener('click', SMALL);
     const START_SEARCH = () => {
         const url = new URL(window.location.href);
-        url.searchParams.set('search', SEARCH.value);
+        SEARCH.value ? url.searchParams.set('search', SEARCH.value) : url.searchParams.delete('search');
         history.replaceState(null, '', url);
-        SEARCH.removeEventListener('input', START_SEARCH);
+        removeAllEvents();
         fillSort();
     };
     SEARCH.addEventListener('input', START_SEARCH);
@@ -44,7 +45,7 @@ export function react() {
         const url = new URL(window.location.href);
         url.searchParams.set('select', SELECT.value);
         history.replaceState(null, '', url);
-        SELECT.removeEventListener('change', START_SELECT);
+        removeAllEvents();
         fillSort();
     };
     SELECT.addEventListener('change', START_SELECT);
@@ -57,49 +58,48 @@ export function react() {
         };
         item.addEventListener('click', GO_DETAILS);
     });
-    Array.from(ADD).forEach((item) => {
-        const ADD_TO_CART = () => {
-            if (!localStorage.basket) {
-                CART.classList.add('visually-hidden');
-                localStorage.basket = `[]`;
-                TOTAL_SUM.innerHTML = '0';
-            }
-            const BUTTON_CONTAINER = item.parentElement as HTMLDivElement;
-            const CARD = BUTTON_CONTAINER.parentElement as HTMLDivElement;
-            const CARD_ID_CLASS = CARD.classList[1];
-            const CARD_ID = CARD_ID_CLASS.split('__')[1];
-
+    Array.from(ADD).forEach((button) => {
+        const BUTTON_CONTAINER = button.parentElement as HTMLDivElement;
+        const CARD = BUTTON_CONTAINER.parentElement as HTMLDivElement;
+        const CARD_ID_CLASS = CARD.classList[1];
+        const CARD_ID = CARD_ID_CLASS.split('__')[1];
+        const ADD_TO_CART = addToBasket(CART, TOTAL_SUM, CARD_ID, button);
+        button.addEventListener('click', ADD_TO_CART);
+        button.addEventListener('click', () => {
             CARD.classList.toggle('active');
-
-            let ID_ARR: string[] = JSON.parse(localStorage.basket);
-            if (CARD.classList.contains('active')) {
-                ID_ARR.push(CARD_ID);
-                (item.firstElementChild as HTMLSpanElement).innerHTML = 'REMOVE FROM';
-            } else {
-                ID_ARR = ID_ARR.filter((el: string) => {
-                    return el !== `${CARD_ID}`;
-                });
-                (item.firstElementChild as HTMLSpanElement).innerHTML = 'ADD TO';
-            }
-            localStorage.basket = JSON.stringify(ID_ARR);
-            if (!JSON.parse(localStorage.basket).length) {
-                CART.classList.add('visually-hidden');
-                CART.innerHTML = '';
-                TOTAL_SUM.innerHTML = '0';
-            }
-            if (JSON.parse(localStorage.basket).length) {
-                CART.classList.remove('visually-hidden');
-                CART.innerHTML = `${JSON.parse(localStorage.basket).length}`;
-                TOTAL_SUM.innerHTML = `${CARDS.reduce((sum, current) => {
-                    let curPrice = 0;
-                    if (JSON.parse(localStorage.basket).includes(`${current.id}`)) {
-                        curPrice = current.price;
-                        console.log(curPrice);
-                    }
-                    return sum + curPrice;
-                }, 0)}`;
+        });
+    });
+    function sortBy(criteria: string) {
+        return (event: Event) => {
+            if (event.target instanceof HTMLInputElement) {
+                const input = event.target;
+                const url = new URL(window.location.href);
+                const CURRENT = url.searchParams.get(criteria);
+                if (input.checked) {
+                    if (!CURRENT?.includes(input.id))
+                        url.searchParams.set(criteria, `${CURRENT ? CURRENT : ''}↕${input.id}`);
+                } else {
+                    const NEW_CURRENT = CURRENT?.split('↕')
+                        .filter((el) => el !== input.id)
+                        .join('↕');
+                    NEW_CURRENT ? url.searchParams.set(criteria, `${NEW_CURRENT}`) : url.searchParams.delete(criteria);
+                }
+                history.replaceState(null, '', url);
+                removeAllEvents();
+                fillSort();
             }
         };
-        item.addEventListener('click', ADD_TO_CART);
-    });
+    }
+    const CATEGORY_CONTAINER = document.getElementsByClassName('checkboxes__category')[0] as HTMLDivElement;
+    const SORT_BY_CATEGORY = sortBy('category');
+    CATEGORY_CONTAINER.addEventListener('click', SORT_BY_CATEGORY);
+    const BRAND_CONTAINER = document.getElementsByClassName('checkboxes__brand')[0] as HTMLDivElement;
+    const SORT_BY_BRAND = sortBy('brand');
+    BRAND_CONTAINER.addEventListener('click', SORT_BY_BRAND);
+    function removeAllEvents() {
+        SELECT.removeEventListener('change', START_SELECT);
+        SEARCH.removeEventListener('input', START_SEARCH);
+        CATEGORY_CONTAINER.removeEventListener('click', SORT_BY_CATEGORY);
+        BRAND_CONTAINER.removeEventListener('click', SORT_BY_BRAND);
+    }
 }

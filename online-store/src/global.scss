@@ -239,7 +239,12 @@ justify-content: space-between;
     align-items: center;
     height: 20%;
 }
-
+.add::before {
+    content: 'ADD TO ';
+}
+.remove::before {
+    content: 'REMOVE FROM ';
+}
 .btn {
     font-size: 70% !important;
     height: 70%;

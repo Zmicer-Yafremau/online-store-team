@@ -1,5 +1,4 @@
 import { cardType } from '../types/types';
-import { react } from './react-on-changes';
 import { CARDS } from './cards/cards';
 import { changeSize } from './change-size';
 import { countQuantity } from './count-brands-cat-quantity';
@@ -31,7 +30,7 @@ export function fill(data: cardType[]) {
         </ul>
      </div>
      <div class="card__buttons container bg-dark">
-        <button type="button" class="btn btn-light card__drop-button card__btn-${value.id} fs-6"><span>ADD TO</span> CART</button>
+        <button type="button" class="btn btn-light card__drop-button card__btn-${value.id} fs-6 add">CART</button>
         <button type="button" class="btn btn-light card__details-button card__btn-${value.id}  fs-6">DETAILS</button>
      </div>  
         
@@ -49,7 +48,7 @@ export function fill(data: cardType[]) {
             <span>(${countQuantity()[value.brand]}/${countQuantity()[value.brand]})</span>
         </div>
         `;
-            CATEGORY_SET.add(value.brand);
+            BRAND_SET.add(value.brand);
         }
         if (!CATEGORY_SET.has(value.category)) {
             const CATEGORY_LINE = document.createElement('div');
@@ -67,22 +66,22 @@ export function fill(data: cardType[]) {
             CATEGORY_SET.add(value.category);
         }
     });
-    react();
     if (!CONTENT.innerHTML) CONTENT.innerHTML = `Sorry, no matches ='(`;
     const DIV_CARDS = (document.getElementsByClassName('card') as unknown) as NodeListOf<HTMLDivElement>;
     const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
     const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
     Array.from(DIV_CARDS).forEach((el) => {
-        console.log(typeof el.classList[1].split(`_`)[2]);
         if (
             !el.classList.contains('active') &&
             JSON.parse(localStorage.basket).includes(el.classList[1].split(`_`)[2])
         ) {
             el.classList.add('active');
-            el.children[2].children[0].children[0].innerHTML = 'REMOVE FROM';
+            el.children[2].children[0].classList.add('remove');
+            el.children[2].children[0].classList.remove('add');
         } else if (JSON.parse(localStorage.basket).includes(el.classList[1].split(`_`)[2])) {
             el.classList.remove('active');
-            el.children[2].children[0].children[0].innerHTML = 'ADD TO';
+            el.children[2].children[0].classList.remove('remove');
+            el.children[2].children[0].classList.add('add');
         }
     });
     if (!localStorage.basket) {
@@ -102,7 +101,6 @@ export function fill(data: cardType[]) {
             let curPrice = 0;
             if (JSON.parse(localStorage.basket).includes(`${current.id}`)) {
                 curPrice = current.price;
-                console.log(curPrice);
             }
             return sum + curPrice;
         }, 0)}`;

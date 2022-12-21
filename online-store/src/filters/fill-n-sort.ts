@@ -1,8 +1,10 @@
 import { CARDS } from '../components/cards/cards';
 import { fill } from '../components/fill';
+import { react } from '../components/react-on-changes';
 import { sortFilter } from './sort-filter';
 import { valueFilter } from './value-filters';
 export function fillSort() {
+    console.log('in sort');
     const PARAMS = new URLSearchParams(location.search);
     const FOUND = document.querySelector('.main__found-span') as HTMLSpanElement;
     const SELECT = document.querySelector('.form-select') as HTMLSelectElement;
@@ -20,5 +22,6 @@ export function fillSort() {
     }
     sortFilter();
     fill(JSON.parse(localStorage.cards));
+    react();
     FOUND.innerHTML = JSON.parse(localStorage.cards).length;
 }
