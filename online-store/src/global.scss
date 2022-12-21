@@ -261,7 +261,7 @@ html {
 .product-details {
     width: 80%;
     height: fit-content;
-    margin: 82px auto;
+    margin: 0 auto;
 }
 
 .product-details__container {
@@ -305,6 +305,7 @@ html {
     border: 1px solid white;
     border-radius: 0.5rem;
     cursor: pointer;
+    margin: 2px;
 }
 
 .grand-photo img {

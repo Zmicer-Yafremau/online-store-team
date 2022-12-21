@@ -22,13 +22,20 @@ class App {
         }
         let page: Page | null = null;
         const idPageArray = idPage.split('/');
-
         if (idPage === PageIds.MainPage) {
             page = new MainPage(idPage, 'main', 'main');
         } else if (idPage === PageIds.CartPage) {
             page = new CartPage(idPage, 'main', 'main');
         } else if (idPageArray.includes(PageIds.ProductPage)) {
-            if (Number(idPageArray[1]) < CARDS.length || idPageArray === undefined) {
+            if (
+                Number(idPageArray[1]) < CARDS.length &&
+                idPageArray !== undefined &&
+                Number(idPageArray[1]) > 0 &&
+                idPageArray[2] ===
+                    CARDS.find((item) => item.id == Number(idPageArray[1]))
+                        .title.split(' ')
+                        .join('_')
+            ) {
                 page = new ProductPage(idPage, 'main', 'main', idPageArray[1]);
             } else {
                 page = new ErrorPage(idPage, 'main', 'main', ErrorTypes.Error_notFound);
@@ -42,6 +49,9 @@ class App {
             const footer = document.querySelector('.footer');
             pageHTML.id = App.defaultPageId;
             App.container.insertBefore(pageHTML, footer);
+            if (page instanceof ProductPage) {
+                ProductPage.imgChange();
+            }
         }
     }
 
