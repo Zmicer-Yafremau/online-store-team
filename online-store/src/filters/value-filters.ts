@@ -11,7 +11,7 @@ export function valueFilter() {
     console.log(CATEGORY);
     const dataSorted = CARDS.filter((el) => {
         return (
-            (BRAND ? BRAND.includes(el.brand) : el) &&
+            (BRAND ? BRAND.includes(el.brand.replaceAll(' ', '_')) : el) &&
             (CATEGORY ? CATEGORY.includes(el.category) : el) &&
             (SEARCH
                 ? el.title.toLocaleLowerCase().includes(SEARCH.toLocaleLowerCase()) ||

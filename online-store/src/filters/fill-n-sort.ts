@@ -1,8 +1,10 @@
 import { CARDS } from '../components/cards/cards';
+import { createFilters } from '../components/create-filters';
 import { fill } from '../components/fill';
 import { react } from '../components/react-on-changes';
 import { sortFilter } from './sort-filter';
 import { valueFilter } from './value-filters';
+import { updateQuantity } from '../components/update-brand-cat-uantity';
 export function fillSort() {
     console.log('in sort');
     const PARAMS = new URLSearchParams(location.search);
@@ -22,6 +24,7 @@ export function fillSort() {
     }
     sortFilter();
     fill(JSON.parse(localStorage.cards));
+    updateQuantity();
     react();
     FOUND.innerHTML = JSON.parse(localStorage.cards).length;
 }

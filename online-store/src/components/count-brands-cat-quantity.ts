@@ -1,11 +1,11 @@
-import { CARDS } from './cards/cards';
 import { quantityObject } from '../types/types';
-export function countQuantity(): quantityObject {
+import { cardType } from '../types/types';
+export function countQuantity(CARDS: cardType[]): quantityObject {
     return CARDS.reduce((obj: quantityObject, current) => {
         if (!obj[current.brand]) {
-            obj[current.brand] = 1;
+            obj[current.brand.replaceAll(' ', '_')] = 1;
         } else {
-            obj[current.brand] += 1;
+            obj[current.brand.replaceAll(' ', '_')] += 1;
         }
 
         if (!obj[current.category]) {

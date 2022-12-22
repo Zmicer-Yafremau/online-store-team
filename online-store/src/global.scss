@@ -13,16 +13,19 @@ $accordion-color: black;
     min-height: 100vh;
     overflow-x: hidden;
 }
+
 .center {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .between {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .header {
     height: 90px;
     width: 100%;
@@ -55,20 +58,33 @@ $accordion-color: black;
 }
 
 .aside {
-    min-width: 25vw;
+    min-width: 350px;
+    width: 25vw;
     height: fit-content;
     border: .1px $gray-400 solid;
     border-radius: 5px;
     margin-right: 20px;
     flex-grow: 0;
     padding: 5px;
+    /*animation-duration:10s;
+    animation-name: slidein;*/
 }
+@keyframes slidein {
+    from {
+      margin-left: 0;
+    }
+  
+    to {
+      margin-left: -350px;
+    }
+  }
 .aside__buttons {
     width: 100%;
     margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
 }
+
 .checkboxes {
     height: 25vh;
     border: .1px $gray-500 solid;
@@ -76,6 +92,7 @@ $accordion-color: black;
     border-radius: 5px;
     width: 100%;
 }
+
 .range {
     height: 15vh;
     border: .1px $gray-500 solid;
@@ -83,12 +100,15 @@ $accordion-color: black;
     border-radius: 5px;
     width: 100%;
 }
+
 .checkbox__header {
     height: 10%;
 }
+
 .range__header {
     height: 20%;
 }
+
 .checkbox__content {
     height: 90%;
     width: 100%;
@@ -100,34 +120,41 @@ $accordion-color: black;
 .form-check-label {
     margin-left: 10px;
 }
+
 .aside__header {
     width: 100%;
     background-color: $dark;
     color: white;
     text-transform: uppercase;
 }
-.checkbox__content  > div {
-width: 100%;
-height: 30px;
-display: flex;
-align-items:center;
-justify-content: space-between;
+
+.checkbox__content>div {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.zero {
+    color: $gray-500;
 }
 .main {
-    min-width: 100%;
+    width: 100%;
     margin-top: 120px;
     display: flex;
     padding: 10px;
 }
 
 .products {
-    min-width: 70%;
+    width: 70%;
     flex-grow: 1;
 }
+
 .accordion-body {
     flex-wrap: wrap;
     gap: 20px;
 }
+
 .main__filters {
     position: relative;
     z-index: 100;
@@ -157,23 +184,28 @@ justify-content: space-between;
     border-radius: 5px;
     flex-wrap: wrap;
 }
-.size > div {
+
+.size>div {
     border-radius: 20px;
     border: 1px solid;
     margin: 2px;
     background-color: white;
 }
-.size__large > div {
+
+.size__large>div {
     width: 35%;
     height: 35%;
 }
-.size__small > div {
+
+.size__small>div {
     width: 20%;
     height: 20%;
 }
+
 .size.active {
     background-color: rgb(231, 231, 231);
 }
+
 .header__cart:hover,
 .size:hover {
     transition: all 0.5s;
@@ -239,12 +271,15 @@ justify-content: space-between;
     align-items: center;
     height: 20%;
 }
+
 .add::before {
     content: 'ADD TO ';
 }
+
 .remove::before {
     content: 'REMOVE FROM ';
 }
+
 .btn {
     font-size: 70% !important;
     height: 70%;
