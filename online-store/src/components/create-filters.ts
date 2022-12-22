@@ -1,5 +1,6 @@
 import { CARDS } from './cards/cards';
 import { countQuantity } from './count-brands-cat-quantity';
+import { updateQuantity } from './update-brand-cat-quantity';
 export function createFilters() {
     const BRAND_CONTAINER = document.getElementsByClassName('checkboxes__brand')[0].children[1] as HTMLDivElement;
     const CATEGORY_CONTAINER = document.getElementsByClassName('checkboxes__category')[0].children[1] as HTMLDivElement;
@@ -44,4 +45,5 @@ export function createFilters() {
             CATEGORY_SET.add(value.category);
         }
     });
+    updateQuantity();
 }

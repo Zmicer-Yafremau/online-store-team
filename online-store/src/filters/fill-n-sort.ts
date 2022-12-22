@@ -4,7 +4,7 @@ import { fill } from '../components/fill';
 import { react } from '../components/react-on-changes';
 import { sortFilter } from './sort-filter';
 import { valueFilter } from './value-filters';
-import { updateQuantity } from '../components/update-brand-cat-uantity';
+import { updateQuantity } from '../components/update-brand-cat-quantity';
 export function fillSort() {
     console.log('in sort');
     const PARAMS = new URLSearchParams(location.search);

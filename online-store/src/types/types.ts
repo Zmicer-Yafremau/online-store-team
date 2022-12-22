@@ -12,5 +12,10 @@ export type cardType = {
     images: string[];
 };
 export type quantityObject = {
-    [word:string]: number;
-}
+    [word: string]: number;
+};
+export type sliderValueType = {
+    max: number;
+    left: number;
+    right: number;
+};
