@@ -374,3 +374,76 @@ html {
     }
 
 }
+
+.cart-page {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: fit-content;
+}
+
+.cart-container {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.products-in-cart {
+    width: 69%;
+    border: 1px solid white;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background-color: #1e1b1b80;
+    height: -moz-fit-content;
+    height: fit-content;
+}
+
+.title-and-page-control {
+    display: flex;
+    background-color: #181a1c;
+    padding: 0.3rem;
+    border-bottom: 1px solid white;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.page-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-control input {
+    width: 2rem;
+    text-align: center;
+    outline: none;
+    border: 1px solid white;
+    border-radius: 0.2rem;
+    background-color: #373636;
+    font-size: 140%;
+}
+
+.page-numbers[_ngcontent-tnt-c24] {
+    margin-left: 2rem;
+    color: wheat;
+}
+
+.page-numbers {
+    background-color: #373636;
+    cursor: pointer;
+    border: 1px solid orange;
+    border-radius: 0.2rem;
+    padding: 0.1rem;
+    font-size: 140%;
+}
+
+.page-numbers {
+    font-size: 140%;
+    margin: 0 0.5rem;
+}
+
+.prod-items {
+    width: 100%;
+}
+
+

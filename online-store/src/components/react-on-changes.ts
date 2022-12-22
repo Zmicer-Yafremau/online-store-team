@@ -1,6 +1,6 @@
 import { fillSort } from '../filters/fill-n-sort';
 import { CARDS } from './cards/cards';
-import { productDetail } from './product-detail';
+
 export function react() {
     const ADD = document.getElementsByClassName('card__drop-button') as HTMLCollectionOf<HTMLDivElement>;
     const SELECT = document.querySelector('.form-select') as HTMLSelectElement;
