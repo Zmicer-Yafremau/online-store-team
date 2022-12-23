@@ -1,6 +1,4 @@
 import { fillSort } from '../filters/fill-n-sort';
-/*import { CARDS } from './cards/cards';*/
-import { productDetail } from './product-detail';
 import { changeSize } from './change-size';
 import { addToBasket } from './add-to-basket';
 import { countSlider } from './count-slider-values';
@@ -10,7 +8,7 @@ export function react() {
     const SEARCH = document.querySelector('.main__search') as HTMLInputElement;
     const MAIN = document.getElementsByClassName('main')[0] as HTMLElement;
     const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
-    const PRODUCTS = MAIN.children[1] as HTMLElement;
+    const PRODUCTS = MAIN.children[2] as HTMLElement;
     const SIZE = (document.getElementsByClassName('size') as unknown) as NodeListOf<HTMLDivElement>;
     const CONTENT = PRODUCTS.children[1] as HTMLDivElement;
     const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
@@ -48,9 +46,13 @@ export function react() {
     const DETAILS = (document.getElementsByClassName(
         'card__details-button'
     ) as unknown) as NodeListOf<HTMLButtonElement>;
-    const LARGE = changeSize(SIZE, CONTENT, 'large');
+    const LARGE = () => {
+        changeSize(SIZE, CONTENT, 'large');
+    };
     SIZE[0].addEventListener('click', LARGE);
-    const SMALL = changeSize(SIZE, CONTENT, 'small');
+    const SMALL = () => {
+        changeSize(SIZE, CONTENT, 'small');
+    };
     SIZE[1].addEventListener('click', SMALL);
     const START_SEARCH = () => {
         const url = new URL(window.location.href);
@@ -70,8 +72,8 @@ export function react() {
     SELECT.addEventListener('change', START_SELECT);
     Array.from(DETAILS).forEach((item) => {
         const GO_DETAILS = () => {
-            const ID = +item.classList[3].split('-')[1];
-            productDetail(ID);
+            /*const ID = +item.classList[3].split('-')[1];
+            productDetail(ID);*/
             /*const NAME = CARDS.find((el) => el.id === ID);
             history.pushState({}, '', `/${item.classList[3].split('-')[1]}/${NAME?.title.split(' ').join('_')}`);
              */

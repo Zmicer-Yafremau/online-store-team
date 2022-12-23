@@ -4,7 +4,7 @@ import ProductPage from '../product';
 import CartPage from '../cart';
 import ErrorPage, { ErrorTypes } from '../error';
 import { CARDS } from '../../components/cards/cards';
-
+import { MAIN_PAGE } from '../../components/create-main-page';
 export const enum PageIds {
     MainPage = '',
     ProductPage = 'product-details',
@@ -22,6 +22,7 @@ class App {
         }
         let page: Page | null = null;
         const idPageArray = idPage.split('/');
+        const idProduct = CARDS.find((item) => item.id == Number(idPageArray[1]));
         if (idPage === PageIds.MainPage) {
             page = new MainPage(idPage, 'main', 'main');
         } else if (idPage === PageIds.CartPage) {
@@ -31,10 +32,7 @@ class App {
                 Number(idPageArray[1]) < CARDS.length &&
                 idPageArray !== undefined &&
                 Number(idPageArray[1]) > 0 &&
-                idPageArray[2] ===
-                    CARDS.find((item) => item.id == Number(idPageArray[1]))
-                        .title.split(' ')
-                        .join('_')
+                idPageArray[2] === idProduct?.title.split(' ').join('_')
             ) {
                 page = new ProductPage(idPage, 'main', 'main', idPageArray[1]);
             } else {
@@ -51,6 +49,10 @@ class App {
             App.container.insertBefore(pageHTML, footer);
             if (page instanceof ProductPage) {
                 ProductPage.imgChange();
+            }
+            if (page instanceof MainPage) {
+                const MAIN = new MAIN_PAGE();
+                MAIN.fillSort().createFilters();
             }
         }
     }
