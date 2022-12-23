@@ -3,7 +3,6 @@ export function sortFilter(): void {
     const PARAMS = new URLSearchParams(location.search);
     let dataSorted = JSON.parse(localStorage.cards);
     const SELECT_VALUE = PARAMS.get('select');
-    console.log(SELECT_VALUE);
     if (SELECT_VALUE === '1') {
         dataSorted = dataSorted.sort((a: cardType, b: cardType): number => {
             if (a.price > b.price) return 1;

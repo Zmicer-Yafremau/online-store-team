@@ -1,5 +1,5 @@
 // Import all of Bootstrap's CSS
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
 
 * {
     box-sizing: border-box;
@@ -17,7 +17,7 @@ html {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    overflow-X: hidden;
+    overflow-x: hidden;
 }
 
 .center {
@@ -25,13 +25,15 @@ html {
     justify-content: center;
     align-items: center;
 }
+
 .between {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .header {
-    height: 100px;
+    height: 90px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -62,25 +64,152 @@ html {
 }
 
 .aside {
-    min-width: 25vw;
-    border: 1px green solid;
+    width: 350px;
+    height: fit-content;
+    border: .1px $gray-400 solid;
+    border-radius: 5px;
     margin-right: 20px;
+    flex-grow: 0;
+    padding: 5px;
+}
+
+.switch {
+    border: 1px solid;
+    width: 99%;
+    height: 28px !important;
+    padding-bottom: 5px;
+    position: absolute;
+    top: 95px;
+    left: .5%;
+    z-index: 300;
+}
+
+.aside.in {
+    animation-duration: 1s;
+    animation-name: slidein;
+}
+
+.aside.out {
+    animation-duration: 1s;
+    animation-name: slideout;
+}
+
+@keyframes slidein {
+    from {
+        margin-left: 0;
+    }
+
+    to {
+        margin-left: -350px;
+    }
+}
+
+@keyframes slideout {
+    from {
+        margin-left: -350px;
+    }
+
+    to {
+        margin-left: 0;
+    }
+}
+
+.aside__buttons {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.checkboxes {
+    height: 25vh;
+    border: .1px $gray-500 solid;
+    margin-top: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.range {
+    height: 15vh;
+    border: .1px $gray-500 solid;
+    margin-top: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.checkbox__header {
+    height: 10%;
+}
+
+.range__header {
+    height: 20%;
+}
+
+.range__content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 80%;
+}
+
+.range__content>span {
+    display: block;
+}
+
+.range__values {
+    width: 100%;
+    padding: 0 50px;
+}
+
+.checkbox__content {
+    height: 90%;
+    width: 100%;
+    overflow-y: scroll;
+    padding: 5px;
+    flex-direction: column;
+}
+
+.form-check-label {
+    margin-left: 10px;
+}
+
+.aside__header {
+    width: 100%;
+    background-color: $dark;
+    color: white;
+    text-transform: uppercase;
+}
+
+.checkbox__content>div {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.zero {
+    color: $gray-500;
 }
 
 .main {
     width: 100%;
     margin-top: 120px;
     display: flex;
+    padding: 10px;
     flex: 1 0 auto;
 }
 
 .products {
     width: 70%;
+    flex-grow: 1;
 }
+
 .accordion-body {
     flex-wrap: wrap;
     gap: 20px;
 }
+
 .main__filters {
     position: relative;
     z-index: 100;
@@ -110,35 +239,44 @@ html {
     border-radius: 5px;
     flex-wrap: wrap;
 }
-.size > div {
+
+.size>div {
     border-radius: 20px;
     border: 1px solid;
     margin: 2px;
-
+    background-color: white;
 }
-.size__large > div {
+
+.size__large>div {
     width: 35%;
     height: 35%;
 }
-.size__small > div {
+
+.size__small>div {
     width: 20%;
     height: 20%;
 }
+
+.size.active {
+    background-color: rgb(231, 231, 231);
+}
+
 .header__cart:hover,
 .size:hover {
-    transition: all .5s;
+    transition: all 0.5s;
     transform: scale(1.2);
     cursor: pointer;
 }
 
 .card {
     width: 23%;
-    height: 270px;
+    min-width: 250px;
+    height: 320px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     border: 1px solid;
-    background-size: contain !important;
+    background-size: cover !important;
     background-position: center !important;
     margin-bottom: 10px;
 }
@@ -150,12 +288,11 @@ html {
 .card__description-list {
     list-style-type: none;
     font-size: 60%;
-    line-height: 60%;
+    line-height: 90%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-
 }
 
 .card__description {
@@ -175,7 +312,7 @@ html {
     color: white;
     font-size: 90%;
     padding-left: 5px;
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
 }
 
 .card__span {
@@ -188,6 +325,14 @@ html {
     justify-content: space-around;
     align-items: center;
     height: 20%;
+}
+
+.add::before {
+    content: 'ADD TO ';
+}
+
+.remove::before {
+    content: 'REMOVE FROM ';
 }
 
 .btn {
@@ -211,6 +356,7 @@ html {
     padding: 0 20px;
     flex-wrap: wrap;
     margin-top: 20px;
+    padding: 10px;
 }
 
 .footer_img-rs {
@@ -226,7 +372,7 @@ html {
     width: 20px;
     height: 20px;
     margin-left: 20px;
-    border: .1px solid white;
+    border: 0.1px solid white;
     background-color: white;
     border-radius: 30px;
 }
@@ -268,7 +414,7 @@ html {
     width: 100%;
     border: 2px solid white;
     border-radius: 1rem;
-    background: rgba(24, 26, 28, .5);
+    background: rgba(24, 26, 28, 0.5);
     overflow: hidden;
 }
 
@@ -281,7 +427,7 @@ html {
 .product-data {
     display: flex;
     width: 100%;
-    padding: .5%;
+    padding: 0.5%;
 }
 
 .product-photo {
@@ -354,11 +500,27 @@ html {
 }
 
 @media screen and (max-width: 700px) {
-
     h4 {
         font-size: 14px;
     }
-
+h1 {
+    font-size: 22px !important;
+    width: 25% !important;
+}
+.header__sum {
+    text-align: center;
+    margin-left: -60px;
+}
+.footer {
+    justify-content: center;
+} 
+.main__content {
+    justify-content: center;
+    gap: 20px;
+}
+.switch {
+    margin-left: 0;
+}
     p {
         font-size: 14px;
     }
@@ -371,6 +533,18 @@ html {
     .add-to-cart {
         display: flex;
         width: 100%;
+    }
+}
+
+@media (max-width: 1150px) {
+    .aside {
+        position: fixed;
+        left: 0;
+        width: 300px;
+        z-index: 200;
+        opacity: 1;
+        background-color: white;
+        font-size: 12px;
     }
 
 }
