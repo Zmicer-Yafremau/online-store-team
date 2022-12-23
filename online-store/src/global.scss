@@ -66,6 +66,7 @@ $accordion-color: black;
     flex-grow: 0;
     padding: 5px;
 }
+
 .switch {
     border: 1px solid;
     width: 99%;
@@ -76,32 +77,37 @@ $accordion-color: black;
     left: .5%;
     z-index: 300;
 }
+
 .aside.in {
-    animation-duration:1s;
+    animation-duration: 1s;
     animation-name: slidein;
 }
+
 .aside.out {
-    animation-duration:1s;
+    animation-duration: 1s;
     animation-name: slideout;
 }
+
 @keyframes slidein {
     from {
-      margin-left: 0;
+        margin-left: 0;
     }
-  
+
     to {
-      margin-left: -350px;
+        margin-left: -350px;
     }
-  }
-  @keyframes slideout {
+}
+
+@keyframes slideout {
     from {
-      margin-left: -350px;
+        margin-left: -350px;
     }
-  
+
     to {
-      margin-left: 0;
+        margin-left: 0;
     }
-  }
+}
+
 .aside__buttons {
     width: 100%;
     margin-top: 10px;
@@ -132,19 +138,23 @@ $accordion-color: black;
 .range__header {
     height: 20%;
 }
+
 .range__content {
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 80%;
 }
-.range__content > span {
+
+.range__content>span {
     display: block;
 }
+
 .range__values {
     width: 100%;
     padding: 0 50px;
 }
+
 .checkbox__content {
     height: 90%;
     width: 100%;
@@ -171,9 +181,11 @@ $accordion-color: black;
     align-items: center;
     justify-content: space-between;
 }
+
 .zero {
     color: $gray-500;
 }
+
 .main {
     width: 100%;
     margin-top: 120px;
@@ -337,6 +349,7 @@ $accordion-color: black;
     padding: 0 20px;
     flex-wrap: wrap;
     margin-top: 20px;
+    padding: 10px;
 }
 
 .footer_img-rs {
@@ -482,7 +495,24 @@ $accordion-color: black;
     h4 {
         font-size: 14px;
     }
-
+h1 {
+    font-size: 22px !important;
+    width: 25% !important;
+}
+.header__sum {
+    text-align: center;
+    margin-left: -60px;
+}
+.footer {
+    justify-content: center;
+} 
+.main__content {
+    justify-content: center;
+    gap: 20px;
+}
+.switch {
+    margin-left: 0;
+}
     p {
         font-size: 14px;
     }
@@ -497,13 +527,16 @@ $accordion-color: black;
         width: 100%;
     }
 }
+
 @media (max-width: 1150px) {
-   .aside {
-    position: fixed;
-    width: 340px;
-    z-index: 200;
-    opacity: 1;
-    background-color: white;
-   }
+    .aside {
+        position: fixed;
+        left: 0;
+        width: 300px;
+        z-index: 200;
+        opacity: 1;
+        background-color: white;
+        font-size: 12px;
+    }
 
 }

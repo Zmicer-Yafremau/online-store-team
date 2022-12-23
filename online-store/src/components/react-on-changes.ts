@@ -23,10 +23,12 @@ export function react() {
         if (!ASIDE.classList.contains('in')) {
             ASIDE.classList.add('in');
             ASIDE.classList.remove('out');
+            SWITCH.innerHTML = 'SHOW FILTERS';
         } else {
             ASIDE.classList.remove('visually-hidden');
             ASIDE.classList.remove('in');
             ASIDE.classList.add('out');
+            SWITCH.innerHTML = 'HIDE FILTERS';
         }
     };
     ASIDE.addEventListener('animationend', () => {
