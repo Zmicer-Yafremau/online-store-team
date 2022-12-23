@@ -58,16 +58,31 @@ $accordion-color: black;
 }
 
 .aside {
-    min-width: 350px;
-    width: 25vw;
+    width: 350px;
     height: fit-content;
     border: .1px $gray-400 solid;
     border-radius: 5px;
     margin-right: 20px;
     flex-grow: 0;
     padding: 5px;
-    /*animation-duration:10s;
-    animation-name: slidein;*/
+}
+.switch {
+    border: 1px solid;
+    width: 99%;
+    height: 28px !important;
+    padding-bottom: 5px;
+    position: absolute;
+    top: 95px;
+    left: .5%;
+    z-index: 300;
+}
+.aside.in {
+    animation-duration:1s;
+    animation-name: slidein;
+}
+.aside.out {
+    animation-duration:1s;
+    animation-name: slideout;
 }
 @keyframes slidein {
     from {
@@ -76,6 +91,15 @@ $accordion-color: black;
   
     to {
       margin-left: -350px;
+    }
+  }
+  @keyframes slideout {
+    from {
+      margin-left: -350px;
+    }
+  
+    to {
+      margin-left: 0;
     }
   }
 .aside__buttons {
@@ -472,4 +496,14 @@ $accordion-color: black;
         display: flex;
         width: 100%;
     }
+}
+@media (max-width: 1150px) {
+   .aside {
+    position: fixed;
+    width: 340px;
+    z-index: 200;
+    opacity: 1;
+    background-color: white;
+   }
+
 }

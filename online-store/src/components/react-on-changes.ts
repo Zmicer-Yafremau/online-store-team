@@ -17,6 +17,22 @@ export function react() {
     const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
     const RESET = document.getElementsByClassName('reset')[0] as HTMLButtonElement;
     const COPY = document.getElementsByClassName('copy')[0] as HTMLButtonElement;
+    const SWITCH = document.getElementsByClassName('switch')[0] as HTMLDivElement;
+    const ASIDE = document.getElementsByClassName('aside')[0];
+    const CHANGE_VIEW = () => {
+        if (!ASIDE.classList.contains('in')) {
+            ASIDE.classList.add('in');
+            ASIDE.classList.remove('out');
+        } else {
+            ASIDE.classList.remove('visually-hidden');
+            ASIDE.classList.remove('in');
+            ASIDE.classList.add('out');
+        }
+    };
+    ASIDE.addEventListener('animationend', () => {
+        if (ASIDE.classList.contains('in')) ASIDE.classList.add('visually-hidden');
+    });
+    SWITCH.addEventListener('click', CHANGE_VIEW);
     RESET.addEventListener('click', () => {
         location.href = location.origin;
     });
