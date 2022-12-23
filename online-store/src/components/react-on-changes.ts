@@ -3,6 +3,8 @@ import { CARDS } from './cards/cards';
 import { productDetail } from './product-detail';
 import { changeSize } from './change-size';
 import { addToBasket } from './add-to-basket';
+import { countSlider } from './count-slider-values';
+import { updateSlider } from './update-slider';
 export function react() {
     const ADD = document.getElementsByClassName('card__drop-button') as HTMLCollectionOf<HTMLButtonElement>;
     const SELECT = document.querySelector('.form-select') as HTMLSelectElement;
@@ -96,10 +98,50 @@ export function react() {
     const BRAND_CONTAINER = document.getElementsByClassName('checkboxes__brand')[0] as HTMLDivElement;
     const SORT_BY_BRAND = sortBy('brand');
     BRAND_CONTAINER.addEventListener('click', SORT_BY_BRAND);
+    const PRICE_CONTAINER = document.getElementsByClassName(`price__content`)[0] as HTMLDivElement;
+    const STOCK_CONTAINER = document.getElementsByClassName(`stock__content`)[0] as HTMLDivElement;
+    function checkSlider(name: 'price' | 'stock') {
+        return (event: Event) => {
+            if (event.target instanceof HTMLInputElement) {
+                const url = new URL(window.location.href);
+                if (event.target.classList.contains('fromSlider')) {
+                    const THIS_VALUE = countSlider(`${name}`).arr[+event.target.value];
+                    url.searchParams.set(
+                        `${name}`,
+                        `${Math.min(THIS_VALUE, countSlider(`${name}`).right)}↕${Math.max(
+                            THIS_VALUE,
+                            countSlider(`${name}`).right
+                        )}`
+                    );
+                    removeAllEvents();
+                    setTimeout(fillSort, 10);
+                }
+                if (event.target.classList.contains('toSlider')) {
+                    const THIS_VALUE = countSlider(`${name}`).arr[+event.target.value];
+                    url.searchParams.set(
+                        `${name}`,
+                        `${Math.min(THIS_VALUE, countSlider(`${name}`).left)}↕${Math.max(
+                            THIS_VALUE,
+                            countSlider(`${name}`).left
+                        )}`
+                    );
+                    removeAllEvents();
+                    setTimeout(fillSort, 10);
+                }
+                history.replaceState(null, '', url);
+            }
+        };
+    }
+    const PRICE_CHECK = checkSlider('price');
+    const STOCK_CHECK = checkSlider('stock');
+    PRICE_CONTAINER.addEventListener('change', PRICE_CHECK);
+    STOCK_CONTAINER.addEventListener('change', STOCK_CHECK);
     function removeAllEvents() {
         SELECT.removeEventListener('change', START_SELECT);
         SEARCH.removeEventListener('input', START_SEARCH);
         CATEGORY_CONTAINER.removeEventListener('click', SORT_BY_CATEGORY);
         BRAND_CONTAINER.removeEventListener('click', SORT_BY_BRAND);
+        PRICE_CONTAINER.removeEventListener('change', PRICE_CHECK);
+        STOCK_CONTAINER.removeEventListener('change', STOCK_CHECK);
     }
 }

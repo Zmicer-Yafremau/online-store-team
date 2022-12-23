@@ -18,4 +18,5 @@ export type sliderValueType = {
     max: number;
     left: number;
     right: number;
+    arr: number[];
 };
