@@ -1,5 +1,4 @@
 import { CARDS } from '../components/cards/cards';
-import { createFilters } from '../components/create-filters';
 import { fill } from '../components/fill';
 import { react } from '../components/react-on-changes';
 import { sortFilter } from './sort-filter';

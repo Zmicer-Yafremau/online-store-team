@@ -1,10 +1,9 @@
 import { fillSort } from '../filters/fill-n-sort';
-import { CARDS } from './cards/cards';
+/*import { CARDS } from './cards/cards';*/
 import { productDetail } from './product-detail';
 import { changeSize } from './change-size';
 import { addToBasket } from './add-to-basket';
 import { countSlider } from './count-slider-values';
-import { updateSlider } from './update-slider';
 export function react() {
     const ADD = document.getElementsByClassName('card__drop-button') as HTMLCollectionOf<HTMLButtonElement>;
     const SELECT = document.querySelector('.form-select') as HTMLSelectElement;
@@ -73,8 +72,9 @@ export function react() {
         const GO_DETAILS = () => {
             const ID = +item.classList[3].split('-')[1];
             productDetail(ID);
-            const NAME = CARDS.find((el) => el.id === ID);
+            /*const NAME = CARDS.find((el) => el.id === ID);
             history.pushState({}, '', `/${item.classList[3].split('-')[1]}/${NAME?.title.split(' ').join('_')}`);
+             */
         };
         item.addEventListener('click', GO_DETAILS);
     });
