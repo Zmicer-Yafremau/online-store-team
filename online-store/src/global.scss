@@ -8,7 +8,13 @@
 $clr: red;
 $accordion-color: black;
 
+html {
+    height: 100%;
+}
+
 .body {
+    height: 100%;
+    display: flex;
     flex-direction: column;
     min-height: 100vh;
     overflow-x: hidden;
@@ -191,6 +197,7 @@ $accordion-color: black;
     margin-top: 120px;
     display: flex;
     padding: 10px;
+    flex: 1 0 auto;
 }
 
 .products {
@@ -400,7 +407,7 @@ $accordion-color: black;
 .product-details {
     width: 80%;
     height: fit-content;
-    margin: 82px auto;
+    margin: 0 auto;
 }
 
 .product-details__container {
@@ -444,6 +451,7 @@ $accordion-color: black;
     border: 1px solid white;
     border-radius: 0.5rem;
     cursor: pointer;
+    margin: 2px;
 }
 
 .grand-photo img {
