@@ -1,7 +1,10 @@
 import { CARDS } from '../components/cards/cards';
 import { fill } from '../components/fill';
+import { react } from '../components/react-on-changes';
 import { sortFilter } from './sort-filter';
 import { valueFilter } from './value-filters';
+import { updateQuantity } from '../components/update-brand-cat-quantity';
+import { updateSlider } from '../components/update-slider';
 export function fillSort() {
     const PARAMS = new URLSearchParams(location.search);
     const FOUND = document.querySelector('.main__found-span') as HTMLSpanElement;
@@ -20,5 +23,9 @@ export function fillSort() {
     }
     sortFilter();
     fill(JSON.parse(localStorage.cards));
+    updateQuantity();
+    updateSlider('price');
+    updateSlider('stock');
+    react();
     FOUND.innerHTML = JSON.parse(localStorage.cards).length;
 }

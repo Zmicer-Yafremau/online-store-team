@@ -11,3 +11,12 @@ export type cardType = {
     thumbnail: string;
     images: string[];
 };
+export type quantityObject = {
+    [word: string]: number;
+};
+export type sliderValueType = {
+    max: number;
+    left: number;
+    right: number;
+    arr: number[];
+};
