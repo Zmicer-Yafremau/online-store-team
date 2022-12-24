@@ -4,7 +4,7 @@ import ProductPage from '../product';
 import CartPage from '../cart';
 import ErrorPage, { ErrorTypes } from '../error';
 import { CARDS } from '../../components/cards/cards';
-
+import { MAIN_PAGE } from '../../components/create-main-page';
 export const enum PageIds {
     MainPage = '',
     ProductPage = 'product-details',
@@ -49,6 +49,10 @@ class App {
             App.container.insertBefore(pageHTML, footer);
             if (page instanceof ProductPage) {
                 ProductPage.imgChange();
+            }
+            if (page instanceof MainPage) {
+                const MAIN = new MAIN_PAGE();
+                MAIN.fillSort().createFilters();
             }
         }
     }

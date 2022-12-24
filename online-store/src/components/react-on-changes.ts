@@ -9,7 +9,7 @@ export function react() {
     const SEARCH = document.querySelector('.main__search') as HTMLInputElement;
     const MAIN = document.getElementsByClassName('main')[0] as HTMLElement;
     const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
-    const PRODUCTS = MAIN.children[1] as HTMLElement;
+    const PRODUCTS = MAIN.children[2] as HTMLElement;
     const SIZE = (document.getElementsByClassName('size') as unknown) as NodeListOf<HTMLDivElement>;
     const CONTENT = PRODUCTS.children[1] as HTMLDivElement;
     const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
@@ -47,9 +47,13 @@ export function react() {
     const DETAILS = (document.getElementsByClassName(
         'card__details-button'
     ) as unknown) as NodeListOf<HTMLButtonElement>;
-    const LARGE = changeSize(SIZE, CONTENT, 'large');
+    const LARGE = () => {
+        changeSize(SIZE, CONTENT, 'large');
+    };
     SIZE[0].addEventListener('click', LARGE);
-    const SMALL = changeSize(SIZE, CONTENT, 'small');
+    const SMALL = () => {
+        changeSize(SIZE, CONTENT, 'small');
+    };
     SIZE[1].addEventListener('click', SMALL);
     const START_SEARCH = () => {
         const url = new URL(window.location.href);

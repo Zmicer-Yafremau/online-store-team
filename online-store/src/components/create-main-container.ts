@@ -1,8 +1,5 @@
 export function createMainContainer() {
-    const HEADER = document.getElementsByClassName('header')[0];
-    const MAIN = document.createElement('main');
-    MAIN.classList.add('main');
-    HEADER.after(MAIN);
+    const MAIN = document.getElementsByClassName('main')[0];
     MAIN.innerHTML = `
     <div class="switch btn bg-light">HIDE FILTERS</div>
     <aside class="aside">

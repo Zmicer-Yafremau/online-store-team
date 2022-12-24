@@ -72,6 +72,5 @@ export function fill(data: cardType[]) {
     }
     const PARAMS = new URLSearchParams(location.search);
     const SELECT_SIZE = PARAMS.get('size');
-    const REFRESH_SIZE = changeSize(SIZE, CONTENT, SELECT_SIZE ? SELECT_SIZE : 'large');
-    REFRESH_SIZE();
+    changeSize(SIZE, CONTENT, SELECT_SIZE ? SELECT_SIZE : 'large');
 }
