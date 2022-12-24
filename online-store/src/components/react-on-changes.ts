@@ -1,4 +1,5 @@
 import { fillSort } from '../filters/fill-n-sort';
+/*import { productDetail } from './product-detail';*/
 import { changeSize } from './change-size';
 import { addToBasket } from './add-to-basket';
 import { countSlider } from './count-slider-values';
@@ -73,8 +74,8 @@ export function react() {
     Array.from(DETAILS).forEach((item) => {
         const GO_DETAILS = () => {
             /*const ID = +item.classList[3].split('-')[1];
-            productDetail(ID);*/
-            /*const NAME = CARDS.find((el) => el.id === ID);
+            productDetail(ID);
+            const NAME = CARDS.find((el) => el.id === ID);
             history.pushState({}, '', `/${item.classList[3].split('-')[1]}/${NAME?.title.split(' ').join('_')}`);
              */
         };
