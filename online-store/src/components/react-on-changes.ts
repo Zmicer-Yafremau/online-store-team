@@ -1,6 +1,5 @@
 import { fillSort } from '../filters/fill-n-sort';
-/*import { CARDS } from './cards/cards';*/
-import { productDetail } from './product-detail';
+/*import { productDetail } from './product-detail';*/
 import { changeSize } from './change-size';
 import { addToBasket } from './add-to-basket';
 import { countSlider } from './count-slider-values';
@@ -70,9 +69,9 @@ export function react() {
     SELECT.addEventListener('change', START_SELECT);
     Array.from(DETAILS).forEach((item) => {
         const GO_DETAILS = () => {
-            const ID = +item.classList[3].split('-')[1];
+            /*const ID = +item.classList[3].split('-')[1];
             productDetail(ID);
-            /*const NAME = CARDS.find((el) => el.id === ID);
+            const NAME = CARDS.find((el) => el.id === ID);
             history.pushState({}, '', `/${item.classList[3].split('-')[1]}/${NAME?.title.split(' ').join('_')}`);
              */
         };
