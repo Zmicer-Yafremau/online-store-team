@@ -382,7 +382,7 @@ html {
     height: fit-content;
 }
 
-.cart-container {
+.cart_container {
     width: 95%;
     display: flex;
     justify-content: space-between;
@@ -537,16 +537,65 @@ html {
     height: 2rem;
     background-color: gray;
     border-radius: 10rem;
-    font-size: 150%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: none;
-    cursor: pointer;
     border: 1px solid white;
 }
 
+.total-cart {
+    width: 29%;
+    border: 1px solid white;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background-color: #1e1b1b80;
+    height: -moz-fit-content;
+    height: fit-content;
+}
 
+.total-cart h2 {
+    text-align: center;
+    font-size: 130%;
+    background-color: #181a1c;
+    padding: 0.3rem;
+    border-bottom: 1px solid white;
+    color: white;
+}
+
+.total-price {
+    width: 90%;
+    font-size: 170%;
+    color: white;
+    text-align: center;
+    margin: 4%;
+}
+
+.total-price span {
+    color: black;
+}
+
+.promo-code {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.promo-code input {
+    background-color: darkgray;
+    width: 70%;
+    border: 1px solid white;
+    color: white;
+    border-radius: 2rem;
+    padding: 0.4rem;
+    text-align: center;
+    outline: none;
+    font-size: 100%;
+}
+
+.total-cart button {
+    display: block;
+    margin: 3rem auto 1rem;
+}
 
 
 @media screen and (max-width: 1400px) {

@@ -20,9 +20,6 @@ class CartPage extends Page {
         if(localStorage.basket) {
             const ID_ARR: number[]|string[] = JSON.parse(localStorage.basket);
             console.log(ID_ARR);
-            console.log(result);
-            result = `7777`;
-            console.log(result);
             result = `${CARDS.reduce((sum, item) => {
                 let res = '';
             if (ID_ARR.includes(item.id as never)) {
@@ -46,7 +43,7 @@ class CartPage extends Page {
                     <div class="number-control">
                     <div class="stock-control"> Stock: ${item.stock} </div>
                     <div class="incDec-control">
-                    <button>+</button> 1 <button>-</button>
+                    <button type="button" class="btn btn-outline-dark">+</button> 1 <button type="button" class="btn btn-outline-dark">-</button>
                     </div>
                     <div class="amount-control"> €${item.price}.00 </div>
                     </div>
@@ -56,7 +53,14 @@ class CartPage extends Page {
                 return sum + res;
             }, '')}`;
 
-            console.log(result);
+            const TOTAL_SUM = `${CARDS.reduce((sum, item) => {
+                let curPrice = 0;
+                if (ID_ARR.includes(item.id as never)) {
+                    curPrice = item.price;
+                    console.log(curPrice);
+                }
+                return sum + curPrice;
+            }, 0)}`;
 
             pageContent = `
             <div class="cart-page">
@@ -89,10 +93,16 @@ class CartPage extends Page {
 
             </div>
 
-
-
-
-
+            <div class="total-cart">
+            <h2>Summary</h2>
+            <div class="total-price">
+            <span>Products: </span>${ID_ARR.length}</div>
+            <div class="total-price">
+            <span>Total: </span>€${TOTAL_SUM}.00</div>
+            <div class="promo-code">
+            <input type="search" placeholder="Enter promo code" class=""></div>
+            <button class="btn btn-outline-dark">BUY NOW</button>
+            </div>
 
             </div>
             </div>
