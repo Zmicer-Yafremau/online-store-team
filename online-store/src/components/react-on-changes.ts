@@ -20,9 +20,7 @@ import { countSlider } from './count-slider-values';
     const ASIDE = document.getElementsByClassName('aside')[0];
     const CART_ICON = CART.parentElement as HTMLDivElement;
     CART_ICON.addEventListener('click', () => {
-        history.pushState({}, '', ``);
-        history.pushState({}, '', `#cart`);
-        location.reload();
+        location.replace(`${location.origin}#cart`);
     });
     const CHANGE_VIEW = () => {
         if (!ASIDE.classList.contains('in')) {
@@ -84,9 +82,7 @@ import { countSlider } from './count-slider-values';
             const NAME = CARDS.find((el) => el.id === ID)
                 ?.title.split(' ')
                 .join('_');
-            history.pushState({}, '', ``);
-            history.pushState({}, '', `#product-details/${ID}/${NAME}`);
-            location.reload();
+            location.replace(`${location.origin}#product-details/${ID}/${NAME}`);
         };
         item.addEventListener('click', GO_DETAILS);
     });
