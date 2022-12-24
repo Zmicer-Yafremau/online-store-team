@@ -1,6 +1,5 @@
 import Page from '../../types/page';
 import { CARDS } from '../../components/cards/cards';
-import { cardType } from '../../types/types';
 
 class CartPage extends Page {
     constructor(id: string, tagName: string, className: string) {
@@ -65,9 +64,7 @@ class CartPage extends Page {
             pageContent = `
             <div class="cart-page">
             <div class="cart_container container">
-
             <div class="products-in-cart">
-
             <div class="title-and-page-control">
             <h2>Products In Cart</h2>
             <div class="page-control">
@@ -85,14 +82,11 @@ class CartPage extends Page {
             </button>
             </div>
             </div>
-            </div>
-            
+            </div>            
             <div class="prod-items">
             ${result}
             </div>
-
             </div>
-
             <div class="total-cart">
             <h2>Summary</h2>
             <div class="total-price">
@@ -103,13 +97,9 @@ class CartPage extends Page {
             <input type="search" placeholder="Enter promo code" class=""></div>
             <button class="btn btn-outline-dark">BUY NOW</button>
             </div>
-
             </div>
             </div>
-            
             `;
-        
-
             return pageContent;
         }
         return pageContent;

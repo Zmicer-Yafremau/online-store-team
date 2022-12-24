@@ -389,7 +389,7 @@ html {
 }
 
 .products-in-cart {
-    width: 69%;
+    width: 73%;
     border: 1px solid white;
     overflow: hidden;
     border-radius: 0.5rem;
@@ -519,10 +519,13 @@ html {
 
 .stock-control, .amount-control {
     display: flex;
-    color: white;
     align-items: center;
     justify-content: center;
     margin: 7%;
+}
+
+.amount-control {
+    color: white;
 }
 
 .incDec-control {
@@ -544,7 +547,7 @@ html {
 }
 
 .total-cart {
-    width: 29%;
+    width: 25%;
     border: 1px solid white;
     overflow: hidden;
     border-radius: 0.5rem;
@@ -597,6 +600,48 @@ html {
     margin: 3rem auto 1rem;
 }
 
+.res-promo {
+    color: white;
+    margin-top: 3%;
+    text-align: center;
+}
+
+.res-promo span {
+    color: white;
+    background-color: #181a1c;
+    border: 1px solid white;
+    border-radius: 0.3rem;
+    padding: 1%;
+    cursor: pointer;
+}
+
+.applied-codes h5 {
+    text-align: center;
+    background-color: #181a1c;
+    border-bottom: 1px solid white;
+}
+
+.applied-promo {
+    color: white;
+    text-align: center;
+    border-bottom: 1px solid white;
+    padding: 2%;
+}
+
+.applied-promo span {
+    color: white;
+    background-color: #181a1c;
+    border: 1px solid white;
+    border-radius: 0.3rem;
+    padding: 1%;
+    cursor: pointer;
+}
+
+.old-price {
+    text-decoration: line-through;
+}
+
+
 
 @media screen and (max-width: 1400px) {
 
@@ -609,3 +654,96 @@ html {
     }
 
 }
+
+@media screen and (max-width: 1000px) {
+
+    .total-price {
+        font-size: 120%;
+    }
+
+    .number-control {
+        width: 20%;
+    }
+
+    .item-info {
+        width: 70%;
+    }
+
+    .total-cart {
+        font-size: 14px;
+    }
+
+    .promo-code ::placeholder {
+        font-size: 80%;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+.cart_container {
+    flex-direction: column;
+    align-items: center;
+}
+
+.products-in-cart {
+    width: 90%;
+}
+
+.total-cart button {
+    display: flex;
+    justify-content: center;
+    margin: 1rem auto;
+    height: fit-content;
+}
+
+.total-cart {
+    margin-top: 20px;
+    width: 63%;
+}
+
+}
+
+@media screen and (max-width: 560px) {
+
+.title-and-page-control h2 {
+    font-size: 18px;
+}
+
+.page-control {
+    font-size: 12px;
+}
+
+.incDec-control button {
+    width: 1rem;
+    height: 1.5rem;
+}
+
+.page-numbers {
+    margin-left: 1rem;
+}
+
+}
+
+@media screen and (max-width: 430px) {
+    
+    .page-control {
+        font-size: 11px;
+    }
+
+    .incDec-control {
+        font-size: 100%;
+    }
+    
+    .incDec-control button {
+        width: 0.5rem;
+        height: 1rem;
+        margin: 0;
+        padding: 0.4rem;
+    }
+    
+    .page-numbers {
+        margin-left: 0.3rem;
+    }
+    
+    }
