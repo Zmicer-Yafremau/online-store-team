@@ -7,8 +7,8 @@ class CartPage extends Page {
     }
 
     public createContent() {
-        let id: number[] = [];
-        let result: string = `1234`;
+        const id: number[] = [];
+        let result = `1234`;
         id.push(1);
         id.push(2);
         localStorage.basket = JSON.stringify(id);
@@ -16,16 +16,15 @@ class CartPage extends Page {
             <div class="cart-page">
             <h1>Cart is Empty</h1>
             </div>`;
-        if(localStorage.basket) {
-            const ID_ARR: number[]|string[] = JSON.parse(localStorage.basket);
+        if (localStorage.basket) {
+            const ID_ARR: number[] | string[] = JSON.parse(localStorage.basket);
             console.log(ID_ARR);
             result = `${CARDS.reduce((sum, item) => {
                 let res = '';
-            if (ID_ARR.includes(item.id as never)) {
-                    res =
-                    `<div class="app-cart-item">
+                if (ID_ARR.includes(item.id as never)) {
+                    res = `<div class="app-cart-item">
                     <div class="cart-item">
-                    <div class="item-i">${ID_ARR.indexOf(item.id as never)+1}</div>
+                    <div class="item-i">${ID_ARR.indexOf(item.id as never) + 1}</div>
                     <div class="item-info">
                     <img alt="${item.title}" src="${item.images[item.images.length - 1]}">
                     <div class="item-detail-p">

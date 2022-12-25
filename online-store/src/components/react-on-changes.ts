@@ -1,9 +1,10 @@
 import { fillSort } from '../filters/fill-n-sort';
 /*import { productDetail } from './product-detail';*/
+import { CARDS } from './cards/cards';
 import { changeSize } from './change-size';
 import { addToBasket } from './add-to-basket';
 import { countSlider } from './count-slider-values';
-export function react() {
+/*import App from '../pages/app/index'*/ export function react() {
     const ADD = document.getElementsByClassName('card__drop-button') as HTMLCollectionOf<HTMLButtonElement>;
     const SELECT = document.querySelector('.form-select') as HTMLSelectElement;
     const SEARCH = document.querySelector('.main__search') as HTMLInputElement;
@@ -17,6 +18,10 @@ export function react() {
     const COPY = document.getElementsByClassName('copy')[0] as HTMLButtonElement;
     const SWITCH = document.getElementsByClassName('switch')[0] as HTMLDivElement;
     const ASIDE = document.getElementsByClassName('aside')[0];
+    const CART_ICON = CART.parentElement as HTMLDivElement;
+    CART_ICON.addEventListener('click', () => {
+        location.replace(`${location.origin}#cart`);
+    });
     const CHANGE_VIEW = () => {
         if (!ASIDE.classList.contains('in')) {
             ASIDE.classList.add('in');
@@ -73,11 +78,11 @@ export function react() {
     SELECT.addEventListener('change', START_SELECT);
     Array.from(DETAILS).forEach((item) => {
         const GO_DETAILS = () => {
-            /*const ID = +item.classList[3].split('-')[1];
-            productDetail(ID);
-            const NAME = CARDS.find((el) => el.id === ID);
-            history.pushState({}, '', `/${item.classList[3].split('-')[1]}/${NAME?.title.split(' ').join('_')}`);
-             */
+            const ID = +item.classList[3].split('-')[1];
+            const NAME = CARDS.find((el) => el.id === ID)
+                ?.title.split(' ')
+                .join('_');
+            location.replace(`${location.origin}#product-details/${ID}/${NAME}`);
         };
         item.addEventListener('click', GO_DETAILS);
     });
