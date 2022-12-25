@@ -10,6 +10,7 @@ class CartPage extends Page {
     }
 
     public createContent() {
+
         const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
         const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
         let result = ``;
