@@ -7,12 +7,13 @@ class MainPage extends Page {
     public createContent() {
         //add  create innerHTML code
         const PAGECONTENT = `
-        <div class="switch btn bg-light">HIDE FILTERS</div>
-    <aside class="aside">
+        <div class="switch btn bg-light btn-lg">SHOW FILTERS</div>
+    <aside class="aside in">
         <div class="asside__panel">
             <div class="aside__content">
                 <div class="aside__buttons between">
                     <button type="button" class="reset btn btn-outline-dark btn-lg">RESET FILTERS</button>
+                    <button type="button" class="reset-all btn btn-outline-dark btn-lg">RESET ALL</button>
                     <button type="button" class="copy btn btn-outline-dark btn-lg">COPY LINK</button>
                 </div>
                 <div class="checkboxes checkboxes__category category">

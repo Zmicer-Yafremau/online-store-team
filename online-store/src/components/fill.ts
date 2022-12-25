@@ -62,12 +62,11 @@ export function fill(data: cardType[]) {
     if (JSON.parse(localStorage.basket).length) {
         CART.classList.remove('visually-hidden');
         CART.innerHTML = `${JSON.parse(localStorage.basket).length}`;
-        TOTAL_SUM.innerHTML = `${CARDS.reduce((sum, current) => {
-            let curPrice = 0;
-            if (JSON.parse(localStorage.basket).includes(`${current.id}`)) {
-                curPrice = current.price;
+        TOTAL_SUM.innerHTML = `${JSON.parse(localStorage.basket).reduce((sum: number, current: string) => {
+            if (CARDS.find((item) => item.id === Number(current))) {
+                sum = sum + (CARDS.find((item) => item.id === Number(current)) as cardType)?.price;
             }
-            return sum + curPrice;
+            return sum;
         }, 0)}`;
     }
     const PARAMS = new URLSearchParams(location.search);

@@ -47,6 +47,11 @@ class App {
             const footer = document.querySelector('.footer');
             pageHTML.id = App.defaultPageId;
             App.container.insertBefore(pageHTML, footer);
+            const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
+            const CART_ICON = CART.parentElement as HTMLDivElement;
+            CART_ICON.addEventListener('click', () => {
+                location.replace(`${location.origin}#cart`);
+            });
             if (page instanceof ProductPage) {
                 ProductPage.imgChange();
             }

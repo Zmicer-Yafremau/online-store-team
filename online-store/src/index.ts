@@ -1,5 +1,5 @@
 import './global.scss';
-import './components/slider.scss';
+import './pages/main/main.scss';
 import '../node_modules/normalize.css/normalize.css';
 import 'bootstrap';
 import App from './pages/app';
