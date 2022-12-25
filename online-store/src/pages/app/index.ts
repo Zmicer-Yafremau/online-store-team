@@ -54,6 +54,9 @@ class App {
                 const MAIN = new MAIN_PAGE();
                 MAIN.fillSort().createFilters();
             }
+            if (page instanceof CartPage) {
+                CartPage.addEvents();
+            }
         }
     }
 

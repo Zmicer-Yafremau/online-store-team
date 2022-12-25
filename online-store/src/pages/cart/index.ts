@@ -1,5 +1,8 @@
 import Page from '../../types/page';
 import { CARDS } from '../../components/cards/cards';
+import { addQuantity } from './add-quantity-product';
+import { cardType } from '../../types/types';
+import { removeQuantity } from './remove-quantity-product';
 
 class CartPage extends Page {
     constructor(id: string, tagName: string, className: string) {
@@ -7,24 +10,31 @@ class CartPage extends Page {
     }
 
     public createContent() {
-        const id: number[] = [];
-        let result = `1234`;
-        id.push(1);
-        id.push(2);
-        localStorage.basket = JSON.stringify(id);
+
+        const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
+        const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
+        let result = ``;
         let pageContent = `
             <div class="cart-page">
             <h1>Cart is Empty</h1>
             </div>`;
         if (localStorage.basket) {
-            const ID_ARR: number[] | string[] = JSON.parse(localStorage.basket);
+            const ID_ARR: string[] = JSON.parse(localStorage.basket);
             console.log(ID_ARR);
             result = `${CARDS.reduce((sum, item) => {
                 let res = '';
-                if (ID_ARR.includes(item.id as never)) {
-                    res = `<div class="app-cart-item">
+                if ([...new Set(ID_ARR)].includes(String(item.id) as never)) {
+
+                    let quantityCart: number = ID_ARR.reduce((sum, current) => {
+                        if (current === String(item.id)) {
+                            sum = sum + 1;
+                        }
+                        return sum;
+                        }, 0);
+
+                    res = `<div class="app-cart-item card__${item.id}">
                     <div class="cart-item">
-                    <div class="item-i">${ID_ARR.indexOf(item.id as never) + 1}</div>
+                    <div class="item-i">${[...new Set(ID_ARR)].indexOf(String(item.id) as never) + 1}</div>
                     <div class="item-info">
                     <img alt="${item.title}" src="${item.images[item.images.length - 1]}">
                     <div class="item-detail-p">
@@ -39,11 +49,13 @@ class CartPage extends Page {
                     </div>
                     </div>
                     <div class="number-control">
-                    <div class="stock-control"> Stock: ${item.stock} </div>
-                    <div class="incDec-control">
-                    <button type="button" class="btn btn-outline-dark">+</button> 1 <button type="button" class="btn btn-outline-dark">-</button>
+                    <div class="stock-control"> Stock: <span class="stock">${item.stock-quantityCart}</span></div>
+                    <div class="incDec-control card__${item.id}">
+                    <button type="button" class="btn btn-outline-dark card__add-button">+</button>
+                    <span class="quantity"> ${quantityCart} </span>
+                    <button type="button" class="btn btn-outline-dark card__remove-button">-</button>
                     </div>
-                    <div class="amount-control"> €${item.price}.00 </div>
+                    <div class="amount-control">€ ${item.price}</div>
                     </div>
                     </div>
                     </div>`;
@@ -51,14 +63,22 @@ class CartPage extends Page {
                 return sum + res;
             }, '')}`;
 
-            const TOTAL_SUM = `${CARDS.reduce((sum, item) => {
-                let curPrice = 0;
-                if (ID_ARR.includes(item.id as never)) {
-                    curPrice = item.price;
-                    console.log(curPrice);
+            localStorage.basket = JSON.stringify(ID_ARR);
+        if (!JSON.parse(localStorage.basket).length) {
+            CART.classList.add('visually-hidden');
+            CART.innerHTML = '';
+            TOTAL_SUM.innerHTML = '0';
+        }
+        if (JSON.parse(localStorage.basket).length) {
+            CART.classList.remove('visually-hidden');
+            CART.innerHTML = `${JSON.parse(localStorage.basket).length}`;
+            TOTAL_SUM.innerHTML = `${JSON.parse(localStorage.basket).reduce((sum: number, current: string) => {
+                if (CARDS.find((item) => item.id === Number(current))) {
+                sum = sum + (CARDS.find((item) => item.id === Number(current))as cardType)?.price;
                 }
-                return sum + curPrice;
+                return sum;
             }, 0)}`;
+        }
 
             pageContent = `
             <div class="cart-page">
@@ -89,9 +109,9 @@ class CartPage extends Page {
             <div class="total-cart">
             <h2>Summary</h2>
             <div class="total-price">
-            <span>Products: </span>${ID_ARR.length}</div>
+            Products: <span class="summary-product">${ID_ARR.length}</span></div>
             <div class="total-price">
-            <span>Total: </span>€${TOTAL_SUM}.00</div>
+            Total: <span class="summary-total">€ ${TOTAL_SUM.innerHTML}</span></div>
             <div class="promo-code">
             <input type="search" placeholder="Enter promo code" class=""></div>
             <button class="btn btn-outline-dark">BUY NOW</button>
@@ -108,6 +128,34 @@ class CartPage extends Page {
         this.addPagesContent(this.createContent());
         return this.container;
     }
-}
+
+    static addEvents() {
+        const ADD = document.getElementsByClassName('card__add-button') as HTMLCollectionOf<HTMLButtonElement>;
+        const REMOVE = document.getElementsByClassName('card__remove-button') as HTMLCollectionOf<HTMLButtonElement>;
+        const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
+        const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
+        const STOCK = document.getElementsByClassName('stock') as HTMLCollectionOf<HTMLSpanElement>;
+        const QUANTITY = document.getElementsByClassName('quantity') as HTMLCollectionOf<HTMLSpanElement>;
+        const SUMMARY_PRODUCT = document.querySelector('.summary-product') as HTMLSpanElement;
+        const SUMMARY_TOTAL = document.querySelector('.summary-total') as HTMLSpanElement;
+        
+        Array.from(ADD).forEach((button) => {
+            const CARD = button.parentElement as HTMLDivElement;
+            const CARD_ID_CLASS = CARD.classList[1];
+            const CARD_ID = CARD_ID_CLASS.split('__')[1];
+            const ADD_TO_CART = addQuantity(CART, TOTAL_SUM, CARD_ID, button, STOCK, QUANTITY, SUMMARY_PRODUCT, SUMMARY_TOTAL);
+            button.addEventListener('click', ADD_TO_CART);
+        });
+
+        Array.from(REMOVE).forEach((button) => {
+            const CARD = button.parentElement as HTMLDivElement;
+            const CARD_ID_CLASS = CARD.classList[1];
+            const CARD_ID = CARD_ID_CLASS.split('__')[1];
+            const REMOVE_ITEM = CARD.parentElement?.parentElement?.parentElement as HTMLDivElement;
+            const REMOVE_FROM_CART = removeQuantity(CART, TOTAL_SUM, CARD_ID, button, STOCK, QUANTITY, SUMMARY_PRODUCT, SUMMARY_TOTAL, REMOVE_ITEM);
+            button.addEventListener('click', REMOVE_FROM_CART);
+        });
+    }
+} 
 
 export default CartPage;

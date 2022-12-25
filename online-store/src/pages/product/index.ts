@@ -72,8 +72,8 @@ class ProductPage extends Page {
         </div>
         <div class="add-to-cart">
         <div class="cart-button">
-        €${CURRENT_PRODUCT.price}.00
-        <button type="button" class="btn btn-outline-dark">DROP FROM CART</button>
+        € ${CURRENT_PRODUCT.price}
+        <button type="button" class="btn btn-outline-dark">ADD TO CART</button>
         <button type="button" class="btn btn-outline-dark">BUY NOW</button>
         </div>
         </div>
