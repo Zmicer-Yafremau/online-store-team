@@ -48,7 +48,7 @@ class App {
             pageHTML.id = App.defaultPageId;
             App.container.insertBefore(pageHTML, footer);
             if (page instanceof ProductPage) {
-                ProductPage.imgChange();
+                ProductPage.addEvents();
             }
             if (page instanceof MainPage) {
                 const MAIN = new MAIN_PAGE();
