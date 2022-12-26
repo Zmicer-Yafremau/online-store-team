@@ -13,12 +13,13 @@ class CartPage extends Page {
 
         const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
         const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
+        const ITEM_NUMBER = document.getElementsByClassName('item-i') as HTMLCollectionOf<HTMLDivElement>;
         let result = ``;
         let pageContent = `
             <div class="cart-page">
             <h1>Cart is Empty</h1>
             </div>`;
-        if (localStorage.basket) {
+        if (localStorage.basket && localStorage.basket !== `[]`) {
             const ID_ARR: string[] = JSON.parse(localStorage.basket);
             console.log(ID_ARR);
             result = `${CARDS.reduce((sum, item) => {
@@ -138,6 +139,8 @@ class CartPage extends Page {
         const QUANTITY = document.getElementsByClassName('quantity') as HTMLCollectionOf<HTMLSpanElement>;
         const SUMMARY_PRODUCT = document.querySelector('.summary-product') as HTMLSpanElement;
         const SUMMARY_TOTAL = document.querySelector('.summary-total') as HTMLSpanElement;
+        const ITEM_NUMBER = document.getElementsByClassName('item-i') as HTMLCollectionOf<HTMLDivElement>;
+        const CART_PAGE = document.querySelector('.cart-page') as HTMLDivElement;
         
         Array.from(ADD).forEach((button) => {
             const CARD = button.parentElement as HTMLDivElement;
@@ -152,7 +155,7 @@ class CartPage extends Page {
             const CARD_ID_CLASS = CARD.classList[1];
             const CARD_ID = CARD_ID_CLASS.split('__')[1];
             const REMOVE_ITEM = CARD.parentElement?.parentElement?.parentElement as HTMLDivElement;
-            const REMOVE_FROM_CART = removeQuantity(CART, TOTAL_SUM, CARD_ID, button, STOCK, QUANTITY, SUMMARY_PRODUCT, SUMMARY_TOTAL, REMOVE_ITEM);
+            const REMOVE_FROM_CART = removeQuantity(CART, TOTAL_SUM, CARD_ID, button, STOCK, QUANTITY, SUMMARY_PRODUCT, SUMMARY_TOTAL, REMOVE_ITEM, ITEM_NUMBER, CART_PAGE);
             button.addEventListener('click', REMOVE_FROM_CART);
         });
     }
