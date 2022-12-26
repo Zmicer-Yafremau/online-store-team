@@ -94,7 +94,7 @@ class CartPage extends Page {
             <span>Total: </span>€${TOTAL_SUM}.00</div>
             <div class="promo-code">
             <input type="search" placeholder="Enter promo code" class=""></div>
-            <button class="btn btn-outline-dark">BUY NOW</button>
+            <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">BUY NOW</button>
             </div>
             </div>
             </div>
