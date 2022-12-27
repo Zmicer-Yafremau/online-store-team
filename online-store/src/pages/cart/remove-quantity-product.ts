@@ -10,7 +10,9 @@ export function removeQuantity(
     QUANTITY: HTMLCollectionOf<HTMLSpanElement>,
     SUMMARY_PRODUCT: HTMLSpanElement,
     SUMMARY_TOTAL: HTMLSpanElement,    
-    REMOVE_ITEM: HTMLDivElement
+    REMOVE_ITEM: HTMLDivElement,
+    ITEM_NUMBER: HTMLCollectionOf<HTMLDivElement>,
+    CART_PAGE: HTMLDivElement
 ): () => void {
     return () => {
         if (!localStorage.basket) {
@@ -31,6 +33,12 @@ export function removeQuantity(
                 return el !== `${CARD_ID}`;
             });
             REMOVE_ITEM.remove();
+            Array.from(ITEM_NUMBER).forEach((item) => {
+                item.innerText = `${Array.from(ITEM_NUMBER).indexOf(item)+1}`
+            });
+            if (Array.from(ITEM_NUMBER).length === 0) {
+                CART_PAGE.innerHTML = `<h1>Cart is Empty</h1>`;
+            }
         }
         localStorage.basket = JSON.stringify(ID_ARR);
         if (!JSON.parse(localStorage.basket).length) {
