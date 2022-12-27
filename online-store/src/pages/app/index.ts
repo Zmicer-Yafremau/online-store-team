@@ -92,11 +92,14 @@ class App {
                 location.replace(`${location.origin}#cart`);
             });
             if (page instanceof ProductPage) {
-                ProductPage.imgChange();
+                ProductPage.addEvents();
             }
             if (page instanceof MainPage) {
                 const MAIN = new MAIN_PAGE();
                 MAIN.fillSort().createFilters();
+            }
+            if (page instanceof CartPage) {
+                CartPage.addEvents();
             }
         }
     }
