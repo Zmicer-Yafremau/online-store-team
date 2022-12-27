@@ -33,7 +33,7 @@ export function fill(data: cardType[]) {
     });
     if (!CONTENT.innerHTML) CONTENT.innerHTML = `Sorry, no matches ='(`;
     const DIV_CARDS = (document.getElementsByClassName('card') as unknown) as NodeListOf<HTMLDivElement>;
-    const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
+    const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
     const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
     Array.from(DIV_CARDS).forEach((el) => {
         if (
@@ -62,12 +62,11 @@ export function fill(data: cardType[]) {
     if (JSON.parse(localStorage.basket).length) {
         CART.classList.remove('visually-hidden');
         CART.innerHTML = `${JSON.parse(localStorage.basket).length}`;
-        TOTAL_SUM.innerHTML = `${CARDS.reduce((sum, current) => {
-            let curPrice = 0;
-            if (JSON.parse(localStorage.basket).includes(`${current.id}`)) {
-                curPrice = current.price;
+        TOTAL_SUM.innerHTML = `${JSON.parse(localStorage.basket).reduce((sum: number, current: string) => {
+            if (CARDS.find((item) => item.id === Number(current))) {
+                sum = sum + (CARDS.find((item) => item.id === Number(current)) as cardType)?.price;
             }
-            return sum + curPrice;
+            return sum;
         }, 0)}`;
     }
     const PARAMS = new URLSearchParams(location.search);

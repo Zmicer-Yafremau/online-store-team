@@ -98,7 +98,7 @@ class ProductPage extends Page {
         <div class="cart-button">
         € ${CURRENT_PRODUCT.price}
         <button type="button" class="btn btn-outline-dark card__drop-button card__${CURRENT_PRODUCT.id} add">CART</button>
-        <button type="button" class="btn btn-outline-dark card__drop-button card__${CURRENT_PRODUCT.id} buy">BUY NOW</button>
+        <button type="button" class="btn btn-outline-dark card__drop-button card__${CURRENT_PRODUCT.id} buy" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">BUY NOW</button>
         </div>
         </div>
         </div>

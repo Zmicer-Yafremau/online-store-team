@@ -9,12 +9,13 @@ import { countSlider } from './count-slider-values';
     const SELECT = document.querySelector('.form-select') as HTMLSelectElement;
     const SEARCH = document.querySelector('.main__search') as HTMLInputElement;
     const MAIN = document.getElementsByClassName('main')[0] as HTMLElement;
-    const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
+    const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
     const PRODUCTS = MAIN.children[2] as HTMLElement;
     const SIZE = (document.getElementsByClassName('size') as unknown) as NodeListOf<HTMLDivElement>;
     const CONTENT = PRODUCTS.children[1] as HTMLDivElement;
     const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
     const RESET = document.getElementsByClassName('reset')[0] as HTMLButtonElement;
+    const RESET_ALL = document.getElementsByClassName('reset-all')[0] as HTMLButtonElement;
     const COPY = document.getElementsByClassName('copy')[0] as HTMLButtonElement;
     const SWITCH = document.getElementsByClassName('switch')[0] as HTMLDivElement;
     const ASIDE = document.getElementsByClassName('aside')[0];
@@ -40,6 +41,12 @@ import { countSlider } from './count-slider-values';
     SWITCH.addEventListener('click', CHANGE_VIEW);
     RESET.addEventListener('click', () => {
         location.href = location.origin;
+    });
+    RESET_ALL.addEventListener('click', () => {
+        location.href = location.origin;
+        localStorage.clear();
+        removeAllEvents();
+        fillSort();
     });
     const COPY_LINK = () => {
         navigator.clipboard.writeText(location.href);

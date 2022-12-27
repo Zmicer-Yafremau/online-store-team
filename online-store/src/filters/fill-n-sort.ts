@@ -10,7 +10,7 @@ export function fillSort() {
     const FOUND = document.querySelector('.main__found-span') as HTMLSpanElement;
     const SELECT = document.querySelector('.form-select') as HTMLSelectElement;
     const SEARCH = document.querySelector('.main__search') as HTMLInputElement;
-    const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
+    const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
     if (PARAMS.get('search')) SEARCH.value = PARAMS.get('search') as string;
     if (!localStorage.cards) localStorage.cards = JSON.stringify(CARDS);
     if (!localStorage.basket) localStorage.basket = `[]`;
