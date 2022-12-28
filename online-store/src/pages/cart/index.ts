@@ -3,6 +3,7 @@ import { CARDS } from '../../components/cards/cards';
 import { addQuantity } from './add-quantity-product';
 import { cardType } from '../../types/types';
 import { removeQuantity } from './remove-quantity-product';
+import { displayProduct } from './displayProduct';
 
 class CartPage extends Page {
     constructor(id: string, tagName: string, className: string) {
@@ -10,8 +11,8 @@ class CartPage extends Page {
     }
 
     public createContent() {
-        const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
-        const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
+        const TOTAL_SUM = document.getElementsByClassName('header__total-sum')[0] as HTMLSpanElement;
+        const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
         let result = ``;
         let pageContent = `
             <div class="cart-page">
@@ -20,45 +21,54 @@ class CartPage extends Page {
         if (localStorage.basket && localStorage.basket !== `[]`) {
             const ID_ARR: string[] = JSON.parse(localStorage.basket);
             console.log(ID_ARR);
-            result = `${[...new Set(ID_ARR)].reduce((sum, currentId) => {
-                let res = '';
-                const item = CARDS.find((item) => item.id === Number(currentId)) as cardType;
-                let quantityCart: number = ID_ARR.reduce((sum, current) => {
-                    if (current === String(item.id)) {
-                        sum = sum + 1;
-                    }
-                    return sum;
-                }, 0);
 
-                res = `<div class="app-cart-item card__${item.id}">
-                <div class="cart-item">
-                <div class="item-i">${[...new Set(ID_ARR)].indexOf(String(item.id) as never) + 1}</div>
-                <div class="item-info">
-                <img alt="${item.title}" src="${item.images[item.images.length - 1]}">
-                <div class="item-detail-p">
-                <div class="product-title">
-                <h6>${item.title}</h6>
-                </div>
-                <div class="product-description">${item.description}</div>
-                <div class="product-other">
-                <div>Rating: ${item.rating}</div>
-                <div>Discount: ${item.discountPercentage}</div>
-                </div>
-                </div>
-                </div>
-                <div class="number-control">
-                <div class="stock-control"> Stock: <span class="stock">${item.stock - quantityCart}</span></div>
-                <div class="incDec-control card__${item.id}">
-                <button type="button" class="btn btn-outline-dark card__add-button">+</button>
-                <span class="quantity"> ${quantityCart} </span>
-                <button type="button" class="btn btn-outline-dark card__remove-button">-</button>
-                </div>
-                <div class="amount-control">€ ${item.price}</div>
-                </div>
-                </div>
-                </div>`;
-                return sum + res;
-            }, '')}`;
+           // PRODUCT_ITEMS.innerHTML = "";
+            // currentPage--;
+        
+            // const start: number = rows * currentPage;
+            // const end: number = start + rows;
+            // const paginatedData = arrItem.slice(start, end);
+
+
+            // result = `${paginatedData.reduce((sum, currentId) => {
+            //     let res = '';
+            //     const item = CARDS.find((item) => item.id === Number(currentId)) as cardType;
+            //     let quantityCart: number = ID_ARR.reduce((sum, current) => {
+            //         if (current === String(item.id)) {
+            //             sum = sum + 1;
+            //         }
+            //         return sum;
+            //     }, 0);
+
+            //     res = `<div class="app-cart-item card__${item.id}">
+            //     <div class="cart-item">
+            //     <div class="item-i">${paginatedData.indexOf(String(item.id) as never) + 1}</div>
+            //     <div class="item-info">
+            //     <img alt="${item.title}" src="${item.images[item.images.length - 1]}">
+            //     <div class="item-detail-p">
+            //     <div class="product-title">
+            //     <h6>${item.title}</h6>
+            //     </div>
+            //     <div class="product-description">${item.description}</div>
+            //     <div class="product-other">
+            //     <div>Rating: ${item.rating}</div>
+            //     <div>Discount: ${item.discountPercentage}</div>
+            //     </div>
+            //     </div>
+            //     </div>
+            //     <div class="number-control">
+            //     <div class="stock-control"> Stock: <span class="stock">${item.stock - quantityCart}</span></div>
+            //     <div class="incDec-control card__${item.id}">
+            //     <button type="button" class="btn btn-outline-dark card__add-button">+</button>
+            //     <span class="quantity"> ${quantityCart} </span>
+            //     <button type="button" class="btn btn-outline-dark card__remove-button">-</button>
+            //     </div>
+            //     <div class="amount-control">€ ${item.price}</div>
+            //     </div>
+            //     </div>
+            //     </div>`;
+            //     return sum + res;
+            // }, '')}`;
 
             localStorage.basket = JSON.stringify(ID_ARR);
             if (!JSON.parse(localStorage.basket).length) {
@@ -85,15 +95,15 @@ class CartPage extends Page {
             <h2>Products In Cart</h2>
             <div class="page-control">
             <div class="limit">
-            ITEMS: <input type="text" class="number-on-page">
+            ITEMS: <input type="text" class="number-on-page" min="0" value="3">
             </div>
             <div class="page-numbers">
             PAGE: 
-            <button>
+            <button class="page-prev">
             &lt;
             </button>
-            <span>1</span>
-            <button>
+            <span class="page-number">2</span>
+            <button class="page-next">
             &gt; 
             </button>
             </div>
@@ -129,14 +139,33 @@ class CartPage extends Page {
     static addEvents() {
         const ADD = document.getElementsByClassName('card__add-button') as HTMLCollectionOf<HTMLButtonElement>;
         const REMOVE = document.getElementsByClassName('card__remove-button') as HTMLCollectionOf<HTMLButtonElement>;
-        const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
-        const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
+        const TOTAL_SUM = document.getElementsByClassName('header__total-sum')[0] as HTMLSpanElement;
+        const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
         const STOCK = document.getElementsByClassName('stock') as HTMLCollectionOf<HTMLSpanElement>;
         const QUANTITY = document.getElementsByClassName('quantity') as HTMLCollectionOf<HTMLSpanElement>;
         const SUMMARY_PRODUCT = document.querySelector('.summary-product') as HTMLSpanElement;
         const SUMMARY_TOTAL = document.querySelector('.summary-total') as HTMLSpanElement;
         const ITEM_NUMBER = document.getElementsByClassName('item-i') as HTMLCollectionOf<HTMLDivElement>;
         const CART_PAGE = document.querySelector('.cart-page') as HTMLDivElement;
+
+        const PAGE_NUMBER = document.querySelector('.page-number') as HTMLSpanElement;
+        const NUMBER_ON_PAGE = document.querySelector('.number-on-page') as HTMLInputElement;
+        let currentPage = Number(PAGE_NUMBER.innerText);
+        let rows = Number(NUMBER_ON_PAGE.value);
+        const PRODUCT_ITEMS = document.querySelector('.prod-items') as HTMLDivElement;
+        const ID_ARR: string[] = JSON.parse(localStorage.basket);
+        const arrItem = [...new Set(ID_ARR)];
+
+        displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS);
+        NUMBER_ON_PAGE.addEventListener("input", () => updateValue);
+        
+        function updateValue(e: Event) {
+            const target = e.target as HTMLInputElement;
+            rows = Number(target.value);
+            console.log(rows);
+            displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS)
+          }
+
 
         Array.from(ADD).forEach((button) => {
             const CARD = button.parentElement as HTMLDivElement;
@@ -175,6 +204,7 @@ class CartPage extends Page {
             );
             button.addEventListener('click', REMOVE_FROM_CART);
         });
+
     }
 }
 
