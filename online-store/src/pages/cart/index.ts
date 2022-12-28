@@ -22,54 +22,6 @@ class CartPage extends Page {
             const ID_ARR: string[] = JSON.parse(localStorage.basket);
             console.log(ID_ARR);
 
-           // PRODUCT_ITEMS.innerHTML = "";
-            // currentPage--;
-        
-            // const start: number = rows * currentPage;
-            // const end: number = start + rows;
-            // const paginatedData = arrItem.slice(start, end);
-
-
-            // result = `${paginatedData.reduce((sum, currentId) => {
-            //     let res = '';
-            //     const item = CARDS.find((item) => item.id === Number(currentId)) as cardType;
-            //     let quantityCart: number = ID_ARR.reduce((sum, current) => {
-            //         if (current === String(item.id)) {
-            //             sum = sum + 1;
-            //         }
-            //         return sum;
-            //     }, 0);
-
-            //     res = `<div class="app-cart-item card__${item.id}">
-            //     <div class="cart-item">
-            //     <div class="item-i">${paginatedData.indexOf(String(item.id) as never) + 1}</div>
-            //     <div class="item-info">
-            //     <img alt="${item.title}" src="${item.images[item.images.length - 1]}">
-            //     <div class="item-detail-p">
-            //     <div class="product-title">
-            //     <h6>${item.title}</h6>
-            //     </div>
-            //     <div class="product-description">${item.description}</div>
-            //     <div class="product-other">
-            //     <div>Rating: ${item.rating}</div>
-            //     <div>Discount: ${item.discountPercentage}</div>
-            //     </div>
-            //     </div>
-            //     </div>
-            //     <div class="number-control">
-            //     <div class="stock-control"> Stock: <span class="stock">${item.stock - quantityCart}</span></div>
-            //     <div class="incDec-control card__${item.id}">
-            //     <button type="button" class="btn btn-outline-dark card__add-button">+</button>
-            //     <span class="quantity"> ${quantityCart} </span>
-            //     <button type="button" class="btn btn-outline-dark card__remove-button">-</button>
-            //     </div>
-            //     <div class="amount-control">€ ${item.price}</div>
-            //     </div>
-            //     </div>
-            //     </div>`;
-            //     return sum + res;
-            // }, '')}`;
-
             localStorage.basket = JSON.stringify(ID_ARR);
             if (!JSON.parse(localStorage.basket).length) {
                 CART.classList.add('visually-hidden');
@@ -95,14 +47,14 @@ class CartPage extends Page {
             <h2>Products In Cart</h2>
             <div class="page-control">
             <div class="limit">
-            ITEMS: <input type="text" class="number-on-page" min="0" value="3">
+            LIMIT: <input type="text" class="number-on-page" min="0" value="3">
             </div>
             <div class="page-numbers">
             PAGE: 
             <button class="page-prev">
             &lt;
             </button>
-            <span class="page-number">2</span>
+            <span class="page-number">1</span>
             <button class="page-next">
             &gt; 
             </button>
@@ -157,20 +109,40 @@ class CartPage extends Page {
         const arrItem = [...new Set(ID_ARR)];
 
         displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS);
-        NUMBER_ON_PAGE.addEventListener("input", () => updateValue);
-        
-        function updateValue(e: Event) {
-            const target = e.target as HTMLInputElement;
-            rows = Number(target.value);
-            console.log(rows);
-            displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS)
-          }
 
+        NUMBER_ON_PAGE.addEventListener("change", () => updateValue());
+        console.log(NUMBER_ON_PAGE.value);
+        
+        function updateValue() {
+            rows = Number(NUMBER_ON_PAGE.value);
+            console.log(rows);
+            displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS);
+        }
+
+        const PAGE_NEXT = document.querySelector('.page-next') as HTMLSpanElement;
+        const PAGE_PREV = document.querySelector('.page-prev') as HTMLSpanElement;
+
+        PAGE_NEXT.addEventListener('click', () => {
+            if (currentPage < Math.ceil(arrItem.length / rows)) {
+                currentPage = currentPage + 1;
+                PAGE_NUMBER.innerText = `${currentPage}`;
+                displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS)
+            };
+        });
+
+        PAGE_PREV.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage = currentPage - 1;
+                PAGE_NUMBER.innerText = `${currentPage}`;
+                displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS)
+            };
+        });
 
         Array.from(ADD).forEach((button) => {
             const CARD = button.parentElement as HTMLDivElement;
             const CARD_ID_CLASS = CARD.classList[1];
             const CARD_ID = CARD_ID_CLASS.split('__')[1];
+            const NUMBER = Number(button.classList[3]);
             const ADD_TO_CART = addQuantity(
                 CART,
                 TOTAL_SUM,
@@ -179,7 +151,8 @@ class CartPage extends Page {
                 STOCK,
                 QUANTITY,
                 SUMMARY_PRODUCT,
-                SUMMARY_TOTAL
+                SUMMARY_TOTAL,
+                NUMBER
             );
             button.addEventListener('click', ADD_TO_CART);
         });
@@ -189,6 +162,7 @@ class CartPage extends Page {
             const CARD_ID_CLASS = CARD.classList[1];
             const CARD_ID = CARD_ID_CLASS.split('__')[1];
             const REMOVE_ITEM = CARD.parentElement?.parentElement?.parentElement as HTMLDivElement;
+            const NUMBER = Number(button.classList[3]);
             const REMOVE_FROM_CART = removeQuantity(
                 CART,
                 TOTAL_SUM,
@@ -200,7 +174,8 @@ class CartPage extends Page {
                 SUMMARY_TOTAL,
                 REMOVE_ITEM,
                 ITEM_NUMBER,
-                CART_PAGE
+                CART_PAGE,
+                NUMBER
             );
             button.addEventListener('click', REMOVE_FROM_CART);
         });

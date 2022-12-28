@@ -1,5 +1,6 @@
 import { CARDS } from "../../components/cards/cards";
 import { cardType } from "../../types/types";
+import { displayProduct } from "./displayProduct";
 
 export function removeQuantity(
     CART: HTMLSpanElement,
@@ -12,7 +13,8 @@ export function removeQuantity(
     SUMMARY_TOTAL: HTMLSpanElement,    
     REMOVE_ITEM: HTMLDivElement,
     ITEM_NUMBER: HTMLCollectionOf<HTMLDivElement>,
-    CART_PAGE: HTMLDivElement
+    CART_PAGE: HTMLDivElement,
+    NUMBER: number
 ): () => void {
     return () => {
         if (!localStorage.basket) {
@@ -21,18 +23,18 @@ export function removeQuantity(
             TOTAL_SUM.innerHTML = '0';
         }
         let ID_ARR: string[] = JSON.parse(localStorage.basket);
-        const STOCK_SET = [...new Set(ID_ARR)].indexOf(CARD_ID);
-        if (Number(QUANTITY[STOCK_SET].textContent)>1) {
+        if (Number(QUANTITY[NUMBER].textContent)>1) {
             const positionID = ID_ARR.lastIndexOf(CARD_ID);
             ID_ARR.splice(positionID, 1);
-            STOCK[STOCK_SET].textContent = `${Number(STOCK[STOCK_SET].textContent) + 1}`;
-            QUANTITY[STOCK_SET].textContent = `${Number(QUANTITY[STOCK_SET].textContent) - 1}`            
+            STOCK[NUMBER].textContent = `${Number(STOCK[NUMBER].textContent) + 1}`;
+            QUANTITY[NUMBER].textContent = `${Number(QUANTITY[NUMBER].textContent) - 1}`            
         }
         else {
             ID_ARR = ID_ARR.filter((el: string) => {
                 return el !== `${CARD_ID}`;
             });
-            REMOVE_ITEM.remove();
+            displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS);
+            
             Array.from(ITEM_NUMBER).forEach((item) => {
                 item.innerText = `${Array.from(ITEM_NUMBER).indexOf(item)+1}`
             });

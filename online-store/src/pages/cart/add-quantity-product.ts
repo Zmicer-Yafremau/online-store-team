@@ -9,7 +9,8 @@ export function addQuantity(
     STOCK: HTMLCollectionOf<HTMLSpanElement>,
     QUANTITY: HTMLCollectionOf<HTMLSpanElement>,
     SUMMARY_PRODUCT: HTMLSpanElement,
-    SUMMARY_TOTAL: HTMLSpanElement    
+    SUMMARY_TOTAL: HTMLSpanElement,
+    NUMBER: number
 ): () => void {
     return () => {
         if (!localStorage.basket) {
@@ -26,12 +27,10 @@ export function addQuantity(
       }, 0);
       console.log(quantityCart);
 
-      const STOCK_SET = [...new Set(ID_ARR)].indexOf(CARD_ID);
-
-      if (Number(STOCK[STOCK_SET].textContent)>0) {
+      if (Number(STOCK[NUMBER].textContent)>0) {
         ID_ARR.push(CARD_ID);
-        STOCK[STOCK_SET].textContent = `${Number(STOCK[STOCK_SET].textContent) - 1}`;
-        QUANTITY[STOCK_SET].textContent = `${Number(QUANTITY[STOCK_SET].textContent) + 1}`
+        STOCK[NUMBER].textContent = `${Number(STOCK[NUMBER].textContent) - 1}`;
+        QUANTITY[NUMBER].textContent = `${Number(QUANTITY[NUMBER].textContent) + 1}`
         } else {
       console.log('no more product')
       }

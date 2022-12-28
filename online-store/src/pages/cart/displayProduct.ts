@@ -23,7 +23,7 @@ export function displayProduct(arrItem: string[], rows: number, currentPage: num
 
       res = `<div class="app-cart-item card__${item.id}">
       <div class="cart-item">
-      <div class="item-i">${paginatedData.indexOf(String(item.id) as never) + 1}</div>
+      <div class="item-i">${[...new Set(JSON.parse(localStorage.basket))].indexOf(String(item.id) as never) + 1}</div>
       <div class="item-info">
       <img alt="${item.title}" src="${item.images[item.images.length - 1]}">
       <div class="item-detail-p">
@@ -40,9 +40,9 @@ export function displayProduct(arrItem: string[], rows: number, currentPage: num
       <div class="number-control">
       <div class="stock-control"> Stock: <span class="stock">${item.stock - quantityCart}</span></div>
       <div class="incDec-control card__${item.id}">
-      <button type="button" class="btn btn-outline-dark card__add-button">+</button>
+      <button type="button" class="btn btn-outline-dark card__add-button ${paginatedData.indexOf(String(item.id) as never)}">+</button>
       <span class="quantity"> ${quantityCart} </span>
-      <button type="button" class="btn btn-outline-dark card__remove-button">-</button>
+      <button type="button" class="btn btn-outline-dark card__remove-button ${paginatedData.indexOf(String(item.id) as never)}">-</button>
       </div>
       <div class="amount-control">€ ${item.price}</div>
       </div>
