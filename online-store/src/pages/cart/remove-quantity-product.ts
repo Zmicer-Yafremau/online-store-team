@@ -11,10 +11,12 @@ export function removeQuantity(
     QUANTITY: HTMLCollectionOf<HTMLSpanElement>,
     SUMMARY_PRODUCT: HTMLSpanElement,
     SUMMARY_TOTAL: HTMLSpanElement,    
-    REMOVE_ITEM: HTMLDivElement,
+    PRODUCT_ITEMS: HTMLDivElement,
     ITEM_NUMBER: HTMLCollectionOf<HTMLDivElement>,
     CART_PAGE: HTMLDivElement,
-    NUMBER: number
+    NUMBER: number,
+    currentPage: number,
+    rows: number
 ): () => void {
     return () => {
         if (!localStorage.basket) {
@@ -33,12 +35,10 @@ export function removeQuantity(
             ID_ARR = ID_ARR.filter((el: string) => {
                 return el !== `${CARD_ID}`;
             });
+            localStorage.basket = JSON.stringify(ID_ARR);
+            const arrItem = [...new Set(ID_ARR)];
             displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS);
-            
-            Array.from(ITEM_NUMBER).forEach((item) => {
-                item.innerText = `${Array.from(ITEM_NUMBER).indexOf(item)+1}`
-            });
-            if (Array.from(ITEM_NUMBER).length === 0) {
+            if (arrItem.length === 0) {
                 CART_PAGE.innerHTML = `<h1>Cart is Empty</h1>`;
             }
         }

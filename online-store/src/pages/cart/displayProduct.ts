@@ -21,6 +21,8 @@ export function displayProduct(arrItem: string[], rows: number, currentPage: num
           return sum;
       }, 0);
 
+      console.log([...new Set(JSON.parse(localStorage.basket))].indexOf(String(item.id) as never) + 1);
+
       res = `<div class="app-cart-item card__${item.id}">
       <div class="cart-item">
       <div class="item-i">${[...new Set(JSON.parse(localStorage.basket))].indexOf(String(item.id) as never) + 1}</div>

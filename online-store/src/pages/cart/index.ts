@@ -106,12 +106,12 @@ class CartPage extends Page {
         let rows = Number(NUMBER_ON_PAGE.value);
         const PRODUCT_ITEMS = document.querySelector('.prod-items') as HTMLDivElement;
         const ID_ARR: string[] = JSON.parse(localStorage.basket);
-        const arrItem = [...new Set(ID_ARR)];
+        const arrItem: string[] = [...new Set(ID_ARR)];
 
         displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS);
 
         NUMBER_ON_PAGE.addEventListener("change", () => updateValue());
-        console.log(NUMBER_ON_PAGE.value);
+        console.log(NUMBER_ON_PAGE.value); 
         
         function updateValue() {
             rows = Number(NUMBER_ON_PAGE.value);
@@ -161,7 +161,6 @@ class CartPage extends Page {
             const CARD = button.parentElement as HTMLDivElement;
             const CARD_ID_CLASS = CARD.classList[1];
             const CARD_ID = CARD_ID_CLASS.split('__')[1];
-            const REMOVE_ITEM = CARD.parentElement?.parentElement?.parentElement as HTMLDivElement;
             const NUMBER = Number(button.classList[3]);
             const REMOVE_FROM_CART = removeQuantity(
                 CART,
@@ -172,14 +171,15 @@ class CartPage extends Page {
                 QUANTITY,
                 SUMMARY_PRODUCT,
                 SUMMARY_TOTAL,
-                REMOVE_ITEM,
+                PRODUCT_ITEMS,
                 ITEM_NUMBER,
                 CART_PAGE,
-                NUMBER
+                NUMBER,
+                currentPage,
+                rows
             );
             button.addEventListener('click', REMOVE_FROM_CART);
         });
-
     }
 }
 
