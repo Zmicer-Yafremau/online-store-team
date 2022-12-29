@@ -1,12 +1,12 @@
 import { CARDS } from "../../components/cards/cards";
 import { cardType } from "../../types/types";
 import { displayProduct } from "./displayProduct";
+import CartPage from ".";
 
 export function removeQuantity(
     CART: HTMLSpanElement,
     TOTAL_SUM: HTMLSpanElement,
     CARD_ID: string,
-    BUTTON: HTMLButtonElement,
     STOCK: HTMLCollectionOf<HTMLSpanElement>,
     QUANTITY: HTMLCollectionOf<HTMLSpanElement>,
     SUMMARY_PRODUCT: HTMLSpanElement,
@@ -16,7 +16,8 @@ export function removeQuantity(
     CART_PAGE: HTMLDivElement,
     NUMBER: number,
     currentPage: number,
-    rows: number
+    rows: number,
+    remove: void
 ): () => void {
     return () => {
         if (!localStorage.basket) {
@@ -37,6 +38,7 @@ export function removeQuantity(
             });
             localStorage.basket = JSON.stringify(ID_ARR);
             const arrItem = [...new Set(ID_ARR)];
+            remove;
             displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS);
             if (arrItem.length === 0) {
                 CART_PAGE.innerHTML = `<h1>Cart is Empty</h1>`;

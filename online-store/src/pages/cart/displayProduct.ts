@@ -1,5 +1,6 @@
 import { CARDS } from "../../components/cards/cards";
 import { cardType } from "../../types/types";
+import CartPage from ".";
 
 export function displayProduct(arrItem: string[], rows: number, currentPage: number, PRODUCT_ITEMS: HTMLDivElement) { 
   PRODUCT_ITEMS.innerHTML = "";
@@ -52,4 +53,5 @@ export function displayProduct(arrItem: string[], rows: number, currentPage: num
       </div>`;
       return sum + res;
   }, '')}`;
+    CartPage.addEvents();
 }

@@ -47,7 +47,7 @@ class CartPage extends Page {
             <h2>Products In Cart</h2>
             <div class="page-control">
             <div class="limit">
-            LIMIT: <input type="text" class="number-on-page" min="0" value="3">
+            LIMIT: <input type="number" class="number-on-page" min="0" value="3">
             </div>
             <div class="page-numbers">
             PAGE: 
@@ -88,6 +88,18 @@ class CartPage extends Page {
         return this.container;
     }
 
+    static contentProduct() {
+        const PAGE_NUMBER = document.querySelector('.page-number') as HTMLSpanElement;
+        const NUMBER_ON_PAGE = document.querySelector('.number-on-page') as HTMLInputElement;
+        let currentPage = Number(PAGE_NUMBER.innerText);
+        let rows = Number(NUMBER_ON_PAGE.value);
+        const PRODUCT_ITEMS = document.querySelector('.prod-items') as HTMLDivElement;
+        const ID_ARR: string[] = JSON.parse(localStorage.basket);
+        const arrItem: string[] = [...new Set(ID_ARR)];
+
+        displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS);
+    }
+
     static addEvents() {
         const ADD = document.getElementsByClassName('card__add-button') as HTMLCollectionOf<HTMLButtonElement>;
         const REMOVE = document.getElementsByClassName('card__remove-button') as HTMLCollectionOf<HTMLButtonElement>;
@@ -107,36 +119,38 @@ class CartPage extends Page {
         const PRODUCT_ITEMS = document.querySelector('.prod-items') as HTMLDivElement;
         const ID_ARR: string[] = JSON.parse(localStorage.basket);
         const arrItem: string[] = [...new Set(ID_ARR)];
-
-        displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS);
-
-        NUMBER_ON_PAGE.addEventListener("change", () => updateValue());
-        console.log(NUMBER_ON_PAGE.value); 
         
-        function updateValue() {
+        const updateValue = () => {
             rows = Number(NUMBER_ON_PAGE.value);
             console.log(rows);
+            removeAllEvents();
             displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS);
         }
+        NUMBER_ON_PAGE.addEventListener("change", updateValue);
+        console.log(NUMBER_ON_PAGE.value); 
 
         const PAGE_NEXT = document.querySelector('.page-next') as HTMLSpanElement;
         const PAGE_PREV = document.querySelector('.page-prev') as HTMLSpanElement;
 
-        PAGE_NEXT.addEventListener('click', () => {
+        const pageNext = () => {
             if (currentPage < Math.ceil(arrItem.length / rows)) {
                 currentPage = currentPage + 1;
                 PAGE_NUMBER.innerText = `${currentPage}`;
-                displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS)
+                removeAllEvents();
+                displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS);
             };
-        });
+        }
+        PAGE_NEXT.addEventListener('click', pageNext);
 
-        PAGE_PREV.addEventListener('click', () => {
+        const pagePrev = () => {
             if (currentPage > 1) {
                 currentPage = currentPage - 1;
                 PAGE_NUMBER.innerText = `${currentPage}`;
-                displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS)
+                removeAllEvents();
+                displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS);
             };
-        });
+        }
+        PAGE_PREV.addEventListener('click', pagePrev);
 
         Array.from(ADD).forEach((button) => {
             const CARD = button.parentElement as HTMLDivElement;
@@ -166,7 +180,6 @@ class CartPage extends Page {
                 CART,
                 TOTAL_SUM,
                 CARD_ID,
-                button,
                 STOCK,
                 QUANTITY,
                 SUMMARY_PRODUCT,
@@ -176,10 +189,39 @@ class CartPage extends Page {
                 CART_PAGE,
                 NUMBER,
                 currentPage,
-                rows
+                rows,
+                removeAllEvents()
             );
             button.addEventListener('click', REMOVE_FROM_CART);
         });
+
+        function removeAllEvents() {
+            NUMBER_ON_PAGE.removeEventListener("change", updateValue)
+            PAGE_NEXT.removeEventListener('click', pageNext);
+            PAGE_PREV.removeEventListener('click', pagePrev);
+            Array.from(REMOVE).forEach((button) => {
+                const CARD = button.parentElement as HTMLDivElement;
+                const CARD_ID_CLASS = CARD.classList[1];
+                const CARD_ID = CARD_ID_CLASS.split('__')[1];
+                const NUMBER = Number(button.classList[3]);
+                const REMOVE_FROM_CART = removeQuantity(
+                    CART,
+                    TOTAL_SUM,
+                    CARD_ID,
+                    STOCK,
+                    QUANTITY,
+                    SUMMARY_PRODUCT,
+                    SUMMARY_TOTAL,
+                    PRODUCT_ITEMS,
+                    ITEM_NUMBER,
+                    CART_PAGE,
+                    NUMBER,
+                    currentPage,
+                    rows
+                );
+                button.removeEventListener('click', REMOVE_FROM_CART);
+            });
+        }
     }
 }
 
