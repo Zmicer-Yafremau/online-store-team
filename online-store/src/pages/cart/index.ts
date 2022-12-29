@@ -11,7 +11,7 @@ class CartPage extends Page {
 
     public createContent() {
         const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
-        const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
+        const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
         let result = ``;
         let pageContent = `
             <div class="cart-page">
@@ -23,7 +23,7 @@ class CartPage extends Page {
             result = `${[...new Set(ID_ARR)].reduce((sum, currentId) => {
                 let res = '';
                 const item = CARDS.find((item) => item.id === Number(currentId)) as cardType;
-                let quantityCart: number = ID_ARR.reduce((sum, current) => {
+                const quantityCart: number = ID_ARR.reduce((sum, current) => {
                     if (current === String(item.id)) {
                         sum = sum + 1;
                     }

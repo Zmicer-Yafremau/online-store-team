@@ -12,8 +12,7 @@ class ProductPage extends Page {
     }
 
     public createContent() {
-        const CURRENT_PRODUCT: cardType =
-            CARDS.find((item) => item.id === Number(this.idProduct)) as cardType;
+        const CURRENT_PRODUCT: cardType = CARDS.find((item) => item.id === Number(this.idProduct)) as cardType;
         const IMG_PRODUCT = imagesProduct(CURRENT_PRODUCT);
         const IMG_GRAND = ` <img alt="${CURRENT_PRODUCT.title}" src=${
             CURRENT_PRODUCT.images[CURRENT_PRODUCT.images.length - 1]
@@ -28,7 +27,7 @@ class ProductPage extends Page {
 
         const ID_ARR: string[] = JSON.parse(localStorage.basket);
         const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
-        const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
+        const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
 
         localStorage.basket = JSON.stringify(ID_ARR);
         if (!JSON.parse(localStorage.basket).length) {
@@ -41,7 +40,7 @@ class ProductPage extends Page {
             CART.innerHTML = `${JSON.parse(localStorage.basket).length}`;
             TOTAL_SUM.innerHTML = `${JSON.parse(localStorage.basket).reduce((sum: number, current: string) => {
                 if (CARDS.find((item) => item.id === Number(current))) {
-                sum = sum + (CARDS.find((item) => item.id === Number(current))as cardType)?.price;
+                    sum = sum + (CARDS.find((item) => item.id === Number(current)) as cardType)?.price;
                 }
                 return sum;
             }, 0)}`;
@@ -97,8 +96,12 @@ class ProductPage extends Page {
         <div class="add-to-cart">
         <div class="cart-button">
         € ${CURRENT_PRODUCT.price}
-        <button type="button" class="btn btn-outline-dark card__drop-button card__${CURRENT_PRODUCT.id} add">CART</button>
-        <button type="button" class="btn btn-outline-dark card__drop-button card__${CURRENT_PRODUCT.id} buy" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">BUY NOW</button>
+        <button type="button" class="btn btn-outline-dark card__drop-button card__${
+            CURRENT_PRODUCT.id
+        } add">CART</button>
+        <button type="button" class="btn btn-outline-dark card__drop-button card__${
+            CURRENT_PRODUCT.id
+        } buy" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">BUY NOW</button>
         </div>
         </div>
         </div>
@@ -123,7 +126,7 @@ class ProductPage extends Page {
             IMG_LARGE.innerHTML = `<img alt="${TITLE}" src=${VALUE}>`;
         });
 
-        const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
+        const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
         const CART_ICON = CART.parentElement as HTMLDivElement;
         CART_ICON.addEventListener('click', () => {
             location.replace(`${location.origin}#cart`);
@@ -139,8 +142,7 @@ class ProductPage extends Page {
         if (JSON.parse(localStorage.basket).includes(CARD_ID)) {
             ADD[0].classList.remove('add');
             ADD[0].classList.add('remove');
-        }
-        else {
+        } else {
             const ADD_TO_CART = buttonBuy(CART, TOTAL_SUM, CARD_ID, ADD[1]);
             ADD[1].addEventListener('click', ADD_TO_CART);
         }
