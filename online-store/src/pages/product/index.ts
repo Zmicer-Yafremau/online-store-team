@@ -27,8 +27,8 @@ class ProductPage extends Page {
         }
 
         const ID_ARR: string[] = JSON.parse(localStorage.basket);
-        const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
-        const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
+        const TOTAL_SUM = document.getElementsByClassName('header__total-sum')[0] as HTMLSpanElement;
+        const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
 
         localStorage.basket = JSON.stringify(ID_ARR);
         if (!JSON.parse(localStorage.basket).length) {
@@ -132,7 +132,7 @@ class ProductPage extends Page {
         //add to main page on logo
 
         const ADD = document.getElementsByClassName('card__drop-button') as HTMLCollectionOf<HTMLButtonElement>;
-        const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
+        const TOTAL_SUM = document.getElementsByClassName('header__total-sum')[0] as HTMLSpanElement;
         const CARD_ID_CLASS = ADD[0].classList[3];
         const CARD_ID = CARD_ID_CLASS.split('__')[1];
 

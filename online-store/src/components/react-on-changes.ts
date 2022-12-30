@@ -13,7 +13,7 @@ import { countSlider } from './count-slider-values';
     const PRODUCTS = MAIN.children[2] as HTMLElement;
     const SIZE = (document.getElementsByClassName('size') as unknown) as NodeListOf<HTMLDivElement>;
     const CONTENT = PRODUCTS.children[1] as HTMLDivElement;
-    const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
+    const TOTAL_SUM = document.getElementsByClassName('header__total-sum')[0] as HTMLSpanElement;
     const RESET = document.getElementsByClassName('reset')[0] as HTMLButtonElement;
     const RESET_ALL = document.getElementsByClassName('reset-all')[0] as HTMLButtonElement;
     const COPY = document.getElementsByClassName('copy')[0] as HTMLButtonElement;
