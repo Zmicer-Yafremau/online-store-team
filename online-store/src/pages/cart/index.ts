@@ -20,8 +20,6 @@ class CartPage extends Page {
             </div>`;
         if (localStorage.basket && localStorage.basket !== `[]`) {
             const ID_ARR: string[] = JSON.parse(localStorage.basket);
-            console.log(ID_ARR);
-
             localStorage.basket = JSON.stringify(ID_ARR);
             if (!JSON.parse(localStorage.basket).length) {
                 CART.classList.add('visually-hidden');
@@ -91,7 +89,14 @@ class CartPage extends Page {
     static contentProduct() {
         const PAGE_NUMBER = document.querySelector('.page-number') as HTMLSpanElement;
         const NUMBER_ON_PAGE = document.querySelector('.number-on-page') as HTMLInputElement;
+        const url = new URL(window.location.href);
+        if (url.searchParams.get('page')) {
+            PAGE_NUMBER.innerText = `${url.searchParams.get('page')}`;
+        }
         let currentPage = Number(PAGE_NUMBER.innerText);
+        if (url.searchParams.get('limit')) {
+            NUMBER_ON_PAGE.value = `${url.searchParams.get('limit')}`;
+        }
         let rows = Number(NUMBER_ON_PAGE.value);
         const PRODUCT_ITEMS = document.querySelector('.prod-items') as HTMLDivElement;
         const ID_ARR: string[] = JSON.parse(localStorage.basket);
@@ -109,9 +114,7 @@ class CartPage extends Page {
         const QUANTITY = document.getElementsByClassName('quantity') as HTMLCollectionOf<HTMLSpanElement>;
         const SUMMARY_PRODUCT = document.querySelector('.summary-product') as HTMLSpanElement;
         const SUMMARY_TOTAL = document.querySelector('.summary-total') as HTMLSpanElement;
-        const ITEM_NUMBER = document.getElementsByClassName('item-i') as HTMLCollectionOf<HTMLDivElement>;
         const CART_PAGE = document.querySelector('.cart-page') as HTMLDivElement;
-
         const PAGE_NUMBER = document.querySelector('.page-number') as HTMLSpanElement;
         const NUMBER_ON_PAGE = document.querySelector('.number-on-page') as HTMLInputElement;
         let currentPage = Number(PAGE_NUMBER.innerText);
@@ -119,37 +122,55 @@ class CartPage extends Page {
         const PRODUCT_ITEMS = document.querySelector('.prod-items') as HTMLDivElement;
         const ID_ARR: string[] = JSON.parse(localStorage.basket);
         const arrItem: string[] = [...new Set(ID_ARR)];
-        
+
         const updateValue = () => {
             rows = Number(NUMBER_ON_PAGE.value);
-            console.log(rows);
+            const url = new URL(window.location.href);
+            url.searchParams.set('limit', NUMBER_ON_PAGE.value);
+            history.replaceState(null, '', url);
             removeAllEvents();
-            displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS);
-        }
-        NUMBER_ON_PAGE.addEventListener("change", updateValue);
-        console.log(NUMBER_ON_PAGE.value); 
+            if (!arrItem.slice(rows * (currentPage - 1), rows * (currentPage - 1) + rows).length) {
+                while (!arrItem.slice(rows * (currentPage - 1), rows * (currentPage - 1) + rows).length) {
+                    currentPage = currentPage - 1;
+                }
+                PAGE_NUMBER.innerText = `${currentPage}`;
+                const url = new URL(window.location.href);
+                url.searchParams.set('page', PAGE_NUMBER.innerText);
+                history.replaceState(null, '', url);
+                displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS);
+            } else {
+                displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS);
+            }
+        };
+        NUMBER_ON_PAGE.addEventListener('change', updateValue);
 
-        const PAGE_NEXT = document.querySelector('.page-next') as HTMLSpanElement;
-        const PAGE_PREV = document.querySelector('.page-prev') as HTMLSpanElement;
+        const PAGE_NEXT = document.getElementsByClassName('page-next')[0] as HTMLButtonElement;
+        const PAGE_PREV = document.getElementsByClassName('page-prev')[0] as HTMLButtonElement;
 
         const pageNext = () => {
             if (currentPage < Math.ceil(arrItem.length / rows)) {
                 currentPage = currentPage + 1;
                 PAGE_NUMBER.innerText = `${currentPage}`;
+                const url = new URL(window.location.href);
+                url.searchParams.set('page', PAGE_NUMBER.innerText);
+                history.replaceState(null, '', url);
                 removeAllEvents();
                 displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS);
-            };
-        }
+            }
+        };
         PAGE_NEXT.addEventListener('click', pageNext);
 
         const pagePrev = () => {
             if (currentPage > 1) {
                 currentPage = currentPage - 1;
                 PAGE_NUMBER.innerText = `${currentPage}`;
+                const url = new URL(window.location.href);
+                url.searchParams.set('page', PAGE_NUMBER.innerText);
+                history.replaceState(null, '', url);
                 removeAllEvents();
                 displayProduct(arrItem, rows, currentPage, PRODUCT_ITEMS);
-            };
-        }
+            }
+        };
         PAGE_PREV.addEventListener('click', pagePrev);
 
         Array.from(ADD).forEach((button) => {
@@ -161,7 +182,6 @@ class CartPage extends Page {
                 CART,
                 TOTAL_SUM,
                 CARD_ID,
-                button,
                 STOCK,
                 QUANTITY,
                 SUMMARY_PRODUCT,
@@ -185,18 +205,17 @@ class CartPage extends Page {
                 SUMMARY_PRODUCT,
                 SUMMARY_TOTAL,
                 PRODUCT_ITEMS,
-                ITEM_NUMBER,
                 CART_PAGE,
                 NUMBER,
                 currentPage,
                 rows,
-                removeAllEvents()
+                PAGE_NUMBER
             );
             button.addEventListener('click', REMOVE_FROM_CART);
         });
 
         function removeAllEvents() {
-            NUMBER_ON_PAGE.removeEventListener("change", updateValue)
+            NUMBER_ON_PAGE.removeEventListener('change', updateValue);
             PAGE_NEXT.removeEventListener('click', pageNext);
             PAGE_PREV.removeEventListener('click', pagePrev);
             Array.from(REMOVE).forEach((button) => {
@@ -213,11 +232,11 @@ class CartPage extends Page {
                     SUMMARY_PRODUCT,
                     SUMMARY_TOTAL,
                     PRODUCT_ITEMS,
-                    ITEM_NUMBER,
                     CART_PAGE,
                     NUMBER,
                     currentPage,
-                    rows
+                    rows,
+                    PAGE_NUMBER
                 );
                 button.removeEventListener('click', REMOVE_FROM_CART);
             });

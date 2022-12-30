@@ -5,7 +5,6 @@ export function addQuantity(
     CART: HTMLSpanElement,
     TOTAL_SUM: HTMLSpanElement,
     CARD_ID: string,
-    BUTTON: HTMLButtonElement,
     STOCK: HTMLCollectionOf<HTMLSpanElement>,
     QUANTITY: HTMLCollectionOf<HTMLSpanElement>,
     SUMMARY_PRODUCT: HTMLSpanElement,
