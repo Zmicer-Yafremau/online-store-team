@@ -12,7 +12,7 @@ export function displayProduct(arrItem: string[], rows: number, currentPage: num
     PRODUCT_ITEMS.innerHTML = `${paginatedData.reduce((sum, currentId) => {
         let res = '';
         const item = CARDS.find((item) => item.id === Number(currentId)) as cardType;
-        let quantityCart: number = JSON.parse(localStorage.basket).reduce((sum: number, current: string) => {
+        const quantityCart: number = JSON.parse(localStorage.basket).reduce((sum: number, current: string) => {
             if (current === String(item.id)) {
                 sum = sum + 1;
             }
@@ -22,7 +22,7 @@ export function displayProduct(arrItem: string[], rows: number, currentPage: num
         res = `<div class="app-cart-item card__${item.id}">
         <div class="cart-item">
         <div class="item-i">${[...new Set(JSON.parse(localStorage.basket))].indexOf(String(item.id) as never) + 1}</div>
-        <div class="item-info">
+        <div class="item-info card__${item.id}">
         <img alt="${item.title}" src="${item.images[item.images.length - 1]}">
         <div class="item-detail-p">
         <div class="product-title">
