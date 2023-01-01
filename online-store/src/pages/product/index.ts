@@ -154,9 +154,11 @@ class ProductPage extends Page {
             ADD[1].classList.toggle('addCart');
         });
         
+
+        const ADD_TO_BUY = buttonBuy(CART, TOTAL_SUM, CARD_ID, ADD[1]);
         ADD[1].addEventListener('click', () => {
-            buttonBuy(CART, TOTAL_SUM, CARD_ID, ADD[1]);
-            //location.replace(`${location.origin}#cart`);
+            ADD_TO_BUY();
+            location.replace(`${location.origin}#cart`);
         });
     }
 }
