@@ -49,12 +49,11 @@ class App {
             App.container.insertBefore(pageHTML, footer);
             const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
             const CART_ICON = CART.parentElement as HTMLDivElement;
-            const SUBMIT = document.getElementsByClassName('modal__submit')[0] as HTMLButtonElement;
             const FORM = document.getElementById('myform') as HTMLFormElement;
-            const RETURN = document.getElementsByClassName('modal__return')[0] as HTMLButtonElement;
             const VALID = document.getElementsByClassName('modal__valid')[0] as HTMLInputElement;
             const CARD_INPUT = document.getElementsByClassName('modal__card-input')[0] as HTMLInputElement;
             const CARD_LOGO = document.getElementsByClassName('modal__logo')[0] as HTMLImageElement;
+            const CLOSE = document.getElementsByClassName('modal__close')[0] as HTMLButtonElement;
             CARD_INPUT.addEventListener('input', () => {
                 if (CARD_INPUT.value[0] === '3') {
                     CARD_LOGO.src =
@@ -69,25 +68,26 @@ class App {
                 } else CARD_LOGO.src = 'https://cdn1.iconfinder.com/data/icons/cash-card-add-on/48/v-22-512.png';
             });
             VALID.addEventListener('input', () => {
-                console.log('hi');
                 const TEMP = VALID.value.split('');
                 if (TEMP.length > 2 && !TEMP.includes('/')) {
                     TEMP.splice(2, 0, `/`);
                     VALID.value = `${TEMP.join('')}`;
                 }
             });
-            FORM.addEventListener('submit', () => {
-                SUBMIT.setAttribute('data-bs-toggle', 'modal');
-                SUBMIT.click();
-                setTimeout(() => {
+            const FORM_SUBMIT = (event: Event) => {
+                event.preventDefault();
+                if (!localStorage.form) {
+                    alert(`Say 'goodby' to your money!`);
                     localStorage.clear();
-                    location.replace(location.origin);
-                }, 3000);
-            });
-            RETURN.addEventListener('click', () => {
-                localStorage.clear();
-                location.replace(location.origin);
-            });
+                    CLOSE.click();
+                    setTimeout(() => {
+                        localStorage.clear();
+                        location.replace(location.origin);
+                    }, 3000);
+                }
+                localStorage.form = 'true';
+            };
+            FORM.addEventListener('submit', FORM_SUBMIT);
             CART_ICON.addEventListener('click', () => {
                 location.replace(`${location.origin}#cart`);
             });

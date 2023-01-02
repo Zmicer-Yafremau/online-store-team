@@ -10,7 +10,7 @@ class CartPage extends Page {
     }
 
     public createContent() {
-        const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
+        const TOTAL_SUM = document.getElementsByClassName('header__total-sum')[0] as HTMLSpanElement;
         const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
         let result = ``;
         let pageContent = `
@@ -129,8 +129,8 @@ class CartPage extends Page {
     static addEvents() {
         const ADD = document.getElementsByClassName('card__add-button') as HTMLCollectionOf<HTMLButtonElement>;
         const REMOVE = document.getElementsByClassName('card__remove-button') as HTMLCollectionOf<HTMLButtonElement>;
-        const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
-        const CART = document.querySelector('.header__cart-quntity') as HTMLSpanElement;
+        const TOTAL_SUM = document.getElementsByClassName('header__total-sum')[0] as HTMLSpanElement;
+        const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
         const STOCK = document.getElementsByClassName('stock') as HTMLCollectionOf<HTMLSpanElement>;
         const QUANTITY = document.getElementsByClassName('quantity') as HTMLCollectionOf<HTMLSpanElement>;
         const SUMMARY_PRODUCT = document.querySelector('.summary-product') as HTMLSpanElement;

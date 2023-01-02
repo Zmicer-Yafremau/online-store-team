@@ -34,7 +34,7 @@ export function fill(data: cardType[]) {
     if (!CONTENT.innerHTML) CONTENT.innerHTML = `Sorry, no matches ='(`;
     const DIV_CARDS = (document.getElementsByClassName('card') as unknown) as NodeListOf<HTMLDivElement>;
     const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
-    const TOTAL_SUM = document.getElementsByClassName('header__totlat-sum')[0] as HTMLSpanElement;
+    const TOTAL_SUM = document.getElementsByClassName('header__total-sum')[0] as HTMLSpanElement;
     Array.from(DIV_CARDS).forEach((el) => {
         if (
             !el.classList.contains('active') &&
