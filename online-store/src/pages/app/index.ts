@@ -58,7 +58,7 @@ class App {
                 MAIN.fillSort().createFilters();
             }
             if (page instanceof CartPage) {
-                CartPage.addEvents();
+                CartPage.contentProduct();
             }
         }
     }
