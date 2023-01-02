@@ -20,3 +20,9 @@ export type sliderValueType = {
     right: number;
     arr: number[];
 };
+
+export type promoCodes = {
+    title: string;
+    description: string;
+    discount: number;
+};

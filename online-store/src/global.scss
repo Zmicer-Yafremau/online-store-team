@@ -22,8 +22,8 @@ input:invalid + span::after {
     padding-right: 5px;
 }
 input:valid + span::after {
-   visibility: hidden;
-   content: "";
+    visibility: hidden;
+    content: "";
 }
 html {
     height: 100%;
