@@ -1,4 +1,4 @@
-import { CARDS } from "../../components/cards/cards";
+import { CARDS } from '../../components/cards/cards';
 
 export function buttonBuy(
     CART: HTMLSpanElement,

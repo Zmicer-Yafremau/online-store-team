@@ -1,7 +1,6 @@
 import { CARDS } from '../../components/cards/cards';
 import { cardType } from '../../types/types';
 import { displayProduct } from './displayProduct';
-
 export function removeQuantity(
     CART: HTMLSpanElement,
     TOTAL_SUM: HTMLSpanElement,
