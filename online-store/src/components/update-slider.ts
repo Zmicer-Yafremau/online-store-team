@@ -1,7 +1,6 @@
 import { countSlider } from './count-slider-values';
 import { sliderValueType } from '../types/types';
 export function updateSlider(sliderName: 'price' | 'stock') {
-    console.log(sliderName);
     const url = new URL(window.location.href);
     const CURRENT = url.searchParams.get(sliderName);
     const SLIDER_CONTAINER = document.getElementsByClassName(`${sliderName}__content`)[0] as HTMLDivElement;
