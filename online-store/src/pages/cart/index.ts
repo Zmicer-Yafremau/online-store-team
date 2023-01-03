@@ -326,29 +326,39 @@ class CartPage extends Page {
             APPLIED_PROMO.append(DROP_CODE);
             ADD_CODE.remove();
             }
-            
-        };
-        ADD_CODE.addEventListener('click', APPLY_PROMO);
 
-        const DROP_CODES = document.getElementsByClassName('drop-code') as HTMLCollectionOf<HTMLSpanElement>;
-        console.log(DROP_CODES)
+            const DROP_CODES = document.getElementsByClassName('drop-code') as HTMLCollectionOf<HTMLSpanElement>;
 
         Array.from(DROP_CODES).forEach((button) => {
             const PROMO_TITLE = button.parentElement?.classList[1];
             const CURRENT_PROMO: promoCodes = PROMO_CODES.find((item) => item.title.toUpperCase() === PROMO_TITLE?.toUpperCase()) as promoCodes;
             const TOTAL_SUM_PROMO = (+TOTAL_SUM.innerHTML * (1 - (CURRENT_PROMO.discount / 100))).toFixed(2);
+            console.log(TOTAL_SUM_PROMO);
             const DROP = () => { 
                 console.log(1111)
+                button.parentElement?.classList.remove(CURRENT_PROMO.title);
                 button.parentElement?.remove();
-                if (APPLIED_PROMOS.length === 1) {
+                console.log('до + скидки')
+                console.log(+RESULT_TOTAL.innerText.slice(2))
+                RESULT_TOTAL.innerText = `€ ${(+RESULT_TOTAL.innerText.slice(2) + (+TOTAL_SUM.innerHTML - (+TOTAL_SUM_PROMO))).toFixed(2)}`;
+                console.log('после + скидки')
+                console.log(+RESULT_TOTAL.innerText.slice(2))
+                if (APPLIED_PROMOS.length <1) {
                     APPLIED_CODES.remove(); 
                     RESULT_PRICE.remove();
-                    TOTAL_PRICE[0].classList.remove('old-price');
+                    TOTAL_PRICE[1].classList.remove('old-price');
+                    }
+                console.log(!Array.from(APPLIED_PROMOS).find((item) => item.classList.contains(PROMO.value)));
+                if (!Array.from(APPLIED_PROMOS).find((item) => item.classList.contains(PROMO.value))||!Array.from(APPLIED_PROMOS).find((item) => item.classList.contains(PROMO.value.toLocaleUpperCase()))) {
+                    CODE.append(ADD_CODE);
                 }
-                RESULT_TOTAL.innerText = `€ ${(+RESULT_TOTAL.innerText.slice(2) + (+TOTAL_SUM.innerHTML - (+TOTAL_SUM_PROMO))).toFixed(2)}`;
+                button.removeEventListener('click', DROP);
             }
             button.addEventListener('click', DROP);
         });
+            
+        };
+        ADD_CODE.addEventListener('click', APPLY_PROMO);
     }
 }
 
