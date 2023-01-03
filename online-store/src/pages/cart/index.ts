@@ -13,7 +13,7 @@ class CartPage extends Page {
     public createContent() {
         const TOTAL_SUM = document.getElementsByClassName('header__total-sum')[0] as HTMLSpanElement;
         const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
-        let result = ``;
+        const result = ``;
         let pageContent = `
             <div class="cart-page">
             <h1>Cart is Empty</h1>
@@ -93,11 +93,11 @@ class CartPage extends Page {
         if (url.searchParams.get('page')) {
             PAGE_NUMBER.innerText = `${url.searchParams.get('page')}`;
         }
-        let currentPage = Number(PAGE_NUMBER.innerText);
+        const currentPage = Number(PAGE_NUMBER.innerText);
         if (url.searchParams.get('limit')) {
             NUMBER_ON_PAGE.value = `${url.searchParams.get('limit')}`;
         }
-        let rows = Number(NUMBER_ON_PAGE.value);
+        const rows = Number(NUMBER_ON_PAGE.value);
         const PRODUCT_ITEMS = document.querySelector('.prod-items') as HTMLDivElement;
         const ID_ARR: string[] = JSON.parse(localStorage.basket);
         const arrItem: string[] = [...new Set(ID_ARR)];

@@ -25,10 +25,10 @@ export function addQuantity(
             return sum;
         }, 0);
         console.log(quantityCart);
-      if (Number(STOCK[NUMBER].textContent)>0) {
-        ID_ARR.push(CARD_ID);
-        STOCK[NUMBER].textContent = `${Number(STOCK[NUMBER].textContent) - 1}`;
-        QUANTITY[NUMBER].textContent = `${Number(QUANTITY[NUMBER].textContent) + 1}`
+        if (Number(STOCK[NUMBER].textContent) > 0) {
+            ID_ARR.push(CARD_ID);
+            STOCK[NUMBER].textContent = `${Number(STOCK[NUMBER].textContent) - 1}`;
+            QUANTITY[NUMBER].textContent = `${Number(QUANTITY[NUMBER].textContent) + 1}`;
         } else {
             console.log('no more product');
         }

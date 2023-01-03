@@ -20,3 +20,7 @@ export type sliderValueType = {
     right: number;
     arr: number[];
 };
+export type cardIdName = {
+    id: number,
+    name: string
+}

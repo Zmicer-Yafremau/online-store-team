@@ -1,3 +1,4 @@
+import { addSlash } from './add-slash';
 export function reactModal() {
     const FORM = document.getElementById('myform') as HTMLFormElement;
     const VALID = document.getElementsByClassName('modal__valid')[0] as HTMLInputElement;
@@ -17,11 +18,7 @@ export function reactModal() {
         } else CARD_LOGO.src = 'https://cdn1.iconfinder.com/data/icons/cash-card-add-on/48/v-22-512.png';
     });
     VALID.addEventListener('input', () => {
-        const TEMP = VALID.value.split('');
-        if (TEMP.length > 2 && !TEMP.includes('/')) {
-            TEMP.splice(2, 0, `/`);
-            VALID.value = `${TEMP.join('')}`;
-        }
+        VALID.value = addSlash(VALID.value);
     });
     const FORM_SUBMIT = (event: Event) => {
         event.preventDefault();

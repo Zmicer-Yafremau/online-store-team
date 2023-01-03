@@ -12,7 +12,7 @@ export function displayProduct(arrItem: string[], rows: number, currentPage: num
     PRODUCT_ITEMS.innerHTML = `${paginatedData.reduce((sum, currentId) => {
         let res = '';
         const item = CARDS.find((item) => item.id === Number(currentId)) as cardType;
-        let quantityCart: number = JSON.parse(localStorage.basket).reduce((sum: number, current: string) => {
+        const quantityCart: number = JSON.parse(localStorage.basket).reduce((sum: number, current: string) => {
             if (current === String(item.id)) {
                 sum = sum + 1;
             }
