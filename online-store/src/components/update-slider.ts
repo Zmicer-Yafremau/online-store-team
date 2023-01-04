@@ -12,7 +12,6 @@ export function updateSlider(sliderName: 'price' | 'stock') {
     INPUT_FROM.max = `${countSlider(sliderName).max - 1}`;
     INPUT_TO.max = `${countSlider(sliderName).max - 1}`;
     if (!CURRENT) {
-        console.log('hello');
         INPUT_FROM.value = `${countSlider(sliderName).arr.findIndex((el) => el === countSlider(sliderName).left)}`;
         INPUT_TO.value = `${countSlider(sliderName).arr.findIndex((el) => el === countSlider(sliderName).right)}`;
         RANGE_LEFT.innerHTML = `${sliderName === 'price' ? '€' : ''}${
@@ -23,7 +22,6 @@ export function updateSlider(sliderName: 'price' | 'stock') {
         }`;
     } else {
         INPUT_FROM.value = `${countSlider(sliderName).arr.findIndex((el) => el === +CURRENT.split(`↕`)[0])}`;
-        console.log('val=', INPUT_FROM.value);
         INPUT_TO.value = `${countSlider(sliderName).arr.findIndex((el) => el === +CURRENT.split(`↕`)[1])}`;
         RANGE_LEFT.innerHTML = `${sliderName === 'price' ? '€' : ''}${CURRENT.split(`↕`)[0]}`;
         RANGE_RIGHT.innerHTML = `${sliderName === 'price' ? '€' : ''}${+CURRENT.split(`↕`)[1]}`;
