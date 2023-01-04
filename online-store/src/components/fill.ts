@@ -1,6 +1,6 @@
 import { cardType } from '../types/types';
-import { CARDS } from './cards/cards';
 import { changeSize } from './change-size';
+import { countSum } from './count-sum';
 export function fill(data: cardType[]) {
     const CONTENT = document.getElementsByClassName('main__content')[0] as HTMLDivElement;
     const SIZE = (document.getElementsByClassName('size') as unknown) as NodeListOf<HTMLDivElement>;
@@ -31,10 +31,9 @@ export function fill(data: cardType[]) {
         
         `;
     });
-    if (!CONTENT.innerHTML) CONTENT.innerHTML = `Sorry, no matches ='(`;
-    const DIV_CARDS = (document.getElementsByClassName('card') as unknown) as NodeListOf<HTMLDivElement>;
     const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
     const TOTAL_SUM = document.getElementsByClassName('header__total-sum')[0] as HTMLSpanElement;
+    const DIV_CARDS = (document.getElementsByClassName('card') as unknown) as NodeListOf<HTMLDivElement>;
     Array.from(DIV_CARDS).forEach((el) => {
         if (
             !el.classList.contains('active') &&
@@ -62,14 +61,12 @@ export function fill(data: cardType[]) {
     if (JSON.parse(localStorage.basket).length) {
         CART.classList.remove('visually-hidden');
         CART.innerHTML = `${JSON.parse(localStorage.basket).length}`;
-        TOTAL_SUM.innerHTML = `${JSON.parse(localStorage.basket).reduce((sum: number, current: string) => {
-            if (CARDS.find((item) => item.id === Number(current))) {
-                sum = sum + (CARDS.find((item) => item.id === Number(current)) as cardType)?.price;
-            }
-            return sum;
-        }, 0)}`;
+        TOTAL_SUM.innerHTML = countSum(JSON.parse(localStorage.basket));
     }
     const PARAMS = new URLSearchParams(location.search);
     const SELECT_SIZE = PARAMS.get('size');
-    changeSize(SIZE, CONTENT, SELECT_SIZE ? SELECT_SIZE : 'large');
+    if (!CONTENT.innerHTML) CONTENT.innerHTML = `<h2 class='center' style="margin:0 auto">Sorry, no matches ='(</h2>`;
+    else {
+        changeSize(SIZE, CONTENT, SELECT_SIZE ? SELECT_SIZE : 'large');
+    }
 }
