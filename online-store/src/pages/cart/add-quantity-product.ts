@@ -25,7 +25,6 @@ export function addQuantity(
             return sum;
         }, 0);
         console.log(quantityCart);
-
         if (Number(STOCK[NUMBER].textContent) > 0) {
             ID_ARR.push(CARD_ID);
             STOCK[NUMBER].textContent = `${Number(STOCK[NUMBER].textContent) - 1}`;

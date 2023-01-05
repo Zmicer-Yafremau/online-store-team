@@ -127,11 +127,9 @@ class ProductPage extends Page {
         });
 
         const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
-        const CART_ICON = CART.parentElement as HTMLDivElement;
-        CART_ICON.addEventListener('click', () => {
-            location.replace(`${location.origin}#cart`);
-        });
-
+        
+        //add to main page on logo
+        
         const ADD = document.getElementsByClassName('card__drop-button') as HTMLCollectionOf<HTMLButtonElement>;
         const TOTAL_SUM = document.getElementsByClassName('header__total-sum')[0] as HTMLSpanElement;
         const CARD_ID_CLASS = ADD[0].classList[3];
@@ -144,7 +142,6 @@ class ProductPage extends Page {
         } else {
             ADD[1].classList.add('addCart');
         }
-
         const ADD_TO_CART = addToBasket(CART, TOTAL_SUM, CARD_ID, ADD[0]);
         ADD[0].addEventListener('click', ADD_TO_CART);
         ADD[0].addEventListener('click', () => {
@@ -156,7 +153,7 @@ class ProductPage extends Page {
         const ADD_TO_BUY = buttonBuy(CART, TOTAL_SUM, CARD_ID, ADD[1]);
         ADD[1].addEventListener('click', () => {
             ADD_TO_BUY();
-            location.replace(`${location.origin}#cart`);
+            location.replace(`${location.origin}${location.pathname}#cart`);
         });
     }
 }

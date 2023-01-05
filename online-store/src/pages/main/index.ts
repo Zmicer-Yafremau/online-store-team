@@ -9,7 +9,7 @@ class MainPage extends Page {
         const PAGECONTENT = `
         <div class="switch btn bg-light btn-lg">SHOW FILTERS</div>
     <aside class="aside in">
-        <div class="asside__panel">
+        <div class="aside__panel">
             <div class="aside__content">
                 <div class="aside__buttons between">
                     <button type="button" class="reset btn btn-outline-dark btn-lg">RESET FILTERS</button>

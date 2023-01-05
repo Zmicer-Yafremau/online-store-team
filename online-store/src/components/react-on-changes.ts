@@ -1,10 +1,10 @@
 import { fillSort } from '../filters/fill-n-sort';
-/*import { productDetail } from './product-detail';*/
-import { CARDS } from './cards/cards';
 import { changeSize } from './change-size';
 import { addToBasket } from './add-to-basket';
 import { countSlider } from './count-slider-values';
-/*import App from '../pages/app/index'*/ export function react() {
+import { hideAside } from './hide-aside';
+import { parseButton } from './parse-button';
+export function react() {
     const ADD = document.getElementsByClassName('card__drop-button') as HTMLCollectionOf<HTMLButtonElement>;
     const SELECT = document.querySelector('.form-select') as HTMLSelectElement;
     const SEARCH = document.querySelector('.main__search') as HTMLInputElement;
@@ -18,32 +18,17 @@ import { countSlider } from './count-slider-values';
     const RESET_ALL = document.getElementsByClassName('reset-all')[0] as HTMLButtonElement;
     const COPY = document.getElementsByClassName('copy')[0] as HTMLButtonElement;
     const SWITCH = document.getElementsByClassName('switch')[0] as HTMLDivElement;
-    const ASIDE = document.getElementsByClassName('aside')[0];
-    const CART_ICON = CART.parentElement as HTMLDivElement;
-    CART_ICON.addEventListener('click', () => {
-        location.replace(`${location.origin}#cart`);
-    });
-    const CHANGE_VIEW = () => {
-        if (!ASIDE.classList.contains('in')) {
-            ASIDE.classList.add('in');
-            ASIDE.classList.remove('out');
-            SWITCH.innerHTML = 'SHOW FILTERS';
-        } else {
-            ASIDE.classList.remove('visually-hidden');
-            ASIDE.classList.remove('in');
-            ASIDE.classList.add('out');
-            SWITCH.innerHTML = 'HIDE FILTERS';
-        }
-    };
+    const ASIDE = document.getElementsByClassName('aside')[0] as HTMLElement;
+    const CHANGE_VIEW = () => (SWITCH.innerHTML = hideAside(ASIDE));
     ASIDE.addEventListener('animationend', () => {
         if (ASIDE.classList.contains('in')) ASIDE.classList.add('visually-hidden');
     });
     SWITCH.addEventListener('click', CHANGE_VIEW);
     RESET.addEventListener('click', () => {
-        location.href = location.origin;
+        location.href = `${location.origin}${location.pathname}`;
     });
     RESET_ALL.addEventListener('click', () => {
-        location.href = location.origin;
+        location.href = `${location.origin}${location.pathname}`;
         localStorage.clear();
         removeAllEvents();
         fillSort();
@@ -85,11 +70,9 @@ import { countSlider } from './count-slider-values';
     SELECT.addEventListener('change', START_SELECT);
     Array.from(DETAILS).forEach((item) => {
         const GO_DETAILS = () => {
-            const ID = +item.classList[3].split('-')[1];
-            const NAME = CARDS.find((el) => el.id === ID)
-                ?.title.split(' ')
-                .join('_');
-            location.replace(`${location.origin}#product-details/${ID}/${NAME}`);
+            const ID = parseButton(item).id;
+            const NAME = parseButton(item).name;
+            location.replace(`${location.origin}${location.pathname}#product-details/${ID}/${NAME}`);
         };
         item.addEventListener('click', GO_DETAILS);
     });

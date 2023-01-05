@@ -3,7 +3,7 @@ export function createMainContainer() {
     MAIN.innerHTML = `
     <div class="switch btn bg-light">HIDE FILTERS</div>
     <aside class="aside">
-        <div class="asside__panel">
+        <div class="aside__panel">
             <div class="aside__content">
                 <div class="aside__buttons between">
                     <button type="button" class="reset btn btn-outline-dark btn-lg">RESET FILTERS</button>
