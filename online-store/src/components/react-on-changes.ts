@@ -19,20 +19,16 @@ export function react() {
     const COPY = document.getElementsByClassName('copy')[0] as HTMLButtonElement;
     const SWITCH = document.getElementsByClassName('switch')[0] as HTMLDivElement;
     const ASIDE = document.getElementsByClassName('aside')[0] as HTMLElement;
-    const CART_ICON = CART.parentElement as HTMLDivElement;
-    CART_ICON.addEventListener('click', () => {
-        location.replace(`${location.origin}#cart`);
-    });
     const CHANGE_VIEW = () => (SWITCH.innerHTML = hideAside(ASIDE));
     ASIDE.addEventListener('animationend', () => {
         if (ASIDE.classList.contains('in')) ASIDE.classList.add('visually-hidden');
     });
     SWITCH.addEventListener('click', CHANGE_VIEW);
     RESET.addEventListener('click', () => {
-        location.href = location.origin;
+        location.href = `${location.origin}${location.pathname}`;
     });
     RESET_ALL.addEventListener('click', () => {
-        location.href = location.origin;
+        location.href = `${location.origin}${location.pathname}`;
         localStorage.clear();
         removeAllEvents();
         fillSort();
@@ -76,7 +72,7 @@ export function react() {
         const GO_DETAILS = () => {
             const ID = parseButton(item).id;
             const NAME = parseButton(item).name;
-            location.replace(`${location.origin}#product-details/${ID}/${NAME}`);
+            location.replace(`${location.origin}${location.pathname}#product-details/${ID}/${NAME}`);
         };
         item.addEventListener('click', GO_DETAILS);
     });

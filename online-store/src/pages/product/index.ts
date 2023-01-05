@@ -127,11 +127,6 @@ class ProductPage extends Page {
         });
 
         const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
-        const CART_ICON = CART.parentElement as HTMLDivElement;
-        CART_ICON.addEventListener('click', () => {
-            location.replace(`${location.origin}#cart`);
-        });
-
         //add to main page on logo
 
         const ADD = document.getElementsByClassName('card__drop-button') as HTMLCollectionOf<HTMLButtonElement>;
@@ -152,7 +147,7 @@ class ProductPage extends Page {
             ADD[0].classList.toggle('active');
         });
         ADD[1].addEventListener('click', () => {
-            location.replace(`${location.origin}#cart`);
+            location.replace(`${location.origin}${location.pathname}#cart`);
         });
     }
 }

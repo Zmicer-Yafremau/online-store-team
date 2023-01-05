@@ -48,6 +48,8 @@ class App {
             const footer = document.querySelector('.footer');
             pageHTML.id = App.defaultPageId;
             App.container.insertBefore(pageHTML, footer);
+            const HEADER_LINK = document.getElementsByClassName('header__link')[0] as HTMLAnchorElement;
+            HEADER_LINK.href = `${location.origin}${location.pathname}`;
             reactModal();
             reactCart();
             if (page instanceof ProductPage) {
