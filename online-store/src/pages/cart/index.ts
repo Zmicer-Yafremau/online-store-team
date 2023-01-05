@@ -1,9 +1,10 @@
 import Page from '../../types/page';
 import { CARDS } from '../../components/cards/cards';
 import { addQuantity } from './add-quantity-product';
-import { cardType } from '../../types/types';
+import { cardType, promoCodes } from '../../types/types';
 import { removeQuantity } from './remove-quantity-product';
 import { displayProduct } from './displayProduct';
+import { PROMO_CODES } from './promo-codes';
 
 class CartPage extends Page {
     constructor(id: string, tagName: string, className: string) {
@@ -70,7 +71,8 @@ class CartPage extends Page {
             <div class="total-price">
             Total: <span class="summary-total">€ ${TOTAL_SUM.innerHTML}</span></div>
             <div class="promo-code">
-            <input type="search" placeholder="Enter promo code" class=""></div>
+            <input type="search" placeholder="Enter promo code" class="promo-input"></div>
+            <span class="promo-ex">Promo for test: 'RS', 'EPM'</span>
             <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">BUY NOW</button>
             </div>
             </div>
@@ -239,6 +241,131 @@ class CartPage extends Page {
                     PAGE_NUMBER
                 );
                 button.removeEventListener('click', REMOVE_FROM_CART);
+            });
+        }
+
+        const PRODUCT_INFO = document.getElementsByClassName('item-info') as HTMLCollectionOf<HTMLButtonElement>;
+        Array.from(PRODUCT_INFO).forEach((item) => {
+            const GO_DETAILS = () => {
+                const ID = +item.classList[1].split('__')[1];
+                const NAME = CARDS.find((el) => el.id === ID)
+                    ?.title.split(' ')
+                    .join('_');
+                location.replace(`${location.origin}${location.pathname}#product-details/${ID}/${NAME}`);
+            };
+            item.addEventListener('click', GO_DETAILS);
+        });
+
+
+        const PROMO = document.querySelector('.promo-input') as HTMLInputElement;
+        const PROMO_CODE = document.querySelector('.promo-code') as HTMLDivElement;
+        const CODE = document.createElement('div');
+        CODE.classList.add('res-promo');
+        const ADD_CODE = document.createElement('span');
+        ADD_CODE.classList.add('add-code');
+        ADD_CODE.innerText = 'ADD';
+        const TOTAL_PRICE = document.getElementsByClassName('total-price') as HTMLCollectionOf<HTMLDivElement>;
+        const RESULT_PRICE = document.createElement('div');
+        RESULT_PRICE.classList.add('result-price');
+        RESULT_PRICE.classList.add('total-price');
+
+        if (!localStorage.promo) {
+            localStorage.promo = `[]`;
+        }
+        const INPUT_PROMO = () => {
+            const CURRENT_PROMO: promoCodes = PROMO_CODES.find(
+                (item) => item.title.toUpperCase() === PROMO.value.toUpperCase()
+            ) as promoCodes;
+            if (CURRENT_PROMO) {
+                PROMO_CODE.after(CODE);
+                CODE.innerHTML = CURRENT_PROMO.description;
+                const PROMO_ARR: promoCodes[] = JSON.parse(localStorage.promo);
+                if (!Array.from(PROMO_ARR).find((item) => item.title === CURRENT_PROMO.title)) {
+                    CODE.append(ADD_CODE);
+                }
+            } else {
+                CODE.remove();
+            }
+        };
+        PROMO.addEventListener('input', INPUT_PROMO);
+
+        const APPLY_PROMO = () => {
+            const CURRENT_PROMO: promoCodes = PROMO_CODES.find(
+                (item) => item.title.toUpperCase() === PROMO.value.toUpperCase()
+            ) as promoCodes;
+            const PROMO_ARR: promoCodes[] = JSON.parse(localStorage.promo);
+            if (!Array.from(PROMO_ARR).find((item) => item === CURRENT_PROMO)) {
+                PROMO_ARR.push(CURRENT_PROMO);
+                localStorage.promo = JSON.stringify(PROMO_ARR);
+                console.log(114)
+                addAppliedPromo();
+            }
+        };
+        ADD_CODE.addEventListener('click', APPLY_PROMO);
+
+        addAppliedPromo();
+        
+        function addAppliedPromo() {
+            const PROMO_ARR: promoCodes[] = JSON.parse(localStorage.promo);
+            const sumPromo: number = PROMO_ARR.reduce((sum: number, current) => {
+                sum = sum + current.discount;
+                return sum;
+            }, 0);
+            const TOTAL_SUM_PROMO = (+TOTAL_SUM.innerHTML * (1 - sumPromo / 100)).toFixed(2);
+            let result = `${PROMO_ARR.reduce((sum, currentPromo) => {
+                let res = '';
+                res = `
+                    <div class="applied-promo ${currentPromo.title}">
+                    ${currentPromo.description}
+                    <span class="drop-code">DROP</span>
+                    </div>
+                    `;
+                return sum + res;
+            }, '')
+                }`;
+            if (PROMO_ARR.length) {
+                TOTAL_PRICE[1].classList.add('old-price');
+                TOTAL_PRICE[1].after(RESULT_PRICE);
+                RESULT_PRICE.innerHTML = `Total: 
+            <span class="summary-total result-total">€ ${TOTAL_SUM_PROMO}</span>
+            <div class="applied-codes">
+            <h6>Applied codes</h6>
+            ${result}
+            </div>`;
+                
+                if (PROMO_ARR.find((item) => item.title.toUpperCase() === PROMO.value.toUpperCase())) {
+                    ADD_CODE.remove();
+                }
+                
+            } else {
+                RESULT_PRICE.remove();
+                TOTAL_PRICE[1].classList.remove('old-price');
+            }
+            const DROP_CODES = document.getElementsByClassName('drop-code') as HTMLCollectionOf<HTMLSpanElement>;
+            const RESULT_TOTAL = document.getElementsByClassName('result-total')[0] as HTMLSpanElement;      
+            Array.from(DROP_CODES).forEach((button) => {
+                let PROMO_ARR: promoCodes[] = JSON.parse(localStorage.promo);
+                const PROMO_NUMBER = Array.from(DROP_CODES).indexOf(button);
+                const sumPromo: number = PROMO_ARR.reduce((sum: number, current) => {
+                    sum = sum + current.discount;
+                    return sum;
+                }, 0);
+                const DROP = () => {
+                    RESULT_TOTAL.innerText = `€ ${(+TOTAL_SUM.innerHTML - (1 - (sumPromo - PROMO_ARR[PROMO_NUMBER].discount) / 100)).toFixed(2)}`;
+                    PROMO_ARR = PROMO_ARR.filter((el) => {
+                        return el.title !== PROMO_ARR[PROMO_NUMBER].title;
+                    })
+                    localStorage.promo = JSON.stringify(PROMO_ARR);
+                    const CURRENT_PROMO: promoCodes = PROMO_CODES.find(
+                        (item) => item.title.toUpperCase() === PROMO.value.toUpperCase()
+                    ) as promoCodes;
+                    if (CURRENT_PROMO) {
+                        if (!PROMO_ARR.find((item) => item.title.toUpperCase() === CURRENT_PROMO.title.toUpperCase())) {
+                        CODE.append(ADD_CODE);
+                    }}
+                    addAppliedPromo();
+                };
+                button.addEventListener('click', DROP);
             });
         }
     }

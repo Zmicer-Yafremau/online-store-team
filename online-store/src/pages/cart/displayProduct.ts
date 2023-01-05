@@ -22,7 +22,7 @@ export function displayProduct(arrItem: string[], rows: number, currentPage: num
         res = `<div class="app-cart-item card__${item.id}">
         <div class="cart-item">
         <div class="item-i">${[...new Set(JSON.parse(localStorage.basket))].indexOf(String(item.id) as never) + 1}</div>
-        <div class="item-info">
+        <div class="item-info card__${item.id}">
         <img alt="${item.title}" src="${item.images[item.images.length - 1]}">
         <div class="item-detail-p">
         <div class="product-title">
