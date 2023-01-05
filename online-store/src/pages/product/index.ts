@@ -141,8 +141,7 @@ class ProductPage extends Page {
             ADD[0].classList.remove('add');
             ADD[0].classList.add('remove');
             ADD[1].classList.add('inCart');
-        }
-        else {
+        } else {
             ADD[1].classList.add('addCart');
         }
 
@@ -153,7 +152,6 @@ class ProductPage extends Page {
             ADD[1].classList.toggle('inCart');
             ADD[1].classList.toggle('addCart');
         });
-        
 
         const ADD_TO_BUY = buttonBuy(CART, TOTAL_SUM, CARD_ID, ADD[1]);
         ADD[1].addEventListener('click', () => {

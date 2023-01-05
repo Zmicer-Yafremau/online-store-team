@@ -12,7 +12,7 @@ export function buttonBuy(
             localStorage.basket = `[]`;
             TOTAL_SUM.innerHTML = '0';
         }
-        let ID_ARR: string[] = JSON.parse(localStorage.basket);
+        const ID_ARR: string[] = JSON.parse(localStorage.basket);
         if (BUTTON.classList.contains('addCart')) {
             ID_ARR.push(CARD_ID);
             localStorage.basket = JSON.stringify(ID_ARR);
