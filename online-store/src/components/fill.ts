@@ -2,6 +2,7 @@ import { cardType } from '../types/types';
 import { changeSize } from './change-size';
 import { countSum } from './count-sum';
 export function fill(data: cardType[]) {
+    if (!localStorage.basket) localStorage.basket = '[]';
     const CONTENT = document.getElementsByClassName('main__content')[0] as HTMLDivElement;
     const SIZE = (document.getElementsByClassName('size') as unknown) as NodeListOf<HTMLDivElement>;
     CONTENT.innerHTML = '';
