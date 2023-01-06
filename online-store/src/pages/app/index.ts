@@ -61,6 +61,7 @@ class App {
             }
             if (page instanceof CartPage) {
                 CartPage.contentProduct();
+                CartPage.addPromoCode();
             }
         }
     }
@@ -73,7 +74,6 @@ class App {
     }
 
     run() {
-        // App.renderNewPage('');
         this.enableRouteChange();
         const hash = window.location.hash.slice(1);
         App.renderNewPage(hash);
