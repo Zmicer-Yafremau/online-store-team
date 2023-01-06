@@ -5,7 +5,6 @@ export function changeSize(SIZE: NodeListOf<HTMLDivElement>, CONTENT: HTMLDivEle
         const url = new URL(window.location.href);
         url.searchParams.set('size', 'large');
         history.replaceState(null, '', url);
-        console.log(CONTENT);
         Array.from((CONTENT.children as unknown) as NodeListOf<HTMLDivElement>).forEach((el) => {
             el.style.width = '';
             el.style.height = '';
@@ -17,7 +16,6 @@ export function changeSize(SIZE: NodeListOf<HTMLDivElement>, CONTENT: HTMLDivEle
         });
     }
     if (act === 'small') {
-        console.log(CONTENT);
         SIZE[0].classList.remove('active');
         SIZE[1].classList.add('active');
         const url = new URL(window.location.href);

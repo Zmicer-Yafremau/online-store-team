@@ -127,9 +127,9 @@ class ProductPage extends Page {
         });
 
         const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
-        
+
         //add to main page on logo
-        
+
         const ADD = document.getElementsByClassName('card__drop-button') as HTMLCollectionOf<HTMLButtonElement>;
         const TOTAL_SUM = document.getElementsByClassName('header__total-sum')[0] as HTMLSpanElement;
         const CARD_ID_CLASS = ADD[0].classList[3];

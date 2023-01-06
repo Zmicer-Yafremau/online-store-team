@@ -4,7 +4,10 @@ export function reactModal() {
     const VALID = document.getElementsByClassName('modal__valid')[0] as HTMLInputElement;
     const CARD_INPUT = document.getElementsByClassName('modal__card-input')[0] as HTMLInputElement;
     const CARD_LOGO = document.getElementsByClassName('modal__logo')[0] as HTMLImageElement;
-    const CLOSE = document.getElementsByClassName('modal__close')[0] as HTMLButtonElement;
+    const INPUTS_FORM = (document.getElementsByClassName(
+        'modal_form-input'
+    ) as unknown) as NodeListOf<HTMLInputElement>;
+    let event_checker = false;
     CARD_INPUT.addEventListener('input', () => {
         if (CARD_INPUT.value[0] === '3') {
             CARD_LOGO.src =
@@ -22,16 +25,36 @@ export function reactModal() {
     });
     const FORM_SUBMIT = (event: Event) => {
         event.preventDefault();
-        if (!localStorage.form) {
+        if (!event_checker) {
+            Array.from(INPUTS_FORM).forEach((el) => {
+                el.addEventListener('input', () => {
+                    if (el.checkValidity()) {
+                        el.classList.add('valid');
+                        el.classList.remove('invalid');
+                    } else {
+                        el.classList.remove('valid');
+                        el.classList.add('invalid');
+                    }
+                });
+            });
+        }
+        Array.from(INPUTS_FORM).forEach((el) => {
+            if (el.checkValidity()) {
+                el.classList.add('valid');
+                el.classList.remove('invalid');
+            } else {
+                el.classList.remove('valid');
+                el.classList.add('invalid');
+            }
+        });
+        if (Array.from(INPUTS_FORM).every((el) => el.checkValidity())) {
             alert(`Say 'goodby' to your money!`);
-            localStorage.clear();
-            CLOSE.click();
             setTimeout(() => {
                 localStorage.clear();
-                location.replace(location.origin);
+                location.replace(`${location.origin}${location.pathname}`);
             }, 3000);
         }
-        localStorage.form = 'true';
+        event_checker = true;
     };
     FORM.addEventListener('submit', FORM_SUBMIT);
 }

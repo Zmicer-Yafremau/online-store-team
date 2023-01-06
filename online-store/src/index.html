@@ -23,12 +23,12 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <form id="myform">
+                            <form id="myform" novalidate>
                                 <h6>Personal details</h6>
                                 <div class="row mb-3 input-group">
                                     <input
                                         type="text"
-                                        class="form-control"
+                                        class="form-control modal_form-input"
                                         placeholder="Name"
                                         pattern="[a-zA-Z]{3,}(\s[a-zA-Z]{3,}){1,}"
                                         required
@@ -38,7 +38,7 @@
                                 <div class="row mb-3 input-group">
                                     <input
                                         type="tel"
-                                        class="form-control"
+                                        class="form-control modal_form-input"
                                         placeholder="Phone number"
                                         pattern="\+[0-9]{9}"
                                         required
@@ -48,7 +48,7 @@
                                 <div class="row mb-3 input-group">
                                     <input
                                         type="text"
-                                        class="form-control"
+                                        class="form-control modal_form-input"
                                         placeholder="Delivery address"
                                         pattern="[a-zA-Z]{5,}(\s[a-zA-Z]{5,}){2,}"
                                         required
@@ -58,7 +58,7 @@
                                 <div class="row mb-3 input-group">
                                     <input
                                         type="email"
-                                        class="form-control"
+                                        class="form-control modal_form-input"
                                         placeholder="E-mail"
                                         pattern="^.+@[a-zA-Z]{1,}[\.][a-zA-Z]{1,}"
                                         required
@@ -77,7 +77,7 @@
                                                 />
                                                 <input
                                                     type="text"
-                                                    class="form-control modal__card-input"
+                                                    class="form-control modal_form-input modal__card-input"
                                                     placeholder="Card number"
                                                     aria-label="Card_number"
                                                     pattern="[0-9]{16,16}"
@@ -91,7 +91,7 @@
                                                 <div class="input-group-text">VALID:</div>
                                                 <input
                                                     type="text"
-                                                    class="form-control col-7 modal__valid"
+                                                    class="form-control modal_form-input col-7 modal__valid"
                                                     pattern="(([0][0-9])|([1][0-2]))/(([0][0-9])|([1-2][0-9])|([3][0-1]))"
                                                     placeholder="Valid Thru"
                                                     required
@@ -104,7 +104,7 @@
                                                 <div class="input-group-text">CVV:</div>
                                                 <input
                                                     type="text"
-                                                    class="form-control col-7"
+                                                    class="form-control modal_form-input col-7"
                                                     pattern="[0-9]{3,3}"
                                                     placeholder="Code"
                                                     required

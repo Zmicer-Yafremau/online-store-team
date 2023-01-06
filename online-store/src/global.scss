@@ -16,12 +16,12 @@ $accordion-color: black;
     height: 30px;
     width: 50px;
 }
-input:invalid + span::after {
+.invalid + span::after {
     content: "Error";
     padding-left: 5px;
     padding-right: 5px;
 }
-input:valid + span::after {
+.valid + span::after {
     visibility: hidden;
     content: "";
 }
