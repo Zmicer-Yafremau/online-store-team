@@ -255,7 +255,10 @@ class CartPage extends Page {
             };
             item.addEventListener('click', GO_DETAILS);
         });
+    }
 
+    static addPromoCode() {
+        const TOTAL_SUM = document.getElementsByClassName('header__total-sum')[0] as HTMLSpanElement;
         const PROMO = document.querySelector('.promo-input') as HTMLInputElement;
         const PROMO_CODE = document.querySelector('.promo-code') as HTMLDivElement;
         const CODE = document.createElement('div');
@@ -296,7 +299,6 @@ class CartPage extends Page {
             if (!Array.from(PROMO_ARR).find((item) => item === CURRENT_PROMO)) {
                 PROMO_ARR.push(CURRENT_PROMO);
                 localStorage.promo = JSON.stringify(PROMO_ARR);
-                console.log(114);
                 addAppliedPromo();
             }
         };

@@ -1,6 +1,8 @@
 import { CARDS } from '../../components/cards/cards';
 import { cardType } from '../../types/types';
 import { displayProduct } from './displayProduct';
+import { promoCodes } from '../../types/types';
+
 export function removeQuantity(
     CART: HTMLSpanElement,
     TOTAL_SUM: HTMLSpanElement,
@@ -66,5 +68,14 @@ export function removeQuantity(
         }
         SUMMARY_PRODUCT.textContent = CART.textContent;
         SUMMARY_TOTAL.textContent = `€ ${TOTAL_SUM.textContent}`;
+        if (JSON.parse(localStorage.promo).length) {
+            const PROMO_ARR: promoCodes[] = JSON.parse(localStorage.promo);
+            const sumPromo: number = PROMO_ARR.reduce((sum: number, current) => {
+                sum = sum + current.discount;
+                return sum;
+            }, 0);
+            const RESULT_TOTAL = document.getElementsByClassName('result-total')[0] as HTMLSpanElement;
+            RESULT_TOTAL.innerHTML = `€ ${(+TOTAL_SUM.innerHTML * (1 - sumPromo / 100)).toFixed(2)}`;
+        }
     };
 }

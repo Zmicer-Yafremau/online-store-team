@@ -1,4 +1,4 @@
-import { parseButton } from "../components/parse-button";
+import { parseButton } from '../components/parse-button';
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const { document } = new JSDOM(`...`).window;
