@@ -1,8 +1,8 @@
 import Page from '../../types/page';
 
 export const enum ErrorTypes {
-    Error_404 = 404,
-    Error_notFound = 'product not found',
+    Error_404 = 'Page not found',
+    Error_notFound = 'Product not found',
 }
 
 class ErrorPage extends Page {
@@ -14,9 +14,8 @@ class ErrorPage extends Page {
     }
 
     public createContent() {
-        //add  create innerHTML code
-        const PAGECONTENT = 'error' + this.errorType;
-        return PAGECONTENT;
+        const PAGE_CONTENT = `<h1>ERROR: ${this.errorType}</h1>`;
+        return PAGE_CONTENT;
     }
 
     render() {
