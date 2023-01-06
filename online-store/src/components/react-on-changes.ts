@@ -19,6 +19,13 @@ export function react() {
     const COPY = document.getElementsByClassName('copy')[0] as HTMLButtonElement;
     const SWITCH = document.getElementsByClassName('switch')[0] as HTMLDivElement;
     const ASIDE = document.getElementsByClassName('aside')[0] as HTMLElement;
+    const CATEGORY_CONTAINER = document.getElementsByClassName('checkboxes__category')[0] as HTMLDivElement;
+    const BRAND_CONTAINER = document.getElementsByClassName('checkboxes__brand')[0] as HTMLDivElement;
+    const PRICE_CONTAINER = document.getElementsByClassName(`price__content`)[0] as HTMLDivElement;
+    const STOCK_CONTAINER = document.getElementsByClassName(`stock__content`)[0] as HTMLDivElement;
+    const DETAILS = (document.getElementsByClassName(
+        'card__details-button'
+    ) as unknown) as NodeListOf<HTMLButtonElement>;
     const CHANGE_VIEW = () => (SWITCH.innerHTML = hideAside(ASIDE));
     ASIDE.addEventListener('animationend', () => {
         if (ASIDE.classList.contains('in')) ASIDE.classList.add('visually-hidden');
@@ -41,9 +48,6 @@ export function react() {
         }, 500);
     };
     COPY.addEventListener('click', COPY_LINK);
-    const DETAILS = (document.getElementsByClassName(
-        'card__details-button'
-    ) as unknown) as NodeListOf<HTMLButtonElement>;
     const LARGE = () => {
         changeSize(SIZE, CONTENT, 'large');
     };
@@ -87,20 +91,22 @@ export function react() {
             CARD.classList.toggle('active');
         });
     });
-    function sortBy(criteria: string) {
+    function sortBy<T>(criteria: T) {
         return (event: Event) => {
             if (event.target instanceof HTMLInputElement) {
                 const input = event.target;
                 const url = new URL(window.location.href);
-                const CURRENT = url.searchParams.get(criteria);
+                const CURRENT = url.searchParams.get(`${criteria}`);
                 if (input.checked) {
                     if (!CURRENT?.includes(input.id))
-                        url.searchParams.set(criteria, `${CURRENT ? CURRENT : ''}↕${input.id}`);
+                        url.searchParams.set(`${criteria}`, `${CURRENT ? CURRENT : ''}↕${input.id}`);
                 } else {
                     const NEW_CURRENT = CURRENT?.split('↕')
                         .filter((el) => el !== input.id)
                         .join('↕');
-                    NEW_CURRENT ? url.searchParams.set(criteria, `${NEW_CURRENT}`) : url.searchParams.delete(criteria);
+                    NEW_CURRENT
+                        ? url.searchParams.set(`${criteria}`, `${NEW_CURRENT}`)
+                        : url.searchParams.delete(`${criteria}`);
                 }
                 history.replaceState(null, '', url);
                 removeAllEvents();
@@ -108,14 +114,10 @@ export function react() {
             }
         };
     }
-    const CATEGORY_CONTAINER = document.getElementsByClassName('checkboxes__category')[0] as HTMLDivElement;
     const SORT_BY_CATEGORY = sortBy('category');
     CATEGORY_CONTAINER.addEventListener('click', SORT_BY_CATEGORY);
-    const BRAND_CONTAINER = document.getElementsByClassName('checkboxes__brand')[0] as HTMLDivElement;
     const SORT_BY_BRAND = sortBy('brand');
     BRAND_CONTAINER.addEventListener('click', SORT_BY_BRAND);
-    const PRICE_CONTAINER = document.getElementsByClassName(`price__content`)[0] as HTMLDivElement;
-    const STOCK_CONTAINER = document.getElementsByClassName(`stock__content`)[0] as HTMLDivElement;
     function checkSlider(name: 'price' | 'stock') {
         return (event: Event) => {
             if (event.target instanceof HTMLInputElement) {
