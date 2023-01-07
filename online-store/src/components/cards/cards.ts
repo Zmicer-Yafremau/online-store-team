@@ -1419,6 +1419,39 @@ export const CARDS = [
         ],
     },
     {
+        id: 78,
+        title: 'Rhinestone Korean Style Open Rings',
+        description: 'Fashion Jewellery 3Pcs Adjustable Pearl Rhinestone Korean Style Open Rings For Women',
+        price: 30,
+        discountPercentage: 8.02,
+        rating: 4.69,
+        stock: 9,
+        brand: 'Fashion Jewellery',
+        category: 'womens-jewellery',
+        thumbnail: 'https://i.dummyjson.com/data/products/78/thumbnail.jpg',
+        images: [
+            'https://i.dummyjson.com/data/products/77/2.jpg',
+            'https://i.dummyjson.com/data/products/78/thumbnail.jpg',
+        ]
+    },
+    {
+        id: 79,
+        title: 'Elegant Female Pearl Earrings',
+        description: 'Elegant Female Pearl Earrings Set Zircon Pearl Earings Women Party Accessories 9 Pairs/Set',
+        price: 30,
+        discountPercentage: 12.8,
+        rating: 4.74,
+        stock: 16,
+        brand: 'Fashion Jewellery',
+        category: 'womens-jewellery',
+        thumbnail: 'https://i.dummyjson.com/data/products/79/thumbnail.jpg',
+        images: [
+            'https://i.dummyjson.com/data/products/77/2.jpg',
+            'https://i.dummyjson.com/data/products/79/1.jpg',
+        ]
+    },
+
+    {
         id: 80,
         title: 'Chain Pin Tassel Earrings',
         description: 'Pair Of Ear Cuff Butterfly Long Chain Pin Tassel Earrings - Silver ( Long Life Quality Product)',
