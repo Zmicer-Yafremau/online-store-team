@@ -414,7 +414,6 @@ export const CARDS = [
             'https://i.dummyjson.com/data/products/23/1.jpg',
             'https://i.dummyjson.com/data/products/23/2.jpg',
             'https://i.dummyjson.com/data/products/23/3.jpg',
-            'https://i.dummyjson.com/data/products/23/4.jpg',
             'https://i.dummyjson.com/data/products/23/thumbnail.jpg',
         ],
     },
@@ -434,7 +433,6 @@ export const CARDS = [
             'https://i.dummyjson.com/data/products/24/1.jpg',
             'https://i.dummyjson.com/data/products/24/2.jpg',
             'https://i.dummyjson.com/data/products/24/3.jpg',
-            'https://i.dummyjson.com/data/products/24/4.jpg',
             'https://i.dummyjson.com/data/products/24/thumbnail.jpg',
         ],
     },
@@ -473,7 +471,6 @@ export const CARDS = [
             'https://i.dummyjson.com/data/products/26/2.jpg',
             'https://i.dummyjson.com/data/products/26/3.jpg',
             'https://i.dummyjson.com/data/products/26/4.jpg',
-            'https://i.dummyjson.com/data/products/26/5.jpg',
             'https://i.dummyjson.com/data/products/26/thumbnail.jpg',
         ],
     },
@@ -532,7 +529,6 @@ export const CARDS = [
             'https://i.dummyjson.com/data/products/29/1.jpg',
             'https://i.dummyjson.com/data/products/29/2.jpg',
             'https://i.dummyjson.com/data/products/29/3.webp',
-            'https://i.dummyjson.com/data/products/29/4.webp',
             'https://i.dummyjson.com/data/products/29/thumbnail.webp',
         ],
     },
@@ -671,7 +667,7 @@ export const CARDS = [
     },
     {
         id: 37,
-        title: 'ank Tops for Womens/Girls',
+        title: 'ank Tops for Womens Girls',
         description: 'PACK OF 3 CAMISOLES ,VERY COMFORTABLE SOFT COTTON STUFF, COMFORTABLE IN ALL FOUR SEASONS',
         price: 50,
         discountPercentage: 12.05,
@@ -1037,7 +1033,6 @@ export const CARDS = [
         images: [
             'https://i.dummyjson.com/data/products/56/1.jpg',
             'https://i.dummyjson.com/data/products/56/2.jpg',
-            'https://i.dummyjson.com/data/products/56/3.jpg',
             'https://i.dummyjson.com/data/products/56/4.jpg',
             'https://i.dummyjson.com/data/products/56/5.jpg',
             'https://i.dummyjson.com/data/products/56/thumbnail.jpg',
@@ -1218,7 +1213,6 @@ export const CARDS = [
         images: [
             'https://i.dummyjson.com/data/products/66/1.jpg',
             'https://i.dummyjson.com/data/products/66/2.jpg',
-            'https://i.dummyjson.com/data/products/66/3.jpg',
             'https://i.dummyjson.com/data/products/66/4.JPG',
             'https://i.dummyjson.com/data/products/66/thumbnail.jpg',
         ],
@@ -1289,7 +1283,6 @@ export const CARDS = [
         category: 'womens-watches',
         thumbnail: 'https://i.dummyjson.com/data/products/70/thumbnail.jpg',
         images: [
-            'https://i.dummyjson.com/data/products/70/1.jpg',
             'https://i.dummyjson.com/data/products/70/2.jpg',
             'https://i.dummyjson.com/data/products/70/thumbnail.jpg',
         ],
@@ -1422,7 +1415,6 @@ export const CARDS = [
         images: [
             'https://i.dummyjson.com/data/products/77/1.jpg',
             'https://i.dummyjson.com/data/products/77/2.jpg',
-            'https://i.dummyjson.com/data/products/77/3.jpg',
             'https://i.dummyjson.com/data/products/77/thumbnail.jpg',
         ],
     },
@@ -1437,7 +1429,10 @@ export const CARDS = [
         brand: 'Fashion Jewellery',
         category: 'womens-jewellery',
         thumbnail: 'https://i.dummyjson.com/data/products/78/thumbnail.jpg',
-        images: ['https://i.dummyjson.com/data/products/78/thumbnail.jpg'],
+        images: [
+            'https://i.dummyjson.com/data/products/77/2.jpg',
+            'https://i.dummyjson.com/data/products/78/thumbnail.jpg',
+        ]
     },
     {
         id: 79,
@@ -1450,8 +1445,12 @@ export const CARDS = [
         brand: 'Fashion Jewellery',
         category: 'womens-jewellery',
         thumbnail: 'https://i.dummyjson.com/data/products/79/thumbnail.jpg',
-        images: ['https://i.dummyjson.com/data/products/79/1.jpg'],
+        images: [
+            'https://i.dummyjson.com/data/products/77/2.jpg',
+            'https://i.dummyjson.com/data/products/79/1.jpg',
+        ]
     },
+
     {
         id: 80,
         title: 'Chain Pin Tassel Earrings',
@@ -1642,7 +1641,6 @@ export const CARDS = [
         images: [
             'https://i.dummyjson.com/data/products/89/1.jpg',
             'https://i.dummyjson.com/data/products/89/2.jpg',
-            'https://i.dummyjson.com/data/products/89/3.jpg',
             'https://i.dummyjson.com/data/products/89/4.jpg',
             'https://i.dummyjson.com/data/products/89/thumbnail.jpg',
         ],
@@ -1680,7 +1678,6 @@ export const CARDS = [
         category: 'motorcycle',
         thumbnail: 'https://i.dummyjson.com/data/products/91/thumbnail.jpg',
         images: [
-            'https://i.dummyjson.com/data/products/91/1.jpg',
             'https://i.dummyjson.com/data/products/91/2.jpg',
             'https://i.dummyjson.com/data/products/91/3.jpg',
             'https://i.dummyjson.com/data/products/91/4.jpg',

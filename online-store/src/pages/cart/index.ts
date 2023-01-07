@@ -1,10 +1,11 @@
 import Page from '../../types/page';
 import { CARDS } from '../../components/cards/cards';
 import { addQuantity } from './add-quantity-product';
-import { cardType, promoCodes } from '../../types/types';
+import { promoCodes } from '../../types/types';
 import { removeQuantity } from './remove-quantity-product';
 import { displayProduct } from './displayProduct';
 import { PROMO_CODES } from './promo-codes';
+import { countSum } from '../../components/count-sum';
 
 class CartPage extends Page {
     constructor(id: string, tagName: string, className: string) {
@@ -30,12 +31,7 @@ class CartPage extends Page {
             if (JSON.parse(localStorage.basket).length) {
                 CART.classList.remove('visually-hidden');
                 CART.innerHTML = `${JSON.parse(localStorage.basket).length}`;
-                TOTAL_SUM.innerHTML = `${JSON.parse(localStorage.basket).reduce((sum: number, current: string) => {
-                    if (CARDS.find((item) => item.id === Number(current))) {
-                        sum = sum + (CARDS.find((item) => item.id === Number(current)) as cardType)?.price;
-                    }
-                    return sum;
-                }, 0)}`;
+                TOTAL_SUM.innerHTML = countSum(JSON.parse(localStorage.basket));
             }
 
             pageContent = `
