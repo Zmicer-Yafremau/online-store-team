@@ -1,6 +1,5 @@
-import { CARDS } from '../../components/cards/cards';
-import { cardType } from '../../types/types';
 import { promoCodes } from '../../types/types';
+import { countSum } from '../../components/count-sum';
 
 export function addQuantity(
     CART: HTMLSpanElement,
@@ -19,12 +18,6 @@ export function addQuantity(
             TOTAL_SUM.innerHTML = '0';
         }
         const ID_ARR: string[] = JSON.parse(localStorage.basket);
-        const quantityCart: number = ID_ARR.reduce((sum, current) => {
-            if (current === CARD_ID) {
-                sum = sum + 1;
-            }
-            return sum;
-        }, 0);
         if (Number(STOCK[NUMBER].textContent) > 0) {
             ID_ARR.push(CARD_ID);
             STOCK[NUMBER].textContent = `${Number(STOCK[NUMBER].textContent) - 1}`;
@@ -41,12 +34,7 @@ export function addQuantity(
         if (JSON.parse(localStorage.basket).length) {
             CART.classList.remove('visually-hidden');
             CART.innerHTML = `${JSON.parse(localStorage.basket).length}`;
-            TOTAL_SUM.innerHTML = `${JSON.parse(localStorage.basket).reduce((sum: number, current: string) => {
-                if (CARDS.find((item) => item.id === Number(current))) {
-                    sum = sum + (CARDS.find((item) => item.id === Number(current)) as cardType)?.price;
-                }
-                return sum;
-            }, 0)}`;
+            TOTAL_SUM.innerHTML = countSum(JSON.parse(localStorage.basket));
         }
         SUMMARY_PRODUCT.textContent = CART.textContent;
         SUMMARY_TOTAL.textContent = `€ ${TOTAL_SUM.textContent}`;

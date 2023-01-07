@@ -1,7 +1,6 @@
-import { CARDS } from '../../components/cards/cards';
-import { cardType } from '../../types/types';
 import { displayProduct } from './displayProduct';
 import { promoCodes } from '../../types/types';
+import { countSum } from '../../components/count-sum';
 
 export function removeQuantity(
     CART: HTMLSpanElement,
@@ -59,12 +58,7 @@ export function removeQuantity(
         if (JSON.parse(localStorage.basket).length) {
             CART.classList.remove('visually-hidden');
             CART.innerHTML = `${JSON.parse(localStorage.basket).length}`;
-            TOTAL_SUM.innerHTML = `${JSON.parse(localStorage.basket).reduce((sum: number, current: string) => {
-                if (CARDS.find((item) => item.id === Number(current))) {
-                    sum = sum + (CARDS.find((item) => item.id === Number(current)) as cardType)?.price;
-                }
-                return sum;
-            }, 0)}`;
+            TOTAL_SUM.innerHTML = countSum(JSON.parse(localStorage.basket));
         }
         SUMMARY_PRODUCT.textContent = CART.textContent;
         SUMMARY_TOTAL.textContent = `€ ${TOTAL_SUM.textContent}`;
