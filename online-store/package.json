@@ -52,11 +52,14 @@
         "bootstrap": "^5.2.3",
         "jsdom": "^20.0.3",
         "mini-css-extract-plugin": "^2.7.2",
-        "nouislider": "^15.6.0"
+        "nouislider": "^15.6.0",
+        "vanilla-router": "^1.2.8"
     },
     "jest": {
         "preset": "ts-jest",
         "resetMocks": false,
-        "setupFiles": ["jest-localstorage-mock"]
+        "setupFiles": [
+            "jest-localstorage-mock"
+        ]
     }
 }
