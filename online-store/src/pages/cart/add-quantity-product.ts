@@ -1,5 +1,7 @@
 import { promoCodes } from '../../types/types';
 import { countSum } from '../../components/count-sum';
+import { CARDS } from '../../components/cards/cards';
+import { cardType } from '../../types/types';
 
 export function addQuantity(
     CART: HTMLSpanElement,
@@ -9,6 +11,7 @@ export function addQuantity(
     QUANTITY: HTMLCollectionOf<HTMLSpanElement>,
     SUMMARY_PRODUCT: HTMLSpanElement,
     SUMMARY_TOTAL: HTMLSpanElement,
+    AMOUNT_PRODUCT: HTMLCollectionOf<HTMLDivElement>,
     NUMBER: number
 ): () => void {
     return () => {
@@ -18,10 +21,13 @@ export function addQuantity(
             TOTAL_SUM.innerHTML = '0';
         }
         const ID_ARR: string[] = JSON.parse(localStorage.basket);
+        const PRICE = (CARDS.find((item) => item.id === Number(CARD_ID)) as cardType)?.price;
+        
         if (Number(STOCK[NUMBER].textContent) > 0) {
             ID_ARR.push(CARD_ID);
             STOCK[NUMBER].textContent = `${Number(STOCK[NUMBER].textContent) - 1}`;
-            QUANTITY[NUMBER].textContent = `${Number(QUANTITY[NUMBER].textContent) + 1}`;
+            QUANTITY[NUMBER].textContent = `${Number(QUANTITY[NUMBER].textContent) + 1}`
+            AMOUNT_PRODUCT[NUMBER].textContent = `€ ${Number(QUANTITY[NUMBER].textContent) * PRICE}`;
         } else {
             alert('no more product');
         }
