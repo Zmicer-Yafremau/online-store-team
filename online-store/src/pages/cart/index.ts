@@ -112,6 +112,7 @@ class CartPage extends Page {
         const QUANTITY = document.getElementsByClassName('quantity') as HTMLCollectionOf<HTMLSpanElement>;
         const SUMMARY_PRODUCT = document.querySelector('.summary-product') as HTMLSpanElement;
         const SUMMARY_TOTAL = document.querySelector('.summary-total') as HTMLSpanElement;
+        const AMOUNT_PRODUCT = document.getElementsByClassName('amount-control') as HTMLCollectionOf<HTMLDivElement>;
         const CART_PAGE = document.querySelector('.cart-page') as HTMLDivElement;
         const PAGE_NUMBER = document.querySelector('.page-number') as HTMLSpanElement;
         const NUMBER_ON_PAGE = document.querySelector('.number-on-page') as HTMLInputElement;
@@ -184,6 +185,7 @@ class CartPage extends Page {
                 QUANTITY,
                 SUMMARY_PRODUCT,
                 SUMMARY_TOTAL,
+                AMOUNT_PRODUCT,
                 NUMBER
             );
             button.addEventListener('click', ADD_TO_CART);
@@ -205,6 +207,7 @@ class CartPage extends Page {
                 PRODUCT_ITEMS,
                 CART_PAGE,
                 NUMBER,
+                AMOUNT_PRODUCT,
                 currentPage,
                 rows,
                 PAGE_NUMBER
@@ -232,6 +235,7 @@ class CartPage extends Page {
                     PRODUCT_ITEMS,
                     CART_PAGE,
                     NUMBER,
+                    AMOUNT_PRODUCT,
                     currentPage,
                     rows,
                     PAGE_NUMBER

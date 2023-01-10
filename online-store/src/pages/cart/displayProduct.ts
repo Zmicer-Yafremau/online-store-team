@@ -46,7 +46,7 @@ export function displayProduct(arrItem: string[], rows: number, currentPage: num
             String(item.id) as never
         )}">-</button>
         </div>
-        <div class="amount-control">€ ${item.price}</div>
+        <div class="amount-control">€ ${item.price * quantityCart}</div>
         </div>
         </div>
         </div>`;

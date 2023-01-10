@@ -1,6 +1,8 @@
 import { displayProduct } from './displayProduct';
 import { promoCodes } from '../../types/types';
 import { countSum } from '../../components/count-sum';
+import { CARDS } from '../../components/cards/cards';
+import { cardType } from '../../types/types';
 
 export function removeQuantity(
     CART: HTMLSpanElement,
@@ -13,6 +15,7 @@ export function removeQuantity(
     PRODUCT_ITEMS: HTMLDivElement,
     CART_PAGE: HTMLDivElement,
     NUMBER: number,
+    AMOUNT_PRODUCT: HTMLCollectionOf<HTMLDivElement>,
     currentPage: number,
     rows: number,
     PAGE_NUMBER: HTMLSpanElement
@@ -24,11 +27,13 @@ export function removeQuantity(
             TOTAL_SUM.innerHTML = '0';
         }
         let ID_ARR: string[] = JSON.parse(localStorage.basket);
+        const PRICE = (CARDS.find((item) => item.id === Number(CARD_ID)) as cardType)?.price;
         if (Number(QUANTITY[NUMBER].textContent) > 1) {
             const positionID = ID_ARR.lastIndexOf(CARD_ID);
             ID_ARR.splice(positionID, 1);
             STOCK[NUMBER].textContent = `${Number(STOCK[NUMBER].textContent) + 1}`;
             QUANTITY[NUMBER].textContent = `${Number(QUANTITY[NUMBER].textContent) - 1}`;
+            AMOUNT_PRODUCT[NUMBER].textContent = `€ ${Number(QUANTITY[NUMBER].textContent) * PRICE}`
         } else {
             ID_ARR = ID_ARR.filter((el: string) => {
                 return el !== `${CARD_ID}`;
