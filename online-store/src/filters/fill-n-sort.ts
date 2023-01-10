@@ -11,15 +11,20 @@ export function fillSort() {
     const SELECT = document.querySelector('.form-select') as HTMLSelectElement;
     const SEARCH = document.querySelector('.main__search') as HTMLInputElement;
     const CART = document.querySelector('.header__cart-quantity') as HTMLSpanElement;
+    const SELECT_VALUE = PARAMS.get('select');
     if (PARAMS.get('search')) SEARCH.value = PARAMS.get('search') as string;
     if (!localStorage.cards) localStorage.cards = JSON.stringify(CARDS);
     if (!localStorage.basket) localStorage.basket = `[]`;
     if (!JSON.parse(localStorage.basket).length) CART.innerHTML = '';
     if (JSON.parse(localStorage.basket)) CART.innerHTML = `${JSON.parse(localStorage.basket).length}`;
     valueFilter();
-    if (location.search.includes('select')) {
+    if (SELECT_VALUE) {
         SELECT.firstElementChild?.setAttribute('disabled', '');
         SELECT.firstElementChild?.removeAttribute('selected');
+        SELECT.value = SELECT_VALUE;
+    } else {
+        SELECT.firstElementChild?.removeAttribute('disabled');
+        SELECT.firstElementChild?.setAttribute('selected', '');
     }
     sortFilter();
     fill(JSON.parse(localStorage.cards));

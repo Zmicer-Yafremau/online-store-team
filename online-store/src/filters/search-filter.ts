@@ -7,6 +7,7 @@ export function searchFilter(el: cardType, SEARCH: string): boolean {
         el.price.toString().includes(SEARCH) ||
         el.discountPercentage.toString().includes(SEARCH) ||
         el.rating.toString().includes(SEARCH) ||
-        el.stock.toString().includes(SEARCH.toLocaleLowerCase())
+        el.stock.toString().includes(SEARCH.toLocaleLowerCase()) ||
+        el.description.toLowerCase().includes(SEARCH.toLocaleLowerCase())
     );
 }
