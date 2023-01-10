@@ -7,6 +7,7 @@ import { CARDS } from '../../components/cards/cards';
 import { MAIN_PAGE } from '../../components/create-main-page';
 import { reactModal } from '../../components/react-modal';
 import { reactCart } from '../../components/react-cart';
+
 export const enum PageIds {
     MainPage = '',
     ProductPage = 'product-details',
