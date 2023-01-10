@@ -1432,7 +1432,7 @@ export const CARDS = [
         images: [
             'https://i.dummyjson.com/data/products/77/2.jpg',
             'https://i.dummyjson.com/data/products/78/thumbnail.jpg',
-        ]
+        ],
     },
     {
         id: 79,
@@ -1445,10 +1445,7 @@ export const CARDS = [
         brand: 'Fashion Jewellery',
         category: 'womens-jewellery',
         thumbnail: 'https://i.dummyjson.com/data/products/79/thumbnail.jpg',
-        images: [
-            'https://i.dummyjson.com/data/products/77/2.jpg',
-            'https://i.dummyjson.com/data/products/79/1.jpg',
-        ]
+        images: ['https://i.dummyjson.com/data/products/77/2.jpg', 'https://i.dummyjson.com/data/products/79/1.jpg'],
     },
 
     {

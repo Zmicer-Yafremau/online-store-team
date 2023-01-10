@@ -45,7 +45,7 @@ export function addQuantity(
                 sum = sum + current.discount;
                 return sum;
             }, 0);
-            const RESULT_TOTAL = document.getElementsByClassName('result-total')[0] as HTMLSpanElement; 
+            const RESULT_TOTAL = document.getElementsByClassName('result-total')[0] as HTMLSpanElement;
             RESULT_TOTAL.innerHTML = `€ ${(+TOTAL_SUM.innerHTML * (1 - sumPromo / 100)).toFixed(2)}`;
         }
     };

@@ -30,7 +30,7 @@ class App {
             page = new CartPage(idPage, 'main', 'main');
         } else if (idPageArray.includes(PageIds.ProductPage)) {
             if (
-                Number(idPageArray[1]) < (CARDS.length+1) &&
+                Number(idPageArray[1]) < CARDS.length + 1 &&
                 idPageArray !== undefined &&
                 Number(idPageArray[1]) > 0 &&
                 idPageArray[2] === idProduct?.title.split(' ').join('_')
