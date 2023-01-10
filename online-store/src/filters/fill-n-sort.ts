@@ -18,10 +18,14 @@ export function fillSort() {
     if (!JSON.parse(localStorage.basket).length) CART.innerHTML = '';
     if (JSON.parse(localStorage.basket)) CART.innerHTML = `${JSON.parse(localStorage.basket).length}`;
     valueFilter();
-    if (!SELECT_VALUE) {
+    if (SELECT_VALUE) {
         SELECT.firstElementChild?.setAttribute('disabled', '');
         SELECT.firstElementChild?.removeAttribute('selected');
-    } else SELECT.value = SELECT_VALUE;
+        SELECT.value = SELECT_VALUE;
+    } else {
+        SELECT.firstElementChild?.removeAttribute('disabled');
+        SELECT.firstElementChild?.setAttribute('selected', '');
+    }
     sortFilter();
     fill(JSON.parse(localStorage.cards));
     updateQuantity();
